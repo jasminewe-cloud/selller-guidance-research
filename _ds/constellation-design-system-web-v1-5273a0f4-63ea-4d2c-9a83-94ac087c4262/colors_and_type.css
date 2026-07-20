@@ -1,0 +1,441 @@
+/* ============================================================
+   Constellation Design System — Colors & Type
+   Sourced from @zillow/constellation-tokens (Zillow theme)
+   ============================================================ */
+
+/* ---------- Fonts ---------- */
+@font-face {
+  font-family: "Object Sans";
+  src: url("./fonts/object-sans-heavy.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("./fonts/inter-variable.woff2") format("woff2-variations"),
+       url("./fonts/inter-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ==========================================================
+     PRIMITIVE COLOR TOKENS (base tier)
+     11-step scales, 50 → 950
+     ========================================================== */
+
+  /* Gray — neutral foundation (cool, slightly blue-leaning) */
+  --gray-50:  #f7f7f7;
+  --gray-100: #eeeef0;
+  --gray-200: #dddde1;
+  --gray-300: #cdcdd3;
+  --gray-400: #adadb6;
+  --gray-500: #7e7f8e;
+  --gray-600: #535364;
+  --gray-700: #393945;
+  --gray-800: #2a2a33;
+  --gray-900: #212129;
+  --gray-950: #111116;
+
+  /* Blue — Zillow's primary brand / action color */
+  --blue-50:  #F4F9FF;
+  --blue-100: #E2F0FF;
+  --blue-200: #C5E2FF;
+  --blue-300: #9ACDFF;
+  --blue-400: #65B4FF;
+  --blue-500: #3574FF;
+  --blue-600: #0041D9;  /* Brand / action default */
+  --blue-700: #0033AB;
+  --blue-800: #002788;
+  --blue-900: #001962;
+  --blue-950: #000E42;
+
+  /* Red — destructive / error */
+  --red-50:   #fff6f6;
+  --red-100:  #ffe8e8;
+  --red-200:  #ffd1d0;
+  --red-300:  #ffbab1;
+  --red-400:  #ff7f73;
+  --red-500:  #fa3d45;
+  --red-600:  #ac001e;
+  --red-700:  #7c001c;
+  --red-800:  #5a0514;
+  --red-900:  #46000c;
+  --red-950:  #320004;
+
+  /* Green — success */
+  --green-50:  #f1fdec;
+  --green-100: #daface;
+  --green-200: #c1f7ac;
+  --green-300: #9ff17b;
+  --green-400: #68c952;
+  --green-500: #46a130;
+  --green-600: #196100;
+  --green-700: #114a00;
+  --green-800: #0b3800;
+  --green-900: #062a00;
+  --green-950: #031c00;
+
+  /* Orange — Zillow's "wordmark" accent, used for premium upsells / gleams */
+  --orange-50:  #fff6f3;
+  --orange-100: #ffe9e3;
+  --orange-200: #ffd7ca;
+  --orange-300: #ffc0ab;
+  --orange-400: #ffa385;
+  --orange-500: #ff4d29;
+  --orange-600: #d03c0b;
+  --orange-700: #7d2103;
+  --orange-800: #561200;
+  --orange-900: #410b00;
+  --orange-950: #2e0600;
+
+  /* Yellow — warnings, highlights */
+  --yellow-50:  #fff8ea;
+  --yellow-100: #ffecc9;
+  --yellow-200: #ffd88e;
+  --yellow-300: #ffc752;
+  --yellow-400: #f2b100;
+  --yellow-500: #f08b00;
+  --yellow-600: #8b3f00;
+  --yellow-700: #5f2900;
+  --yellow-800: #4c1f00;
+  --yellow-900: #2f1100;
+  --yellow-950: #210a00;
+
+  /* Teal — info / secondary accent */
+  --teal-50:  #eafdfa;
+  --teal-500: #008578;
+  --teal-700: #004841;
+
+  /* Purple — data-viz */
+  --purple-50:  #fcf6ff;
+  --purple-500: #8547d6;
+  --purple-700: #4e1f8a;
+
+  /* ==========================================================
+     SEMANTIC COLOR TOKENS (use these for styling)
+     T1 (tone) surface & text tokens, mapped from primitives
+     ========================================================== */
+
+  /* Text */
+  --text-primary:   var(--gray-950);   /* default text in light mode */
+  --text-secondary: var(--gray-600);
+  --text-tertiary:  var(--gray-500);
+  --text-disabled:  var(--gray-400);
+  --text-action:    var(--blue-600);
+  --text-onDark:    #ffffff;
+  --text-error:     var(--red-600);
+  --text-success:   var(--green-600);
+  --text-warning:   var(--yellow-600);
+
+  /* Surface / Background — semantic backgrounds */
+  --bg-neutral:    #ffffff;           /* was bg-primary */
+  --bg-softest:    var(--gray-100);   /* was bg-secondary (gray-50) */
+  --bg-softer:     var(--gray-200);   /* was bg-tertiary (gray-100) */
+  --bg-soft:       var(--gray-300);
+  --bg-impact:     var(--gray-950);   /* was bg-inverse */
+
+  /* Aliases — keep old names working */
+  --bg-primary:    var(--bg-neutral);
+  --bg-secondary:  var(--bg-softest);
+  --bg-tertiary:   var(--bg-softer);
+  --bg-inverse:    var(--bg-impact);
+
+  /* Brand & feedback (foreground / accent) */
+  --brand:         var(--blue-600);
+  --feedback-critical: var(--red-600);
+  --feedback-success:  var(--green-600);
+  --feedback-warning:  var(--yellow-600);
+
+  /* Text colors when sitting on top of a surface */
+  --text-on-neutral:  var(--gray-950);
+  --text-on-softest:  var(--gray-950);
+  --text-on-softer:   var(--gray-950);
+  --text-on-soft:     var(--gray-950);
+  --text-on-impact:   var(--gray-50);
+  --text-on-brand:    #ffffff;
+  --text-on-critical: #ffffff;
+  --text-on-success:  #ffffff;
+  --text-on-warning:  #ffffff;
+
+  /* Action aliases (same hex, kept for components) */
+  --bg-action:     var(--blue-600);
+  --bg-action-hover:   var(--blue-700);
+  --bg-action-pressed: var(--blue-800);
+  --bg-error:      var(--red-50);
+  --bg-success:    var(--green-50);
+  --bg-warning:    var(--yellow-50);
+  --bg-info:       var(--blue-50);
+
+  /* Border */
+  --border-default:  var(--gray-300);
+  --border-subtle:   var(--gray-200);
+  --border-strong:   var(--gray-600);
+  --border-action:   var(--blue-600);
+  --border-error:    var(--red-600);
+  --border-focus:    var(--blue-400);
+
+  /* Icon */
+  --icon-primary:   var(--gray-900);
+  --icon-secondary: var(--gray-600);
+  --icon-action:    var(--blue-600);
+  --icon-onDark:    #ffffff;
+
+  /* Brand accent */
+  --brand-primary:  var(--blue-600);     /* Zillow blue — action */
+  --brand-accent:   var(--orange-500);   /* Zillow wordmark / premium */
+
+  /* ==========================================================
+     TYPOGRAPHY — Primitive sizes (Zillow fontSize tokens)
+     ========================================================== */
+  --font-size-250:  10px;
+  --font-size-300:  12px;
+  --font-size-350:  14px;
+  --font-size-400:  16px;
+  --font-size-450:  18px;
+  --font-size-500:  20px;
+  --font-size-600:  24px;
+  --font-size-700:  28px;
+  --font-size-800:  32px;
+  --font-size-900:  36px;
+  --font-size-1000: 40px;
+  --font-size-1100: 44px;
+  --font-size-1200: 48px;
+  --font-size-1500: 60px;
+
+  --line-height-400:  16px;
+  --line-height-600:  24px;
+  --line-height-800:  32px;
+  --line-height-1000: 40px;
+  --line-height-1200: 48px;
+  --line-height-1400: 56px;
+  --line-height-1600: 64px;
+  --line-height-1800: 72px;
+
+  /* ==========================================================
+     TYPOGRAPHY — Semantic
+     brand = Object Sans (Heavy 900) — heading
+     ui    = Inter — body & default
+     ========================================================== */
+  --font-brand: "Object Sans", "Object Sans Fallback",
+                "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-ui:    "Inter", "Inter Fallback",
+                system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono:  ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+
+  --font-weight-regular: 400;
+  --font-weight-bold:    700;
+  --font-weight-heavy:   900;   /* Object Sans Heavy — the only weight Zillow ships */
+
+  /* ==========================================================
+     SPACING (4px base) — subset of Zillow spacing tokens
+     ========================================================== */
+  --space-negative-25: -1px;
+  --space-zero: 0px;
+  --space-25:   1px;
+  --space-50:   2px;
+  --space-100:  4px;
+  --space-150:  6px;
+  --space-200:  8px;
+  --space-250:  10px;
+  --space-300:  12px;
+  --space-350:  14px;
+  --space-400:  16px;
+  --space-500:  20px;
+  --space-600:  24px;
+  --space-700:  28px;
+  --space-800:  32px;
+  --space-900:  36px;
+  --space-1000: 40px;
+  --space-1100: 44px;
+  --space-1200: 48px;
+  --space-1300: 52px;
+  --space-1400: 56px;
+  --space-1500: 60px;
+  --space-1600: 64px;
+  --space-1800: 72px;
+  --space-2400: 96px;
+
+  /* ==========================================================
+     RADII — Rounded, never pill except the "capsule" token
+     ========================================================== */
+  --radius-zero:    0px;
+  --radius-50:      2px;
+  --radius-100:     4px;
+  --radius-150:     6px;
+  --radius-200:     8px;
+  --radius-300:     12px;
+  --radius-400:     16px;
+  --radius-500:     20px;
+  --radius-600:     24px;
+  --radius-700:     28px;
+  --radius-capsule: 999px;
+  --radius-ellipse: 50%;
+
+  /* ==========================================================
+     SHADOWS — Subtle, black-on-alpha. Focus is 3-stop blue halo.
+     ========================================================== */
+  --shadow-sm:       0 1px 4px   0 rgba(0, 0, 0, 0.15);
+  --shadow-sm-heavy: 0 6px 16px  0 rgba(0, 0, 0, 0.30);
+  --shadow-md:       0 8px 20px  0 rgba(0, 0, 0, 0.15);
+  --shadow-lg:       0 16px 30px 0 rgba(0, 0, 0, 0.15);
+  --shadow-focus:    0 0 2px 3px var(--blue-400),
+                     0 0 2px 4px var(--blue-600);
+
+  /* Motion */
+  --motion-duration-fast: 120ms;
+  --motion-duration-base: 200ms;
+  --motion-duration-slow: 320ms;
+  --motion-ease-out:     cubic-bezier(0.2, 0.8, 0.2, 1);
+  --motion-ease-inOut:   cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   DARK MODE — opt in via [data-theme="dark"] or prefers-color-scheme
+   Re-binds semantic tokens only; primitives (gray-50, blue-600) stay.
+   ============================================================ */
+[data-theme="dark"] {
+  /* Text */
+  --text-primary:   var(--gray-50);
+  --text-secondary: var(--gray-300);
+  --text-tertiary:  var(--gray-400);
+  --text-disabled:  var(--gray-600);
+  --text-action:    var(--blue-400);
+
+  /* Backgrounds */
+  --bg-neutral:    #000000;
+  --bg-softest:    var(--gray-900);
+  --bg-softer:     var(--gray-800);
+  --bg-soft:       var(--gray-700);
+  --bg-impact:     var(--gray-50);
+  --bg-primary:    var(--bg-neutral);
+  --bg-secondary:  var(--bg-softest);
+  --bg-tertiary:   var(--bg-softer);
+  --bg-inverse:    var(--bg-impact);
+
+  /* Brand / feedback — brighter on dark */
+  --brand:             var(--blue-400);
+  --feedback-critical: var(--red-400);
+  --feedback-success:  var(--green-400);
+  --feedback-warning:  var(--yellow-400);
+
+  /* Text-on-surface flips in dark mode */
+  --text-on-neutral:  var(--gray-50);
+  --text-on-softest:  var(--gray-50);
+  --text-on-softer:   var(--gray-50);
+  --text-on-soft:     var(--gray-50);
+  --text-on-impact:   var(--gray-950);
+  --text-on-brand:    var(--gray-950);
+  --text-on-critical: var(--gray-950);
+  --text-on-success:  var(--gray-950);
+  --text-on-warning:  var(--gray-950);
+
+  /* Border / icon */
+  --border-default: var(--gray-700);
+  --border-subtle:  var(--gray-800);
+  --border-strong:  var(--gray-400);
+  --border-action:  var(--blue-400);
+  --icon-primary:   var(--gray-50);
+  --icon-secondary: var(--gray-300);
+  --icon-action:    var(--blue-400);
+}
+
+/* ============================================================
+   SEMANTIC ELEMENT STYLES
+   Applied to bare tags inside .c11n root. Matches Zillow's
+   textStyle tokens: heading-xl|lg|md|sm|xs, body-lg|md|sm|xs
+   ============================================================ */
+
+.c11n, .c11n * { box-sizing: border-box; }
+
+.c11n {
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: var(--font-size-400);
+  line-height: var(--line-height-600);
+  font-weight: var(--font-weight-regular);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---- Headings: Object Sans Heavy, tight leading ---- */
+.c11n h1, .c11n .heading-xl {
+  font-family: var(--font-brand);
+  font-weight: var(--font-weight-heavy);
+  font-size: var(--font-size-1500);    /* 60 */
+  line-height: var(--line-height-1800);/* 72 */
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.c11n h2, .c11n .heading-lg {
+  font-family: var(--font-brand);
+  font-weight: var(--font-weight-heavy);
+  font-size: var(--font-size-1200);    /* 48 */
+  line-height: var(--line-height-1600);/* 64 */
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.c11n h3, .c11n .heading-md {
+  font-family: var(--font-brand);
+  font-weight: var(--font-weight-heavy);
+  font-size: var(--font-size-900);     /* 36 */
+  line-height: var(--line-height-1000);/* 40 */
+  margin: 0;
+}
+.c11n h4, .c11n .heading-sm {
+  font-family: var(--font-brand);
+  font-weight: var(--font-weight-heavy);
+  font-size: var(--font-size-600);     /* 24 */
+  line-height: var(--line-height-800); /* 32 */
+  margin: 0;
+}
+.c11n h5, .c11n .heading-xs {
+  font-family: var(--font-brand);
+  font-weight: var(--font-weight-heavy);
+  font-size: var(--font-size-500);     /* 20 */
+  line-height: var(--line-height-600); /* 24 */
+  margin: 0;
+}
+
+/* ---- Body: Inter. "body" is default; LG/SM/XS are overrides. ---- */
+.c11n .body-lg       { font-size: var(--font-size-450); line-height: var(--line-height-600); }
+.c11n .body-lg-bold  { font-size: var(--font-size-450); line-height: var(--line-height-600); font-weight: var(--font-weight-bold); }
+.c11n p, .c11n .body { font-size: var(--font-size-400); line-height: var(--line-height-600); }
+.c11n .body-bold     { font-size: var(--font-size-400); line-height: var(--line-height-600); font-weight: var(--font-weight-bold); }
+.c11n small, .c11n .body-sm  { font-size: var(--font-size-350); line-height: var(--line-height-600); }
+.c11n .body-sm-bold  { font-size: var(--font-size-350); line-height: var(--line-height-600); font-weight: var(--font-weight-bold); }
+.c11n .body-xs       { font-size: var(--font-size-300); line-height: var(--line-height-400); }
+.c11n .fineprint     { font-size: var(--font-size-250); line-height: var(--line-height-400); }
+
+/* ---- Utility ---- */
+.c11n a {
+  color: var(--text-action);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+.c11n a:hover  { color: var(--blue-700); text-decoration-thickness: 2px; }
+.c11n a:active { color: var(--blue-800); }
+
+.c11n code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--gray-100);
+  padding: 2px 6px;
+  border-radius: var(--radius-100);
+}
+
+.c11n hr {
+  border: 0;
+  border-top: 1px solid var(--border-subtle);
+  margin: var(--space-600) 0;
+}
+
+.c11n ::selection {
+  background: var(--blue-200);
+  color: var(--gray-900);
+}
