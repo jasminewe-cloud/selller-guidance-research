@@ -457,8 +457,8 @@
             <!-- LAYER 1 (z:5): Teal background block — sits behind image card, extends past pills so corners overlap into teal -->
             <div style="position:absolute;top:46px;left:0;right:0;height:{{ a.toolTealHeight }};z-index:5;background:#136F65;"></div>
             <!-- LAYER 3 (z:30): Pill buttons only — always on top of image when scrolling -->
-            <div style="position:absolute;top:46px;left:0;right:0;z-index:30;padding:10px 12px 0;pointer-events:none;">
-              <div style="display:flex;align-items:center;gap:6px;overflow-x:auto;padding-bottom:10px;pointer-events:auto;" class="noscroll">
+            <div style="position:absolute;top:46px;left:0;right:0;z-index:30;padding:10px 0 0;pointer-events:none;">
+              <div style="display:flex;align-items:center;gap:6px;overflow-x:auto;padding:0 0 10px 12px;pointer-events:auto;" class="noscroll">
                 <button onClick="{{ a.tabGoHome }}" style="flex:none;display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:rgba(255,255,255,.18);color:#fff;">
                   <span style="width:14px;height:14px;flex:none;display:inline-block;background:#fff;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;"></span>
                   Your plan
