@@ -454,8 +454,8 @@
         <!-- FULL-SCREEN: Action tool -->
         <sc-if value="{{ a.viewTool }}">
           <div style="position:absolute;inset:0;z-index:46;background:var(--gray-50);">
-            <!-- Teal pill nav — fixed overlay above scroll so image can peek under it at rest AND scroll behind it -->
-            <div style="position:absolute;top:0;left:0;right:0;z-index:30;background:#136F65;padding:10px 12px 0;">
+            <!-- Teal pill nav — sits below 46px status bar, always above scroll content -->
+            <div style="position:absolute;top:46px;left:0;right:0;z-index:30;background:#136F65;padding:10px 12px 0;">
               <div style="display:flex;align-items:center;gap:6px;overflow-x:auto;padding-bottom:10px;" class="noscroll">
                 <button onClick="{{ a.tabGoHome }}" style="flex:none;display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:rgba(255,255,255,.18);color:#fff;">
                   <span style="width:14px;height:14px;flex:none;display:inline-block;background:#fff;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;"></span>
@@ -2606,7 +2606,7 @@ class Component extends DCLogic {
       tabBarBg: a.tabBarPinned ? 'var(--gray-50)' : 'transparent',
       tabBarBorder: a.tabBarPinned ? '1px solid var(--gray-100)' : 'none',
       understandSubMaxH: a.understandSubOpen ? '60px' : '0px',
-      toolNavHeight: a.understandSubOpen ? '96px' : '56px',
+      toolNavHeight: a.understandSubOpen ? '142px' : '102px',
       understandChevronRotate: a.understandSubOpen ? 'rotate(180deg)' : 'rotate(0deg)',
       subTab0Active: a.actionIdx===0 ? 'rgba(255,255,255,.9)' : 'rgba(255,255,255,.18)',
       subTab0Color:  a.actionIdx===0 ? '#136F65' : '#fff',
