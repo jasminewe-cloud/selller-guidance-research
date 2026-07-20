@@ -482,8 +482,8 @@
                   </div>
                 </div>
               </div>
-              <!-- Home photo -->
-              <div style="padding:0 14px;margin-top:8px;position:relative;z-index:11;">
+              <!-- Home photo — negative margin creates overlap with teal bar; z-index kept below sticky nav so it scrolls under -->
+              <div style="padding:0 14px;margin-top:-10px;position:relative;z-index:11;">
                 <img src="assets/home-photo.png" alt="Your home" style="display:block;width:100%;height:190px;object-fit:cover;border-radius:16px;" />
               </div>
               <div style="padding:12px 14px 96px;display:flex;flex-direction:column;gap:14px;">
