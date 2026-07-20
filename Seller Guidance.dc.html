@@ -674,7 +674,7 @@
                   <div style="font-family:var(--font-brand);font-weight:900;font-size:40px;line-height:1;color:#fff;margin-bottom:4px;">{{ a.saleStr }}</div>
                   <div style="font-family:var(--font-ui);font-size:13px;color:rgba(255,255,255,.75);margin-bottom:16px;">Time on market {{ a.sellsIn }}</div>
                   <!-- Slider -->
-                  <input type="range" min="400000" max="800000" step="5000" value="{{ a.saleVal }}" onInput="{{ a.onSale }}" onChange="{{ a.onSaleCommit }}" class="c11n-slider" style="width:100%;accent-color:#4ADE80;" />
+                  <input type="range" min="{{ a.sliderMin }}" max="{{ a.sliderMax }}" step="5000" value="{{ a.saleVal }}" onInput="{{ a.onSale }}" onChange="{{ a.onSaleCommit }}" class="c11n-slider" style="width:100%;accent-color:#4ADE80;" />
                   <div style="display:flex;justify-content:space-between;font-family:var(--font-ui);font-size:12px;color:rgba(255,255,255,.7);margin-top:4px;">
                     <span>$400K</span>
                     <span style="font-weight:700;color:#fff;">{{ a.salePriceRange }}</span>
@@ -2174,7 +2174,7 @@ class Component extends DCLogic {
   togglePlan(){ this.setState(s=>({a:{...s.a, planOpen:!s.a.planOpen}})); }
   dismissInsight(){ this.setState(s=>({a:{...s.a, insightDismissed:true}})); }
   dismissIntro(){ this.setState(s=>({ob:{...s.ob, beat:0}})); }
-  goToListingPriceNudge(){ this.setState(s=>({a:{...s.a, view:'tool', actionIdx:2, screen:'action', salePrice:800000, insightPrice:800000, fromInsightNudge:true, askedKeys:[], understandSubOpen:false}}), ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; }); }
+  goToListingPriceNudge(){ this.setState(s=>{ const nudgePrice = s.hf.zestimate || 1695000; return {a:{...s.a, view:'tool', actionIdx:2, screen:'action', salePrice:nudgePrice, insightPrice:nudgePrice, fromInsightNudge:true, askedKeys:[], understandSubOpen:false}}; }, ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; }); }
   selectComp(idx){ this.setState(s=>({a:{...s.a, selectedComp: s.a.selectedComp===idx ? null : idx}})); }
   prevMs(){
     const target = Math.max(0, this.state.a.expanded-1);
@@ -2535,9 +2535,10 @@ class Component extends DCLogic {
     const altPills = altOverride || order.filter(i=>!eng[i] && (recNext.prep || i!==recNext.idx))
       .map(i=>({ label:this.REC_LABEL[i], onTap:()=>this.gotoTool(i) }));
     if(!recNext.prep && a.actionIdx!==3){ altPills.push({ label:'Prepare to list', onTap:()=>this.gotoTool(3) }); }
-    // live net proceeds (tool 2) — if facts updated, default sale price to Zestimate
+    // live net proceeds (tool 2) — if facts updated, default sale price to 81% of Zestimate (midpoint of sweet spot)
     const zestForSale = hf.zestimate || 1695000;
-    const saleDefault = hf.factsUpdated && a.salePrice===600000 ? zestForSale : a.salePrice;
+    const zestSweetSpot = Math.round(zestForSale * 0.81 / 5000) * 5000;
+    const saleDefault = hf.factsUpdated && a.salePrice===600000 ? zestSweetSpot : a.salePrice;
     const sale=saleDefault, mort=a.mortgage, prep=6000;
     const closing=Math.round(sale*0.09);
     const net=Math.max(0, sale - mort - prep - closing);
@@ -2568,7 +2569,7 @@ class Component extends DCLogic {
       addressValue:a.addressValue, onAddr:(e)=>this.onAddr(e), onKey:(e)=>this.onKey(e), submitAddr:()=>this.submitAddr(), useLocation:()=>this.useLocation(),
       inputPlaceholder: a.mode==='input' ? 'Enter your home address' : 'Ask Zillow…',
       chatPlaceholder: this.state.hf.open ? 'Tell me what you want to update…' : 'Ask about your home value…',
-      actionChatPlaceholder: (a.selectedComp !== null && a.selectedComp !== undefined) ? `Ask about the ${this.A_COMPS[a.selectedComp].price} comp…` : a.actionIdx===0 ? 'Ask about your home value…' : `Ask about your ${sale <= 600000 ? '$'+Math.round(sale/1000)+'K listing price' : sale <= 700000 ? 'pricing strategy' : 'pricing and risk'}…`,
+      actionChatPlaceholder: (a.selectedComp !== null && a.selectedComp !== undefined) ? `Ask about the ${this.A_COMPS[a.selectedComp].price} comp…` : a.actionIdx===0 ? 'Ask about your home value…' : `Ask about your ${sale <= Math.round(zestForSale*0.90) ? '$'+Math.round(sale/1000)+'K listing price' : sale <= zestForSale ? 'pricing strategy' : 'pricing and risk'}…`,
       actionChatGlowClass: a.homeFGlow ? 'chat-glow' : '',
       sendBg: a.mode==='input' ? 'var(--blue-600)' : 'var(--gray-300)',
       scrollRef:this.aScrollRef, onScroll:()=>this.onScrollA(), toolScrollOnScroll:()=>this.onScrollTool(), moreBelow:a.moreBelow, scrollDown:()=>this.scrollDownA(), spacerHpx:(a.spacerH||0)+'px', compsRef:this.compsRef, homeFRef:this.homeFRef, toolScrollRef:this.aToolScrollRef, toolChatBarRef:this.toolChatBarRef, milestoneChatBarRef:this.milestoneChatBarRef, milestoneScrollRef:this.aMilestoneScrollRef, onScrollMilestone:()=>this.onScrollMilestone(),
@@ -2686,11 +2687,13 @@ class Component extends DCLogic {
       altPills,
       // live net proceeds (tool 2)
       saleVal:sale, mortVal:mort, onSale:(e)=>this.onSale(e), onMortgage:(e)=>this.onMortgage(e),
+      sliderMin: Math.round(zestForSale*0.72/5000)*5000,
+      sliderMax: Math.round(zestForSale*1.15/5000)*5000,
       saleStr:fmt(sale), mortStr:fmt(mort), closingStr:fmt(closing), netStr:fmt(net),
       salePct:salePct+'%', mortPct:mortPct+'%',
-      confidence: sale <= 600000 ? 'High' : sale <= 700000 ? 'Medium' : 'Low',
-      sellsIn: sale <= 600000 ? '~15 days' : sale <= 700000 ? '~28 days' : '~45+ days',
-      listPriceLabel: sale <= 600000 ? 'Likely list price' : sale <= 700000 ? 'Possible list price' : 'Optimistic list price',
+      confidence: sale <= Math.round(zestForSale*0.90) ? 'High' : sale <= zestForSale ? 'Medium' : 'Low',
+      sellsIn: sale <= Math.round(zestForSale*0.90) ? '~15 days' : sale <= zestForSale ? '~28 days' : '~45+ days',
+      listPriceLabel: sale <= Math.round(zestForSale*0.90) ? 'Likely list price' : sale <= zestForSale ? 'Possible list price' : 'Optimistic list price',
       salePriceRange: (Math.round(zestForSale*0.72/1000))+'k - '+(Math.round(zestForSale/1000))+'k',
       onSaleCommit: (e)=>this.onSaleCommit(e),
       insightText: (()=>{
