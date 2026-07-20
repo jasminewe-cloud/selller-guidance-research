@@ -454,8 +454,8 @@
         <!-- FULL-SCREEN: Action tool -->
         <sc-if value="{{ a.viewTool }}">
           <div style="position:absolute;inset:0;z-index:46;background:var(--gray-50);">
-            <!-- LAYER 1 (z:5): Teal background block — sits behind image card -->
-            <div style="position:absolute;top:46px;left:0;right:0;height:{{ a.toolNavHeight }};z-index:5;background:#136F65;"></div>
+            <!-- LAYER 1 (z:5): Teal background block — sits behind image card, extends past pills so corners overlap into teal -->
+            <div style="position:absolute;top:46px;left:0;right:0;height:{{ a.toolTealHeight }};z-index:5;background:#136F65;"></div>
             <!-- LAYER 3 (z:30): Pill buttons only — always on top of image when scrolling -->
             <div style="position:absolute;top:46px;left:0;right:0;z-index:30;padding:10px 12px 0;pointer-events:none;">
               <div style="display:flex;align-items:center;gap:6px;overflow-x:auto;padding-bottom:10px;pointer-events:auto;" class="noscroll">
@@ -486,7 +486,7 @@
               <!-- Spacer pushes content below the teal bg block; image sits on top of teal via z-index -->
               <div style="height:{{ a.toolNavHeight }};flex:none;"></div>
               <!-- LAYER 2 (z:10): Home photo — on top of teal bg, behind pills -->
-              <div style="padding:0 14px;margin-top:-24px;position:relative;z-index:10;">
+              <div style="padding:0 14px;position:relative;z-index:10;">
                 <img src="assets/home-photo.png" alt="Your home" style="display:block;width:100%;height:190px;object-fit:cover;border-radius:16px;" />
               </div>
               <div style="padding:12px 14px 96px;display:flex;flex-direction:column;gap:14px;">
@@ -2608,7 +2608,8 @@ class Component extends DCLogic {
       tabBarBg: a.tabBarPinned ? 'var(--gray-50)' : 'transparent',
       tabBarBorder: a.tabBarPinned ? '1px solid var(--gray-100)' : 'none',
       understandSubMaxH: a.understandSubOpen ? '60px' : '0px',
-      toolNavHeight: a.understandSubOpen ? '110px' : '70px',
+      toolNavHeight: a.understandSubOpen ? '140px' : '100px',
+      toolTealHeight: a.understandSubOpen ? '156px' : '116px',
       understandChevronRotate: a.understandSubOpen ? 'rotate(180deg)' : 'rotate(0deg)',
       subTab0Active: a.actionIdx===0 ? 'rgba(255,255,255,.9)' : 'rgba(255,255,255,.18)',
       subTab0Color:  a.actionIdx===0 ? '#136F65' : '#fff',
