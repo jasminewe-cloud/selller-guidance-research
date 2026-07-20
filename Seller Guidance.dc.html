@@ -483,7 +483,7 @@
             <div ref="{{ a.toolScrollRef }}" data-tool-scroll onScroll="{{ a.toolScrollOnScroll }}" class="noscroll" style="position:absolute;top:0;left:0;right:0;bottom:0;overflow-y:auto;">
               <!-- teal background spacer behind nav area (covers scroll content peeking through) -->
               <div style="height:{{ a.toolNavHeight }};background:#136F65;flex:none;"></div>
-              <!-- Home photo — starts flush after spacer; teal nav overlay covers top edge creating the peek effect -->
+              <!-- Home photo — spacer is 12px shorter than nav so top of card sits behind the nav overlay -->
               <div style="padding:0 14px;position:relative;z-index:1;">
                 <img src="assets/home-photo.png" alt="Your home" style="display:block;width:100%;height:190px;object-fit:cover;border-radius:16px;" />
               </div>
@@ -2606,7 +2606,7 @@ class Component extends DCLogic {
       tabBarBg: a.tabBarPinned ? 'var(--gray-50)' : 'transparent',
       tabBarBorder: a.tabBarPinned ? '1px solid var(--gray-100)' : 'none',
       understandSubMaxH: a.understandSubOpen ? '60px' : '0px',
-      toolNavHeight: a.understandSubOpen ? '114px' : '74px',
+      toolNavHeight: a.understandSubOpen ? '130px' : '90px',
       understandChevronRotate: a.understandSubOpen ? 'rotate(180deg)' : 'rotate(0deg)',
       subTab0Active: a.actionIdx===0 ? 'rgba(255,255,255,.9)' : 'rgba(255,255,255,.18)',
       subTab0Color:  a.actionIdx===0 ? '#136F65' : '#fff',
