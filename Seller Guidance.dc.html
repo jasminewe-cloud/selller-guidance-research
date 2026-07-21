@@ -1280,59 +1280,60 @@
 
         <!-- INTRO SCREEN — shown first before onboarding -->
         <sc-if value="{{ ob.showIntro }}">
-          <div style="position:absolute;inset:0;z-index:70;background:var(--gray-50);display:flex;flex-direction:column;">
+          <div style="position:absolute;inset:0;z-index:70;background:#f4f4f6;display:flex;flex-direction:column;animation:beatIn 360ms cubic-bezier(.25,.46,.45,.94) both;">
             <!-- Status bar -->
-            <div style="height:46px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;font-weight:700;color:var(--gray-950);background:var(--gray-50);">
+            <div style="height:46px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;font-weight:700;color:var(--gray-950);background:#f4f4f6;">
               <span>9:41</span>
               <span style="display:flex;align-items:center;gap:6px;">
                 <span style="display:flex;gap:2px;align-items:flex-end;height:11px;"><i style="width:3px;height:5px;background:var(--gray-950);border-radius:1px;display:block;"></i><i style="width:3px;height:7px;background:var(--gray-950);border-radius:1px;display:block;"></i><i style="width:3px;height:9px;background:var(--gray-950);border-radius:1px;display:block;"></i><i style="width:3px;height:11px;background:var(--gray-950);border-radius:1px;display:block;"></i></span>
                 <span style="width:24px;height:12px;border:1.5px solid var(--gray-950);border-radius:3px;position:relative;display:inline-block;"><i style="position:absolute;inset:1.5px;width:16px;background:var(--gray-950);border-radius:1px;display:block;"></i></span>
               </span>
             </div>
-            <!-- Scrollable body -->
-            <div class="noscroll" style="flex:1;overflow-y:auto;padding:12px 24px 0;">
+            <!-- Body -->
+            <div class="noscroll" style="flex:1;overflow-y:auto;padding:12px 24px 0;display:flex;flex-direction:column;">
               <!-- X close -->
-              <button onClick="{{ ob.dismissIntro }}" style="width:36px;height:36px;border-radius:999px;background:var(--gray-200);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+              <button onClick="{{ ob.dismissIntro }}" style="width:36px;height:36px;border-radius:999px;background:var(--gray-200);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-bottom:20px;flex:none;">
                 <span style="width:16px;height:16px;background:var(--gray-700);-webkit-mask:var(--ic-IconCloseOutline) center/contain no-repeat;mask:var(--ic-IconCloseOutline) center/contain no-repeat;display:block;"></span>
               </button>
               <!-- Headline -->
-              <h1 style="font-family:var(--font-brand);font-weight:900;font-size:28px;line-height:1.1;color:var(--gray-950);margin:0 0 14px;">Hi, I'm Seller Advisor. I'm here to help you sell your home.</h1>
-              <!-- Body -->
-              <p style="font-family:var(--font-ui);font-size:15px;line-height:1.55;color:var(--gray-600);margin:0 0 28px;">I'll learn what matters to you, explain your options clearly, and walk you through every step. Selling feels a lot less overwhelming when you have a plan.</p>
-              <!-- Insight cards — stacked with slight fan -->
-              <div style="position:relative;display:flex;flex-direction:column;gap:10px;margin-bottom:24px;">
-                <!-- Card 1: Seller Advisor (slightly rotated behind) -->
-                <div style="background:#fff;border-radius:16px;box-shadow:0 2px 14px rgba(17,17,22,.1);padding:16px;transform:rotate(-1.5deg);transform-origin:center top;">
-                  <div style="display:inline-flex;align-items:center;gap:5px;background:#ede8fd;border-radius:999px;padding:4px 10px;margin-bottom:10px;">
-                    <span style="width:12px;height:12px;background:#5c2d91;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:inline-block;"></span>
-                    <span style="font-family:var(--font-ui);font-size:12px;font-weight:700;color:#5c2d91;">Seller Advisor</span>
+              <h1 style="font-family:var(--font-brand);font-weight:900;font-size:26px;line-height:1.05;color:var(--gray-950);margin:0 0 10px;flex:none;">Hi, I'm Seller Advisor. I'm here to help you sell your home.</h1>
+              <!-- Body text -->
+              <p style="font-family:var(--font-ui);font-size:13px;line-height:1.4;color:var(--gray-600);margin:0 0 24px;flex:none;">I'll learn what matters to you, explain your options clearly, and walk you through every step. Selling feels a lot less overwhelming when you have a plan.</p>
+              <!-- Stacked cards -->
+              <div style="position:relative;height:310px;flex:none;">
+                <!-- Card 1: Seller Advisor — rotated behind, lowest z -->
+                <div style="position:absolute;left:0;right:0;top:0;z-index:1;background:#fff;border:1px solid rgba(0,0,0,.11);border-radius:14px;box-shadow:0 2px 8px rgba(0,0,0,.06);padding:12px 14px;transform:rotate(-3deg);transform-origin:center top;">
+                  <div style="display:inline-flex;align-items:center;gap:4px;background:#ede8fd;border-radius:999px;padding:3px 8px;margin-bottom:6px;">
+                    <span style="width:10px;height:10px;background:#5c2d91;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:inline-block;"></span>
+                    <span style="font-family:var(--font-ui);font-size:11px;font-weight:700;color:#5c2d91;">Seller Advisor</span>
                   </div>
-                  <div style="font-family:var(--font-brand);font-weight:900;font-size:16px;color:var(--gray-950);margin-bottom:4px;">You could walk away with around $504K after costs.</div>
-                  <div style="font-family:var(--font-ui);font-size:13px;color:var(--gray-500);line-height:1.4;">Based on your home's value and the current market.</div>
+                  <div style="font-family:var(--font-brand);font-weight:900;font-size:15px;line-height:1.2;color:var(--gray-950);margin-bottom:4px;">You could walk away with around $504K after costs.</div>
+                  <div style="font-family:var(--font-ui);font-size:11px;color:var(--gray-600);line-height:1.4;">Based on your home's value and the current market.</div>
                 </div>
                 <!-- Card 2: Market trend -->
-                <div style="background:#fff;border-radius:16px;box-shadow:0 2px 14px rgba(17,17,22,.1);padding:16px;">
-                  <div style="display:inline-flex;align-items:center;gap:5px;background:#e6f4eb;border-radius:999px;padding:4px 10px;margin-bottom:10px;">
-                    <span style="width:12px;height:12px;background:#1e7a52;-webkit-mask:var(--ic-IconTrendingOutline) center/contain no-repeat;mask:var(--ic-IconTrendingOutline) center/contain no-repeat;display:inline-block;"></span>
-                    <span style="font-family:var(--font-ui);font-size:12px;font-weight:700;color:#1e7a52;">Market trend</span>
+                <div style="position:absolute;left:0;right:0;top:100px;z-index:2;background:#fff;border:1px solid rgba(0,0,0,.11);border-radius:14px;box-shadow:0 3px 12px rgba(0,0,0,.08);padding:12px 14px;transform:rotate(2.5deg);transform-origin:center top;">
+                  <div style="display:inline-flex;align-items:center;gap:4px;background:#e6f4eb;border-radius:999px;padding:3px 8px;margin-bottom:6px;">
+                    <span style="width:10px;height:10px;background:#1e7a52;-webkit-mask:var(--ic-IconTrendingOutline) center/contain no-repeat;mask:var(--ic-IconTrendingOutline) center/contain no-repeat;display:inline-block;"></span>
+                    <span style="font-family:var(--font-ui);font-size:11px;font-weight:700;color:#1e7a52;">Market trend</span>
                   </div>
-                  <div style="font-family:var(--font-brand);font-weight:900;font-size:16px;color:var(--gray-950);margin-bottom:4px;">Homes near you are selling in 28 days.</div>
-                  <div style="font-family:var(--font-ui);font-size:13px;color:var(--gray-500);line-height:1.4;">It's a strong seller's market right now. Timing is on your side.</div>
+                  <div style="font-family:var(--font-brand);font-weight:900;font-size:15px;line-height:1.2;color:var(--gray-950);margin-bottom:4px;">Homes near you are selling in 28 days.</div>
+                  <div style="font-family:var(--font-ui);font-size:11px;color:var(--gray-600);line-height:1.4;">It's a strong seller's market right now. Timing is on your side.</div>
                 </div>
-                <!-- Card 3: Home value -->
-                <div style="background:#fff;border-radius:16px;box-shadow:0 2px 14px rgba(17,17,22,.1);padding:16px;">
-                  <div style="display:inline-flex;align-items:center;gap:5px;background:#fef3e2;border-radius:999px;padding:4px 10px;margin-bottom:10px;">
-                    <span style="width:12px;height:12px;background:#9a7b00;-webkit-mask:var(--ic-IconDollarSignCircleOutline) center/contain no-repeat;mask:var(--ic-IconDollarSignCircleOutline) center/contain no-repeat;display:inline-block;"></span>
-                    <span style="font-family:var(--font-ui);font-size:12px;font-weight:700;color:#9a7b00;">Home value</span>
+                <!-- Card 3: Home value — front, highest z -->
+                <div style="position:absolute;left:0;right:0;top:200px;z-index:3;background:#fff;border:1px solid rgba(0,0,0,.11);border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.1);padding:12px 14px;transform:rotate(-2deg);transform-origin:center top;">
+                  <div style="display:inline-flex;align-items:center;gap:4px;background:#fef3e2;border-radius:999px;padding:3px 8px;margin-bottom:6px;">
+                    <span style="width:10px;height:10px;background:#9a7b00;-webkit-mask:var(--ic-IconDollarSignCircleOutline) center/contain no-repeat;mask:var(--ic-IconDollarSignCircleOutline) center/contain no-repeat;display:inline-block;"></span>
+                    <span style="font-family:var(--font-ui);font-size:11px;font-weight:700;color:#9a7b00;">Home value</span>
                   </div>
-                  <div style="font-family:var(--font-brand);font-weight:900;font-size:16px;color:var(--gray-950);margin-bottom:4px;">Your Zestimate has grown 4.2% this year.</div>
-                  <div style="font-family:var(--font-ui);font-size:13px;color:var(--gray-500);line-height:1.4;">That growth is real equity you can put toward your next move.</div>
+                  <div style="font-family:var(--font-brand);font-weight:900;font-size:15px;line-height:1.2;color:var(--gray-950);margin-bottom:4px;">Your Zestimate has grown 4.2% this year.</div>
+                  <div style="font-family:var(--font-ui);font-size:11px;color:var(--gray-600);line-height:1.4;">That growth is real equity you can put toward your next move.</div>
                 </div>
               </div>
+              <div style="flex:1;min-height:16px;"></div>
             </div>
             <!-- Get started CTA — pinned to bottom -->
-            <div style="flex:none;padding:12px 24px 32px;background:var(--gray-50);">
-              <button onClick="{{ ob.dismissIntro }}" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#0041D9;color:#fff;border:none;border-radius:14px;padding:16px;cursor:pointer;font-family:var(--font-ui);font-weight:700;font-size:16px;">
+            <div style="flex:none;padding:12px 24px 32px;background:#f4f4f6;">
+              <button onClick="{{ ob.dismissIntro }}" style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:#0041D9;color:#fff;border:none;border-radius:14px;padding:16px;cursor:pointer;font-family:var(--font-ui);font-weight:700;font-size:17px;">
                 Get started
                 <span style="width:18px;height:18px;background:#fff;-webkit-mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;display:inline-block;flex:none;"></span>
               </button>
