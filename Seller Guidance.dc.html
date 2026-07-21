@@ -441,15 +441,13 @@
         <!-- FULL-SCREEN: Action tool -->
         <sc-if value="{{ a.viewTool }}">
           <div style="position:absolute;inset:0;z-index:46;background:var(--gray-50);">
-            <!-- LAYER 1 (z:5): Teal background block — sits behind image card, extends past pills so corners overlap into teal -->
-            <div style="position:absolute;top:46px;left:0;right:0;height:{{ a.toolTealHeight }};z-index:5;background:#136F65;"></div>
-            <!-- LAYER 1b (z:20): Teal pill mask — fixed strip that hides photo scrolling behind pills -->
-            <div style="position:absolute;top:46px;left:0;right:0;height:52px;z-index:20;background:#136F65;"></div>
+            <!-- LAYER 1 (z:20): Frosted white gradient — bleeds into photo below, keeps pills readable -->
+            <div style="position:absolute;top:46px;left:0;right:0;height:90px;z-index:20;background:linear-gradient(to bottom,rgba(255,255,255,0.96) 55%,rgba(255,255,255,0) 100%);pointer-events:none;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);"></div>
             <!-- LAYER 3 (z:30): Pill buttons only — always on top of image when scrolling -->
             <div style="position:absolute;top:46px;left:0;right:0;z-index:30;padding:4px 0 0;pointer-events:none;">
               <div style="display:flex;align-items:center;gap:6px;overflow-x:auto;padding:0 0 10px 12px;pointer-events:auto;" class="noscroll">
-                <button onClick="{{ a.tabGoHome }}" style="flex:none;display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:rgba(255,255,255,.18);color:#fff;">
-                  <span style="width:14px;height:14px;flex:none;display:inline-block;background:#fff;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;"></span>
+                <button onClick="{{ a.tabGoHome }}" style="flex:none;display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:rgba(0,0,0,.08);color:var(--gray-950);">
+                  <span style="width:14px;height:14px;flex:none;display:inline-block;background:var(--gray-950);-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;"></span>
                   Your plan
                 </button>
                 <button onClick="{{ a.tabToggleUnderstand }}" style="flex:none;display:flex;align-items:center;justify-content:center;gap:4px;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.tabUnderstandActive }};color:{{ a.tabUnderstandColor }};">
@@ -457,16 +455,16 @@
                   <span style="width:14px;height:14px;flex:none;display:inline-block;background:{{ a.tabUnderstandColor }};-webkit-mask:var(--ic-IconChevronDownOutline) center/contain no-repeat;mask:var(--ic-IconChevronDownOutline) center/contain no-repeat;transform:{{ a.understandChevronRotate }};transition:transform 200ms;"></span>
                 </button>
                 <button onClick="{{ a.tabGoto3 }}" style="flex:none;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.tabPrepareActive }};color:{{ a.tabPrepareColor }};">Prepare</button>
-                <button style="flex:none;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;white-space:nowrap;border:none;background:rgba(255,255,255,.12);color:rgba(255,255,255,.45);cursor:default;min-width:78px;text-align:center;">List</button>
-                <button style="flex:none;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;white-space:nowrap;border:none;background:rgba(255,255,255,.12);color:rgba(255,255,255,.45);cursor:default;min-width:78px;text-align:center;">Close</button>
+                <button style="flex:none;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;white-space:nowrap;border:none;background:rgba(0,0,0,.05);color:var(--gray-400);cursor:default;min-width:78px;text-align:center;">List</button>
+                <button style="flex:none;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;white-space:nowrap;border:none;background:rgba(0,0,0,.05);color:var(--gray-400);cursor:default;min-width:78px;text-align:center;">Close</button>
               </div>
               <!-- Understand sub-tab row -->
               <div style="overflow:hidden;max-height:{{ a.understandSubMaxH }};transition:max-height 220ms cubic-bezier(.4,0,.2,1);pointer-events:auto;">
-                <div class="noscroll" style="display:flex;align-items:center;gap:6px;padding-bottom:10px;border-top:1px solid rgba(255,255,255,.2);padding-top:8px;padding-left:12px;overflow-x:auto;">
+                <div class="noscroll" style="display:flex;align-items:center;gap:6px;padding-bottom:10px;border-top:1px solid rgba(0,0,0,.08);padding-top:8px;padding-left:12px;overflow-x:auto;">
                   <button onClick="{{ a.subGoto0 }}" style="flex:none;padding:5px 12px;border-radius:999px;font-family:var(--font-ui);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.subTab0Active }};color:{{ a.subTab0Color }};">Home value</button>
                   <button onClick="{{ a.subGoto1 }}" style="flex:none;padding:5px 12px;border-radius:999px;font-family:var(--font-ui);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.subTab1Active }};color:{{ a.subTab1Color }};">Track market</button>
                   <button onClick="{{ a.subGoto2 }}" style="flex:none;padding:5px 12px;border-radius:999px;font-family:var(--font-ui);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.subTab2Active }};color:{{ a.subTab2Color }};">Listing price</button>
-                  <button style="flex:none;padding:5px 12px;border-radius:999px;font-family:var(--font-ui);font-size:12px;font-weight:600;white-space:nowrap;border:none;background:rgba(255,255,255,.12);color:rgba(255,255,255,.45);cursor:default;">Explore</button>
+                  <button style="flex:none;padding:5px 12px;border-radius:999px;font-family:var(--font-ui);font-size:12px;font-weight:600;white-space:nowrap;border:none;background:rgba(0,0,0,.05);color:var(--gray-400);cursor:default;">Explore</button>
                 </div>
               </div>
             </div>
@@ -477,7 +475,6 @@
               <!-- LAYER 2 (z:10): Home photo — on top of teal bg, behind pills -->
               <div style="position:relative;z-index:10;">
                 <img src="assets/Photo.png" alt="Your home" style="display:block;width:100%;height:200px;object-fit:cover;border-radius:0;" />
-                <div style="position:absolute;top:0;left:0;right:0;height:60%;background:linear-gradient(to bottom,#136F65 0%,rgba(19,111,101,0) 100%);pointer-events:none;"></div>
               </div>
               <div style="padding:12px 14px 96px;display:flex;flex-direction:column;gap:14px;">
                 <!-- header -->
@@ -2801,22 +2798,22 @@ class Component extends DCLogic {
       tabGoHome: ()=>this.backHome(), tabGoto0: ()=>this.gotoTool(0), tabGoto3: ()=>this.gotoTool(3),
       tabToggleUnderstand: ()=>this.toggleUnderstandSub(),
       subGoto0: ()=>this.gotoSubTool(0), subGoto1: ()=>this.gotoSubTool(1), subGoto2: ()=>this.gotoSubTool(2), subGoto3: ()=>this.gotoSubTool(3),
-      tabUnderstandActive: (a.actionIdx===0||a.actionIdx===1||a.actionIdx===2) ? '#fff' : 'rgba(255,255,255,.18)',
-      tabUnderstandColor:  (a.actionIdx===0||a.actionIdx===1||a.actionIdx===2) ? '#136F65' : '#fff',
-      tabPrepareActive: a.actionIdx===3 ? '#fff' : 'rgba(255,255,255,.18)',
-      tabPrepareColor:  a.actionIdx===3 ? '#136F65' : '#fff',
+      tabUnderstandActive: (a.actionIdx===0||a.actionIdx===1||a.actionIdx===2) ? '#fff' : 'rgba(0,0,0,.08)',
+      tabUnderstandColor:  (a.actionIdx===0||a.actionIdx===1||a.actionIdx===2) ? '#136F65' : 'var(--gray-950)',
+      tabPrepareActive: a.actionIdx===3 ? '#fff' : 'rgba(0,0,0,.08)',
+      tabPrepareColor:  a.actionIdx===3 ? '#136F65' : 'var(--gray-950)',
       tabBarBg: a.tabBarPinned ? 'var(--gray-50)' : 'transparent',
       tabBarBorder: a.tabBarPinned ? '1px solid var(--gray-100)' : 'none',
       understandSubMaxH: (a.understandSubOpen || a.subPillsRevealed) ? '60px' : '0px',
       toolNavHeight: a.understandSubOpen ? '136px' : '98px',
       toolTealHeight: a.tabBarPinned ? ((a.understandSubOpen || a.subPillsRevealed) ? '90px' : '56px') : (a.understandSubOpen ? '140px' : '100px'),
       understandChevronRotate: a.understandSubOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-      subTab0Active: a.actionIdx===0 ? 'rgba(255,255,255,.9)' : 'rgba(255,255,255,.18)',
-      subTab0Color:  a.actionIdx===0 ? '#136F65' : '#fff',
-      subTab1Active: a.actionIdx===1 ? 'rgba(255,255,255,.9)' : 'rgba(255,255,255,.18)',
-      subTab1Color:  a.actionIdx===1 ? '#136F65' : '#fff',
-      subTab2Active: a.actionIdx===2 ? 'rgba(255,255,255,.9)' : 'rgba(255,255,255,.18)',
-      subTab2Color:  a.actionIdx===2 ? '#136F65' : '#fff',
+      subTab0Active: a.actionIdx===0 ? '#fff' : 'rgba(0,0,0,.06)',
+      subTab0Color:  a.actionIdx===0 ? '#136F65' : 'var(--gray-950)',
+      subTab1Active: a.actionIdx===1 ? '#fff' : 'rgba(0,0,0,.06)',
+      subTab1Color:  a.actionIdx===1 ? '#136F65' : 'var(--gray-950)',
+      subTab2Active: a.actionIdx===2 ? '#fff' : 'rgba(0,0,0,.06)',
+      subTab2Color:  a.actionIdx===2 ? '#136F65' : 'var(--gray-950)',
       subTab3Active: a.actionIdx===3 ? 'rgba(255,255,255,.9)' : 'rgba(255,255,255,.18)',
       subTab3Color:  a.actionIdx===3 ? '#136F65' : '#fff',
       exploreActions: this.A_EXPLORE.map((x,i)=>({ ...x, mt:(i===0?'0':'-20px'), z:String(i+1), onTap:()=>this.openTool(i) })),
