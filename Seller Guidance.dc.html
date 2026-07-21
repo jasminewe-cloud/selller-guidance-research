@@ -661,6 +661,17 @@
 
               <!-- TOOL 2: Determine your listing price — new design -->
               <sc-if value="{{ a.t2 }}">
+                <!-- Failsafe re-orientation card -->
+                <sc-if value="{{ a.fromFailsafe }}">
+                  <div style="background:#3B0470;border-radius:16px;padding:14px 16px;margin-bottom:14px;">
+                    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                      <div style="width:26px;height:26px;flex:none;border-radius:999px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;"><span style="width:13px;height:13px;background:#fff;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:block;"></span></div>
+                      <span style="font-family:var(--font-ui);font-size:12px;font-weight:700;color:rgba(255,255,255,.7);letter-spacing:.03em;text-transform:uppercase;">Seller Advisor</span>
+                    </div>
+                    <p style="font-family:var(--font-brand);font-weight:900;font-size:16px;color:#fff;margin:0 0 6px;line-height:1.2;">Here's your suggested listing price.</p>
+                    <p style="font-family:var(--font-ui);font-size:13px;color:rgba(255,255,255,.8);line-height:1.5;margin:0;">Use the slider below to explore different price points. Tap "Dig deeper with Seller Advisor" when you have questions about what you're seeing.</p>
+                  </div>
+                </sc-if>
                 <!-- Likely list price card (dark teal) -->
                 <div style="background:#1B6B5F;border-radius:16px;padding:18px 18px 16px;">
                   <div style="margin-bottom:4px;">
@@ -2299,6 +2310,12 @@ class Component extends DCLogic {
       this.setState(s=>({a:{...s.a, addressValue:raw, askValue:''}}), ()=>this.submitAddr());
       return;
     }
+    // Failsafe: listing price intent detected — re-orient mid-study tester
+    const isListingIntent = /sell my (home|house|place) for|list(ing)? (price|my home|my house|my place)|what can i (get|sell)|what could i sell|what should i (list|sell)|how much (can|could|should) i (sell|list|get)/i.test(raw);
+    if(isListingIntent){
+      this.fireListingFailsafe(raw);
+      return;
+    }
     // Proceeds onboarding scripted flow
     const procStep = this.state.a.proceedsChatStep;
     if(procStep){
@@ -2544,6 +2561,52 @@ class Component extends DCLogic {
     add({who:'v', kind:'text', text:"In a seller's market, pricing at $550K and generating multiple competing offers is often how you end up at $558K or above at close. Starting at $558K as your ask can slow that down. Fewer initial showings, less urgency, less room for buyers to feel like they're winning."}, 2800);
     add({who:'v', kind:'text', text:"$550K is not settling. It's the strategic entry point that gives you the best shot at closing at or above that number. We'd expect this home to go pending in roughly 13 days at this price."}, 4000);
     add({who:'v', kind:'text', text:"If you want to start at $558K, that's your call. Just know you're pricing to the best-case outcome from a different neighborhood pocket, and you may need a little more patience."}, 5000);
+  }
+  fireListingFailsafe(raw){
+    const add = (msg, delay) => setTimeout(()=>{
+      this.setState(s=>{
+        const prev = s.a.messages;
+        const msgs = (msg.isThinking===false && prev.length && prev[prev.length-1].isThinking)
+          ? [...prev.slice(0,-1), msg]
+          : [...prev, msg];
+        return {a:{...s.a, messages:msgs, anchor:msgs.length+999}};
+      });
+    }, delay);
+    // Force post-update state
+    const newFields = { sqft:'2,030', beds:'4', fullBaths:'3', baths:'3' };
+    const newZest = Math.round(465000*1.134/1000)*1000;
+    this.setState(s=>{
+      const msgs=[...s.a.messages, {who:'u', text:raw}];
+      return {
+        a:{...s.a, messages:msgs, chips:[], mode:'ask', anchor:msgs.length+999},
+        hf:{...s.hf, factsUpdated:true, zestimate:newZest, savedZest:465000, fields:{...s.hf.fields,...newFields}, pendingFields:null}
+      };
+    });
+    add({who:'v', isV:true, isThinking:true}, 600);
+    add({who:'v', isV:true, isThinking:false, hasText:true, text:"Good question. Based on your updated home facts — 4 bedrooms, 3 bathrooms, 2,030 sqft — your Zestimate is now $527K."}, 1800);
+    add({who:'v', isV:true, hasText:true, text:"We're in a seller's market in 78745 right now. Homes are going pending in about 13 days and demand is outpacing supply. That gives you room to price above your Zestimate."}, 3000);
+    add({who:'v', isV:true, hasText:true, text:"Based on all of that, we'd suggest listing around $550K. Want to see how that breaks down?"}, 4200);
+    setTimeout(()=>{
+      const chip = { label:"Yes, show me", onTap:()=>this.failsafeGoToListingPrice() };
+      this.setState(s=>({a:{...s.a, chips:[chip], mode:'chips'}}));
+    }, 4600);
+  }
+  failsafeGoToListingPrice(){
+    this.setState(s=>{
+      const msgs=[...s.a.messages, {who:'u', text:'Yes, show me'}];
+      return {a:{...s.a, messages:msgs, chips:[], mode:'ask', anchor:msgs.length+999}};
+    });
+    setTimeout(()=>{
+      this.setState(s=>({a:{...s.a, messages:[...s.a.messages,{who:'v',isV:true,isThinking:true}], anchor:s.a.messages.length+999}}));
+    }, 400);
+    setTimeout(()=>{
+      this.setState(s=>{
+        const msgs=[...s.a.messages.filter(m=>!m.isThinking),
+          {who:'v', isV:true, hasText:true, text:"Here's your listing price tool. Use the slider to explore different price points, then tap 'Dig deeper with Seller Advisor' at the bottom if you have any questions about what you're seeing."}
+        ];
+        return {a:{...s.a, messages:msgs, mode:'cta', ctaLabel:"Let's go", actionIdx:2, fromFailsafe:true, anchor:msgs.length+999}};
+      });
+    }, 1600);
   }
   closeChat(){
     this.setState(s=>({a:{...s.a, chatClosing:true}}));
