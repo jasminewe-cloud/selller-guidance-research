@@ -2299,21 +2299,21 @@ class Component extends DCLogic {
   onAskFocus(){ const pf=this.state.a.proceedsPrefill; if(pf && !(this.state.a.askValue||'').trim()){ this.setState(s=>({a:{...s.a, askValue:pf, proceedsPrefill:null}})); } }
   sendAsk(){
     const raw=(this.state.a.askValue||'').trim(); if(!raw) return;
-    // Scripted insight reply intercept
-    if(this._awaitInsightReply){
-      this.setState(s=>{ const msgs=[...s.a.messages,{who:'u',text:raw}]; return {a:{...s.a,messages:msgs,askValue:'',anchor:msgs.length+999}}; });
-      this.fireInsightScriptedReply(raw);
-      return;
-    }
     // Pre-claim: treat any message as an address entry
     if(!this.state.a.claimed){
       this.setState(s=>({a:{...s.a, addressValue:raw, askValue:''}}), ()=>this.submitAddr());
       return;
     }
-    // Failsafe: listing price intent detected — re-orient mid-study tester
-    const isListingIntent = /sell my (home|house|place) for|list(ing)? (price|my home|my house|my place)|what can i (get|sell)|what could i sell|what should i (list|sell)|how much (can|could|should) i (sell|list|get)/i.test(raw);
-    if(isListingIntent){
+    // Failsafe: listing price intent detected — re-orient mid-study tester (highest priority, overrides all scripted flows)
+    const isListingIntent = /sell my (home|house|place) for|list(ing)? (price|my home|my house|my place)|what (price|can i|could i) (get|sell)|what could i sell|what should i (list|sell|price)|how much (can|could|should) i (sell|list|get)|what should i list|what price/i.test(raw);
+    if(isListingIntent && !this.state.hf.factsUpdated){
       this.fireListingFailsafe(raw);
+      return;
+    }
+    // Scripted insight reply intercept
+    if(this._awaitInsightReply){
+      this.setState(s=>{ const msgs=[...s.a.messages,{who:'u',text:raw}]; return {a:{...s.a,messages:msgs,askValue:'',anchor:msgs.length+999}}; });
+      this.fireInsightScriptedReply(raw);
       return;
     }
     // Proceeds onboarding scripted flow
