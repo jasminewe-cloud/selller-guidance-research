@@ -283,13 +283,14 @@
                 <sc-if value="{{ m.isV }}">
                   <div data-mi="{{ m.key }}" style="width:100%;animation:vfade .25s ease both;display:flex;flex-direction:column;gap:10px;">
                     <sc-if value="{{ m.hasText }}" hint-placeholder-val="{{ true }}"><div style="font-size:15px;line-height:1.5;color:var(--gray-950);">{{ m.text }}</div></sc-if>
+                    <sc-if value="{{ m.isDefMsg }}"><div style="font-size:15px;line-height:1.5;color:var(--gray-950);"><b>{{ m.boldPart }}</b>{{ m.restPart }}</div></sc-if>
 
                     <sc-if value="{{ m.isCard }}">
                       <div style="background:#fff;border:1px solid var(--border-subtle);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-sm);width:100%;">
                         <div style="position:relative;height:150px;"><img src="assets/Photo.png" alt="{{ m.addr1 }}" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;" /></div>
                         <div style="padding:13px 14px;">
-                          <div style="font-family:var(--font-brand);font-weight:900;font-size:26px;line-height:1.05;font-variant-numeric:tabular-nums;">$1,695,000</div>
-                          <div style="font-size:14px;color:var(--gray-900);margin-top:4px;"><b>4</b> bd | <b>3</b> ba | <b>2,656</b> sqft</div>
+                          <div style="font-family:var(--font-brand);font-weight:900;font-size:26px;line-height:1.05;font-variant-numeric:tabular-nums;">$465,000</div>
+                          <div style="font-size:14px;color:var(--gray-900);margin-top:4px;"><b>3</b> bd | <b>2</b> ba | <b>1,680</b> sqft</div>
                           <div style="font-size:14px;color:var(--gray-700);margin-top:2px;">{{ m.addr1 }}</div>
                           <div style="font-size:13px;color:var(--gray-500);margin-top:4px;">{{ m.addr2 }}</div>
                         </div>
@@ -305,7 +306,7 @@
                     <sc-if value="{{ m.isSnap }}">
                       <div style="background:#136F65;border-radius:16px;padding:20px 18px;">
                         <div style="font-size:11px;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.7);margin-bottom:6px;">ZESTIMATE®</div>
-                        <div style="font-family:var(--font-brand);font-weight:900;font-size:38px;line-height:1.0;font-variant-numeric:tabular-nums;color:#fff;margin-bottom:12px;">$1,695,000</div>
+                        <div style="font-family:var(--font-brand);font-weight:900;font-size:38px;line-height:1.0;font-variant-numeric:tabular-nums;color:#fff;margin-bottom:12px;">$465,000</div>
                         <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.18);border-radius:999px;padding:5px 12px;margin-bottom:16px;">
                           <span style="width:10px;height:10px;background:#a8edcc;-webkit-mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;display:block;transform:rotate(-45deg);"></span>
                           <span style="font-family:var(--font-ui);font-size:13px;font-weight:700;color:#fff;">4.2% this year</span>
@@ -343,7 +344,7 @@
 
                     <!-- Suggested next step card (in-chat) -->
                     <sc-if value="{{ m.isNextStep }}">
-                      <div style="background:#fcf6ff;border:1px solid rgba(59,4,112,.15);border-radius:16px;padding:14px;animation:vfade .3s ease both;">
+                      <div style="background:#fff;border:1px solid var(--gray-200);border-radius:16px;padding:14px;animation:vfade .3s ease both;">
                         <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
                           <span style="width:14px;height:14px;flex:none;background:#3B0470;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:block;"></span>
                           <span style="font-size:10px;font-weight:800;color:#3B0470;text-transform:uppercase;letter-spacing:.05em;">Suggested next step</span>
@@ -374,7 +375,7 @@
               </sc-for>
               <!-- suggested next step: appears in thread after user says done -->
               <sc-if value="{{ a.showReadyNext }}">
-                <div style="background:#fcf6ff;border:1px solid rgba(59,4,112,.15);border-radius:16px;padding:14px;animation:vfade .25s ease both;">
+                <div style="background:#fff;border:1px solid var(--gray-200);border-radius:16px;padding:14px;animation:vfade .25s ease both;">
                   <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px;">
                     <span style="width:14px;height:14px;flex:none;background:#3B0470;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:block;"></span>
                     <span style="font-size:10px;font-weight:800;color:#3B0470;text-transform:uppercase;letter-spacing:.05em;">Suggested next step</span>
@@ -412,14 +413,14 @@
               </sc-if>
               <sc-if value="{{ a.showAddrChip }}">
                 <div style="padding:8px 16px 0;display:flex;gap:8px;">
-                  <button onClick="{{ a.tapAddrChip }}" style="flex:none;background:var(--gray-50);border:1.5px solid var(--gray-950);border-radius:999px;padding:8px 14px;font-family:var(--font-ui);font-size:13px;font-weight:600;color:var(--gray-900);cursor:pointer;white-space:nowrap;">3418 Pecos St, Austin, TX 78704</button>
+                  <button onClick="{{ a.tapAddrChip }}" style="flex:none;background:var(--gray-50);border:1.5px solid var(--gray-950);border-radius:999px;padding:8px 14px;font-family:var(--font-ui);font-size:13px;font-weight:600;color:var(--gray-900);cursor:pointer;white-space:nowrap;">2204 Teri Rd, Austin, TX 78745</button>
                 </div>
               </sc-if>
               <div style="display:flex;gap:8px;align-items:center;padding:10px 16px 24px;">
                 <sc-if value="{{ a.modeAsk }}">
                   <div style="flex:1;display:flex;align-items:center;background:#fff;border-radius:999px;padding:0 6px 0 14px;box-shadow:0 2px 12px rgba(0,0,0,.18);">
                     <sc-if value="{{ a.showAddrChip }}"><button onClick="{{ a.useLocationAsk }}" aria-label="Use my location" style="flex:none;border:none;background:transparent;padding:0;margin:0 6px 0 0;cursor:pointer;display:flex;align-items:center;justify-content:center;"><span style="width:19px;height:19px;background:var(--gray-950);-webkit-mask:var(--ic-IconLocationArrowOutline) center/contain no-repeat;mask:var(--ic-IconLocationArrowOutline) center/contain no-repeat;"></span></button></sc-if>
-                    <input value="{{ a.askValue }}" onInput="{{ a.onAskInput }}" onKeyDown="{{ a.onAskKey }}" placeholder="{{ a.askPlaceholder }}" style="flex:1;font-family:var(--font-ui);font-size:15px;color:var(--gray-950);background:transparent;border:none;padding:12px 6px 12px 0;outline:none;" />
+                    <input value="{{ a.askValue }}" onInput="{{ a.onAskInput }}" onKeyDown="{{ a.onAskKey }}" onFocus="{{ a.onAskFocus }}" placeholder="{{ a.askPlaceholder }}" style="flex:1;font-family:var(--font-ui);font-size:15px;color:var(--gray-950);background:transparent;border:none;padding:12px 6px 12px 0;outline:none;" />
                     <button style="width:30px;height:30px;flex:none;border-radius:999px;border:none;background:var(--gray-950);cursor:pointer;display:flex;align-items:center;justify-content:center;margin:3px 0;"><span style="width:15px;height:15px;background:#fff;-webkit-mask:var(--ic-IconMicrophoneOutline) center/contain no-repeat;mask:var(--ic-IconMicrophoneOutline) center/contain no-repeat;"></span></button>
                     <button onClick="{{ a.sendAsk }}" style="width:30px;height:30px;flex:none;border-radius:999px;border:none;background:var(--blue-600);cursor:pointer;align-items:center;justify-content:center;margin:3px 0 3px 4px;display:{{ a.sendDisplay }};"><span style="width:15px;height:15px;background:#fff;-webkit-mask:var(--ic-IconArrowUpOutline) center/contain no-repeat;mask:var(--ic-IconArrowUpOutline) center/contain no-repeat;"></span></button>
                   </div>
@@ -442,8 +443,10 @@
           <div style="position:absolute;inset:0;z-index:46;background:var(--gray-50);">
             <!-- LAYER 1 (z:5): Teal background block — sits behind image card, extends past pills so corners overlap into teal -->
             <div style="position:absolute;top:46px;left:0;right:0;height:{{ a.toolTealHeight }};z-index:5;background:#136F65;"></div>
+            <!-- LAYER 1b (z:20): Teal pill mask — fixed strip that hides photo scrolling behind pills -->
+            <div style="position:absolute;top:46px;left:0;right:0;height:56px;z-index:20;background:#136F65;"></div>
             <!-- LAYER 3 (z:30): Pill buttons only — always on top of image when scrolling -->
-            <div style="position:absolute;top:46px;left:0;right:0;z-index:30;padding:10px 0 0;pointer-events:none;">
+            <div style="position:absolute;top:46px;left:0;right:0;z-index:30;padding:4px 0 0;pointer-events:none;">
               <div style="display:flex;align-items:center;gap:6px;overflow-x:auto;padding:0 0 10px 12px;pointer-events:auto;" class="noscroll">
                 <button onClick="{{ a.tabGoHome }}" style="flex:none;display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:rgba(255,255,255,.18);color:#fff;">
                   <span style="width:14px;height:14px;flex:none;display:inline-block;background:#fff;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;"></span>
@@ -462,7 +465,7 @@
                 <div class="noscroll" style="display:flex;align-items:center;gap:6px;padding-bottom:10px;border-top:1px solid rgba(255,255,255,.2);padding-top:8px;overflow-x:auto;">
                   <button onClick="{{ a.subGoto0 }}" style="flex:none;padding:5px 12px;border-radius:999px;font-family:var(--font-ui);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.subTab0Active }};color:{{ a.subTab0Color }};">Home value</button>
                   <button onClick="{{ a.subGoto1 }}" style="flex:none;padding:5px 12px;border-radius:999px;font-family:var(--font-ui);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.subTab1Active }};color:{{ a.subTab1Color }};">Track market</button>
-                  <button onClick="{{ a.subGoto2 }}" style="flex:none;padding:5px 12px;border-radius:999px;font-family:var(--font-ui);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.subTab2Active }};color:{{ a.subTab2Color }};">Net proceeds</button>
+                  <button onClick="{{ a.subGoto2 }}" style="flex:none;padding:5px 12px;border-radius:999px;font-family:var(--font-ui);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.subTab2Active }};color:{{ a.subTab2Color }};">Listing price</button>
                   <button onClick="{{ a.subGoto3 }}" style="flex:none;padding:5px 12px;border-radius:999px;font-family:var(--font-ui);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.subTab3Active }};color:{{ a.subTab3Color }};">Explore</button>
                 </div>
               </div>
@@ -571,19 +574,19 @@
                     </div>
                     <p style="font-size:14px;line-height:1.5;color:var(--gray-900);margin:0 0 14px;">{{ hf.summaryText }}</p>
                     <button onClick="{{ a.digDeeperHomeFacts }}" style="width:100%;display:flex;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--gray-950);border-radius:14px;padding:11px 16px;cursor:pointer;font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Dig deeper with Seller Advisor</button>
-                    <div style="height:1px;background:var(--gray-200);margin:14px -16px 0;"></div>
+                    <div style="height:1px;background:var(--gray-200);margin:14px 0 0;"></div>
                     <div style="display:flex;align-items:center;justify-content:space-between;padding-top:12px;">
                       <div style="display:flex;flex-direction:column;gap:2px;">
                         <span style="font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;">Next step</span>
                         <span style="font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Review your local market</span>
                       </div>
-                      <button onClick="{{ a.subGoto1 }}" style="width:32px;height:32px;flex:none;border-radius:999px;background:var(--gray-950);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;"><span style="width:14px;height:14px;background:#fff;-webkit-mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;display:block;"></span></button>
+                      <button onClick="{{ a.subGoto1 }}" style="background:transparent;border:none;cursor:pointer;padding:4px;display:flex;align-items:center;justify-content:center;"><span style="width:20px;height:20px;background:var(--gray-950);-webkit-mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;display:block;"></span></button>
                     </div>
                   </div>
                 </sc-if>
                 <!-- Voyager home facts nudge — hidden after facts updated -->
                 <sc-if value="{{ hf.factsNotUpdated }}">
-                <div style="background:#fcf6ff;border:1px solid rgba(59,4,112,.15);border-radius:16px;padding:14px 16px;">
+                <div style="background:#fff;border:1px solid var(--gray-200);border-radius:16px;padding:14px 16px;">
                   <div style="display:flex;align-items:center;gap:9px;margin-bottom:8px;">
                     <span style="width:18px;height:18px;flex:none;background:var(--purple-700);-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:block;"></span>
                     <span style="font-family:var(--font-ui);font-weight:700;font-size:14px;color:var(--gray-950);">Need to update anything?</span>
@@ -593,32 +596,19 @@
                 </div>
                 </sc-if>
               </sc-if>
-              <!-- Check-in: below home facts, only on tool 0 after home facts updated -->
-              <sc-if value="{{ a.factsUpdatedOnT0 }}">
-                <button onClick="{{ a.subGoto1 }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:12px;padding:12px 14px;cursor:pointer;">
-                  <div style="display:flex;align-items:center;gap:10px;">
-                    <div style="width:24px;height:24px;flex:none;border-radius:999px;background:var(--gray-950);display:flex;align-items:center;justify-content:center;"><span style="width:12px;height:12px;background:#fff;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;"></span></div>
-                    <div style="display:flex;flex-direction:column;gap:1px;">
-                      <span style="font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--gray-500);line-height:1.2;">Next step</span>
-                      <span style="font-family:var(--font-ui);font-size:13px;font-weight:700;color:var(--gray-900);line-height:1.2;">Review your local market</span>
-                    </div>
-                  </div>
-                  <span style="display:inline-flex;align-items:center;gap:2px;font-family:var(--font-ui);font-size:13px;font-weight:700;color:#0041D9;white-space:nowrap;">Let's go <span style="width:14px;height:14px;background:#0041D9;-webkit-mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;display:inline-block;flex:none;"></span></span>
-                </button>
-              </sc-if>
 
               <!-- TOOL 1: Track the market -->
               <sc-if value="{{ a.t1 }}">
                 <div style="background:#fff;border-radius:16px;box-shadow:var(--shadow-sm);padding:16px;">
-                  <div style="display:flex;align-items:center;gap:6px;"><span style="font-family:var(--font-brand);font-weight:900;font-size:18px;">Neutral market</span><span style="width:16px;height:16px;background:var(--blue-600);-webkit-mask:var(--ic-IconInfoOutline) center/contain no-repeat;mask:var(--ic-IconInfoOutline) center/contain no-repeat;"></span></div>
-                  <div style="font-family:var(--font-brand);font-weight:900;font-size:30px;line-height:1;margin-top:6px;">50<span style="font-size:16px;color:var(--gray-500);">/100</span></div>
+                  <div style="display:flex;align-items:center;gap:6px;"><span style="font-family:var(--font-brand);font-weight:900;font-size:18px;">Seller's market</span><span style="width:16px;height:16px;background:var(--blue-600);-webkit-mask:var(--ic-IconInfoOutline) center/contain no-repeat;mask:var(--ic-IconInfoOutline) center/contain no-repeat;"></span></div>
+                  <div style="font-family:var(--font-brand);font-weight:900;font-size:30px;line-height:1;margin-top:6px;">72<span style="font-size:16px;color:var(--gray-500);">/100</span></div>
                   <div style="font-size:13px;color:var(--gray-600);margin-bottom:10px;">Market index</div>
-                  <div style="position:relative;height:8px;border-radius:999px;background:linear-gradient(to right,#8fe0a0,#1e7a52,#0f3d2e);"><span style="position:absolute;left:50%;top:-3px;width:4px;height:14px;border-radius:2px;background:var(--gray-950);transform:translateX(-50%);"></span></div>
+                  <div style="position:relative;height:8px;border-radius:999px;background:linear-gradient(to right,#8fe0a0,#1e7a52,#0f3d2e);"><span style="position:absolute;left:72%;top:-3px;width:4px;height:14px;border-radius:2px;background:var(--gray-950);transform:translateX(-50%);"></span></div>
                   <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-600);margin-top:6px;"><span>Buyers market</span><span>Sellers market</span></div>
                 </div>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-                  <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow-sm);padding:14px;"><div style="font-family:var(--font-brand);font-weight:900;font-size:20px;">+6.4%</div><div style="font-size:12.5px;color:var(--gray-600);margin-top:3px;">1-year price forecast</div></div>
-                  <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow-sm);padding:14px;"><div style="font-family:var(--font-brand);font-weight:900;font-size:20px;">28 days</div><div style="font-size:12.5px;color:var(--gray-600);margin-top:3px;">Median days to pending</div></div>
+                  <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow-sm);padding:14px;"><div style="font-family:var(--font-brand);font-weight:900;font-size:20px;">+8.5%</div><div style="font-size:12.5px;color:var(--gray-600);margin-top:3px;">1-year price forecast</div></div>
+                  <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow-sm);padding:14px;"><div style="font-family:var(--font-brand);font-weight:900;font-size:20px;">13 days</div><div style="font-size:12.5px;color:var(--gray-600);margin-top:3px;">Median days to pending</div></div>
                   <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow-sm);padding:14px;"><div style="font-family:var(--font-brand);font-weight:900;font-size:20px;">5</div><div style="font-size:12.5px;color:var(--gray-600);margin-top:3px;">Active listings for sale</div></div>
                   <div style="background:#fff;border-radius:14px;box-shadow:var(--shadow-sm);padding:14px;"><div style="font-family:var(--font-brand);font-weight:900;font-size:20px;">3</div><div style="font-size:12.5px;color:var(--gray-600);margin-top:3px;">New listings in last 30 days</div></div>
                 </div>
@@ -630,7 +620,7 @@
                     <div style="width:28px;height:28px;flex:none;border-radius:999px;background:var(--purple-700);display:flex;align-items:center;justify-content:center;"><span style="width:15px;height:15px;background:#fff;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;"></span></div>
                     <span style="font-weight:700;font-size:14px;">What this means for you</span>
                   </div>
-                  <p style="font-size:14px;line-height:1.5;color:var(--gray-900);margin:0 0 14px;">Your market is stable and neutral right now. Prices are projected to grow 6.4% over the next year and homes are going pending in about 28 days. If you're planning to sell in the next few months, you don't need to wait for a better window.</p>
+                  <p style="font-size:14px;line-height:1.5;color:var(--gray-900);margin:0 0 14px;">Your market is leaning toward sellers right now. Prices are projected to grow 8.5% over the next year and homes are going pending in about 13 days. Demand is outpacing supply, which gives you room to price above your Zestimate and still attract strong offers quickly.</p>
                   <button onClick="{{ a.digDeeperMarket }}" style="width:100%;display:flex;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--gray-950);border-radius:14px;padding:11px 16px;cursor:pointer;font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Dig deeper with Seller Advisor</button>
                 </div>
               </sc-if>
@@ -638,7 +628,7 @@
               <sc-if value="{{ a.t1 }}">
                 <div>
                   <div style="font-family:var(--font-brand);font-weight:900;font-size:17px;margin:10px 2px 10px;">Comparable homes</div>
-                  <div class="noscroll" style="display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;">
+                  <div class="noscroll" style="display:flex;gap:10px;overflow-x:auto;padding:0 14px 4px;margin:0 -14px;">
                     <sc-for list="{{ a.comps }}" as="cp" hint-placeholder-count="4">
                       <div onClick="{{ cp.onTap }}" style="flex:none;width:150px;background:#fff;border-radius:14px;box-shadow:var(--shadow-sm);overflow:hidden;cursor:pointer;outline:{{ cp.cardOutline }};border-radius:14px;">
                         <img src="assets/Photo.png" alt="Comp" style="display:block;width:100%;height:88px;object-fit:cover;" />
@@ -648,55 +638,42 @@
                   </div>
                 </div>
                 <!-- Comps insight card -->
-                <div style="background:#fcf6ff;border:1px solid rgba(59,4,112,.15);border-radius:16px;overflow:hidden;padding:14px 16px;">
+                <div style="background:#fff;border:1px solid var(--gray-200);border-radius:16px;overflow:hidden;padding:14px 16px;">
                   <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px;">
                     <span style="width:18px;height:18px;flex:none;background:var(--purple-700);-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:block;"></span>
                     <span style="font-weight:700;font-size:14px;color:var(--gray-950);">What this means for you</span>
                   </div>
                   <div style="font-size:13.5px;line-height:1.55;color:var(--gray-700);margin-bottom:12px;">
-                    <sc-if value="{{ a.compInsightDefault }}">These recently sold homes are comparable to yours. Their sale prices form the basis for your likely listing range. Tap any comp to see how it stacks up against your home. <button onClick="{{ a.openInsightCompsSheet }}" style="background:transparent;border:none;padding:0;cursor:pointer;font-family:var(--font-ui);font-size:13px;font-weight:600;color:#0041D9;text-decoration:none;vertical-align:baseline;">What's behind this?</button></sc-if>
-                    <sc-if value="{{ !a.compInsightDefault }}">{{ a.compInsightText }} <button onClick="{{ a.openInsightCompsSheet }}" style="background:transparent;border:none;padding:0;cursor:pointer;font-family:var(--font-ui);font-size:13px;font-weight:600;color:#0041D9;text-decoration:none;vertical-align:baseline;">What's behind this?</button></sc-if>
+                    <sc-if value="{{ a.compInsightDefault }}">These recently sold homes are comparable to yours. Their sale prices form the basis for your likely listing range. Tap any comp to see how it stacks up against your home.</sc-if>
+                    <sc-if value="{{ !a.compInsightDefault }}">{{ a.compInsightText }}</sc-if>
                   </div>
                   <button onClick="{{ a.digDeeperComps }}" style="width:100%;display:flex;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--gray-950);border-radius:14px;padding:11px 16px;cursor:pointer;font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Dig deeper with Seller Advisor</button>
-                  <div style="height:1px;background:rgba(59,4,112,.1);margin:14px -16px 0;"></div>
+                  <div style="height:1px;background:var(--gray-200);margin:14px 0 0;"></div>
                   <div style="display:flex;align-items:center;justify-content:space-between;padding-top:12px;">
                     <div style="display:flex;flex-direction:column;gap:2px;">
                       <span style="font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;">Next step</span>
                       <span style="font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Determine your listing price</span>
                     </div>
-                    <button onClick="{{ a.subGoto2 }}" style="width:32px;height:32px;flex:none;border-radius:999px;background:var(--gray-950);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;"><span style="width:14px;height:14px;background:#fff;-webkit-mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;display:block;"></span></button>
+                    <button onClick="{{ a.subGoto2 }}" style="background:transparent;border:none;cursor:pointer;padding:4px;display:flex;align-items:center;justify-content:center;"><span style="width:20px;height:20px;background:var(--gray-950);-webkit-mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;display:block;"></span></button>
                   </div>
                 </div>
-              </sc-if>
-              <sc-if value="{{ a.t1 }}">
-                <button onClick="{{ a.subGoto2 }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:12px;padding:12px 14px;cursor:pointer;">
-                  <div style="display:flex;align-items:center;gap:10px;">
-                    <div style="width:24px;height:24px;flex:none;border-radius:999px;background:var(--gray-950);display:flex;align-items:center;justify-content:center;"><span style="width:12px;height:12px;background:#fff;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;"></span></div>
-                    <div style="display:flex;flex-direction:column;gap:1px;">
-                      <span style="font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--gray-500);line-height:1.2;">Next step</span>
-                      <span style="font-family:var(--font-ui);font-size:13px;font-weight:700;color:var(--gray-900);line-height:1.2;">Determine your listing price</span>
-                    </div>
-                  </div>
-                  <span style="display:inline-flex;align-items:center;gap:2px;font-family:var(--font-ui);font-size:13px;font-weight:700;color:#0041D9;white-space:nowrap;">Let's go <span style="width:14px;height:14px;background:#0041D9;-webkit-mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;display:inline-block;flex:none;"></span></span>
-                </button>
               </sc-if>
 
               <!-- TOOL 2: Determine your listing price — new design -->
               <sc-if value="{{ a.t2 }}">
                 <!-- Likely list price card (dark teal) -->
                 <div style="background:#1B6B5F;border-radius:16px;padding:18px 18px 16px;">
-                  <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+                  <div style="margin-bottom:4px;">
                     <span style="font-family:var(--font-ui);font-size:13px;font-weight:600;color:rgba(255,255,255,.85);">{{ a.listPriceLabel }}</span>
-                    <span style="width:15px;height:15px;background:rgba(255,255,255,.7);-webkit-mask:var(--ic-IconInfoOutline) center/contain no-repeat;mask:var(--ic-IconInfoOutline) center/contain no-repeat;display:inline-block;flex:none;"></span>
                   </div>
                   <div style="font-family:var(--font-brand);font-weight:900;font-size:40px;line-height:1;color:#fff;margin-bottom:4px;">{{ a.saleStr }}</div>
-                  <div style="font-family:var(--font-ui);font-size:13px;color:rgba(255,255,255,.75);margin-bottom:16px;">Time on market {{ a.sellsIn }}</div>
+                  <div style="font-family:var(--font-ui);font-size:13px;color:rgba(255,255,255,.75);margin-bottom:16px;">Zestimate {{ a.zestimateFmt }}</div>
                   <!-- Slider -->
                   <input type="range" min="{{ a.sliderMin }}" max="{{ a.sliderMax }}" step="5000" value="{{ a.saleVal }}" onInput="{{ a.onSale }}" onChange="{{ a.onSaleCommit }}" class="c11n-slider" style="width:100%;accent-color:#4ADE80;" />
                   <div style="display:flex;justify-content:space-between;font-family:var(--font-ui);font-size:12px;color:rgba(255,255,255,.7);margin-top:4px;">
-                    <span>$400K</span>
+                    <span>{{ a.sliderMinFmt }}</span>
                     <span style="font-weight:700;color:#fff;">{{ a.salePriceRange }}</span>
-                    <span>$800K</span>
+                    <span>{{ a.sliderMaxFmt }}</span>
                   </div>
                 </div>
                 <!-- Confidence + Sells in row -->
@@ -733,30 +710,30 @@
               </sc-if>
               <!-- Net proceeds insight card -->
               <sc-if value="{{ a.t2 }}">
-                <div style="background:#fcf6ff;border:1px solid rgba(59,4,112,.15);border-radius:16px;overflow:hidden;padding:14px 16px;">
+                <div style="background:#fff;border:1px solid var(--gray-200);border-radius:16px;overflow:hidden;padding:14px 16px;">
                   <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px;">
                     <span style="width:18px;height:18px;flex:none;background:var(--purple-700);-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:block;"></span>
                     <span style="font-weight:700;font-size:14px;color:var(--gray-950);">What this means for you</span>
                   </div>
-                  <div style="font-size:13.5px;line-height:1.5;color:var(--gray-700);margin-bottom:12px;">{{ a.insightText }} <button onClick="{{ a.openInsightNetSheet }}" style="background:transparent;border:none;padding:0;cursor:pointer;font-family:var(--font-ui);font-size:13px;font-weight:600;color:#0041D9;text-decoration:none;vertical-align:baseline;">What's behind this?</button></div>
+                  <div style="font-size:13.5px;line-height:1.5;color:var(--gray-700);margin-bottom:12px;">{{ a.insightText }}</div>
                   <button onClick="{{ a.digDeeperNet }}" style="width:100%;display:flex;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--gray-950);border-radius:14px;padding:11px 16px;cursor:pointer;font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Dig deeper with Seller Advisor</button>
-                  <div style="height:1px;background:rgba(59,4,112,.1);margin:14px -16px 0;"></div>
+                  <div style="height:1px;background:var(--gray-200);margin:14px 0 0;"></div>
                   <div style="display:flex;align-items:center;justify-content:space-between;padding-top:12px;">
                     <div style="display:flex;flex-direction:column;gap:2px;">
                       <span style="font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;">Next step</span>
-                      <span style="font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Prepare to list</span>
+                      <span style="font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Explore your selling options</span>
                     </div>
-                    <button onClick="{{ a.subGoto3 }}" style="width:32px;height:32px;flex:none;border-radius:999px;background:var(--gray-950);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;"><span style="width:14px;height:14px;background:#fff;-webkit-mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;display:block;"></span></button>
-                  </div>
-                  <div style="height:1px;background:rgba(59,4,112,.1);margin:12px -16px 0;"></div>
-                  <div style="padding-top:12px;">
-                    <span style="font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:8px;">Alternate step</span>
-                    <button onClick="{{ a.subGoto3 }}" style="display:inline-flex;align-items:center;gap:6px;background:transparent;border:1.5px solid var(--gray-300);border-radius:999px;padding:8px 14px;cursor:pointer;">
-                      <span style="font-family:var(--font-ui);font-size:13px;font-weight:600;color:var(--gray-900);">Speak with an agent</span>
-                      <span style="width:14px;height:14px;background:var(--gray-900);-webkit-mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;display:inline-block;flex:none;"></span>
-                    </button>
+                    <span style="width:20px;height:20px;background:var(--gray-950);-webkit-mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;display:block;"></span>
                   </div>
                 </div>
+                <!-- Connect with an agent — standalone CTA -->
+                <button onClick="{{ a.subGoto3 }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:transparent;border:1px solid var(--gray-200);border-radius:16px;padding:14px 16px;cursor:pointer;">
+                  <div style="display:flex;flex-direction:column;align-items:flex-start;gap:2px;">
+                    <span style="font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;">Want expert advice?</span>
+                    <span style="font-family:var(--font-ui);font-size:15px;font-weight:700;color:var(--gray-950);">Connect with an agent</span>
+                  </div>
+                  <span style="width:18px;height:18px;background:var(--gray-950);-webkit-mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;display:block;flex:none;"></span>
+                </button>
               </sc-if>
 
               <!-- TOOL 3: Explore your options -->
@@ -764,7 +741,7 @@
                 <!-- Agent finder card — dark green, matches Zestimate card -->
                 <div style="background:#136F65;border-radius:18px;padding:20px;">
                   <div style="font-family:var(--font-brand);font-weight:900;font-size:22px;color:#fff;line-height:1.1;margin-bottom:6px;">Find your agent</div>
-                  <p style="font-family:var(--font-ui);font-size:13px;color:rgba(255,255,255,.8);margin:0 0 16px;line-height:1.45;">An agent guides you through pricing, offers, negotiations, and more. These matches are ranked by recent sales in 78704.</p>
+                  <p style="font-family:var(--font-ui);font-size:13px;color:rgba(255,255,255,.8);margin:0 0 16px;line-height:1.45;">An agent guides you through pricing, offers, negotiations, and more. These matches are ranked by recent sales in 78745.</p>
                   <!-- Agent cards -->
                   <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;">
                     <!-- Agent 1: Sally Reeds -->
@@ -873,21 +850,9 @@
                       <div style="font-family:var(--font-brand);font-weight:900;font-size:20px;color:var(--gray-950);">Stage to sell faster</div>
                     </div>
                   </div>
-                  <p style="font-family:var(--font-ui);font-size:14px;color:var(--gray-800);line-height:1.55;margin:0 0 14px;">Staged homes in 78704 sell up to 20% faster. You don't need a full service: declutter, deep clean, and focus on the spaces buyers care about most.</p>
+                  <p style="font-family:var(--font-ui);font-size:14px;color:var(--gray-800);line-height:1.55;margin:0 0 14px;">Staged homes in 78745 sell up to 20% faster. You don't need a full service: declutter, deep clean, and focus on the spaces buyers care about most.</p>
                   <button style="width:100%;background:#fff;border:1.5px solid var(--blue-600);border-radius:8px;font-family:var(--font-ui);font-weight:700;font-size:14px;color:var(--blue-600);padding:11px;cursor:pointer;">View checklist</button>
                 </div>
-              </sc-if>
-              <sc-if value="{{ a.t3 }}">
-                <button onClick="{{ a.openChatReady }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:12px;padding:12px 14px;cursor:pointer;">
-                  <div style="display:flex;align-items:center;gap:10px;">
-                    <div style="width:24px;height:24px;flex:none;border-radius:999px;background:var(--gray-950);display:flex;align-items:center;justify-content:center;"><span style="width:12px;height:12px;background:#fff;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;"></span></div>
-                    <div style="display:flex;flex-direction:column;gap:1px;">
-                      <span style="font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--gray-500);line-height:1.2;">Ready to move on?</span>
-                      <span style="font-family:var(--font-ui);font-size:13px;font-weight:700;color:var(--gray-900);line-height:1.2;">I'll guide you to the next step</span>
-                    </div>
-                  </div>
-                  <span style="display:inline-flex;align-items:center;gap:2px;font-family:var(--font-ui);font-size:13px;font-weight:700;color:#0041D9;white-space:nowrap;">Let's go <span style="width:14px;height:14px;background:#0041D9;-webkit-mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;display:inline-block;flex:none;"></span></span>
-                </button>
               </sc-if>
 
               <!-- AI summary + tappable prompts (tools 1–3 only) -->
@@ -934,7 +899,7 @@
                   <div style="width:36px;height:4px;background:var(--gray-300);border-radius:999px;margin:0 auto 20px;"></div>
                   <div style="font-size:11px;font-weight:800;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">Rationale and assumptions</div>
                   <ul style="margin:0;padding:0 0 0 16px;font-size:13.5px;color:var(--gray-700);line-height:1.7;">
-                    <li>4 comparable sales in zip 78704</li>
+                    <li>4 comparable sales in zip 78745</li>
                     <li>4 bd, 3 ba, 2,500+ sqft</li>
                     <li>Sold within the last 90 days</li>
                     <li>Sale-to-list ratio averaging 99.2%</li>
@@ -976,7 +941,7 @@
               <!-- Header -->
               <div style="padding:20px 20px 16px;">
                 <h2 style="font-family:var(--font-brand);font-weight:900;font-size:22px;color:var(--gray-950);margin:0 0 4px;line-height:1.2;">Keep your home facts and Zestimate® up to date</h2>
-                <p style="font-family:var(--font-ui);font-size:13px;color:var(--gray-600);margin:0;">2611 S 2nd St # A, Austin, TX 78704</p>
+                <p style="font-family:var(--font-ui);font-size:13px;color:var(--gray-600);margin:0;">4812 Menchaca Rd #A, Austin, TX 78745</p>
               </div>
 
               <!-- Tip card -->
@@ -1372,10 +1337,12 @@ class Component extends DCLogic {
       "Anything else that would be helpful to know?"
     ];
     this.INIT_A = [
-      { who:'v', isV:true, hasText:true, text:"I'll learn what matters to you, explain your options clearly, and walk you through every step. Selling feels a lot less overwhelming when you have a plan." },
-      { who:'v', isV:true, hasText:true, text:"To get started — what's your home address? I'll pull up your details." }
+      { who:'v', isV:true, hasText:true, text:"Got your home at 4812 Menchaca Rd, Austin, TX 78745 pulled up. Here's the current picture." },
+      { who:'v', isV:true, kind:'snap', isSnap:true },
+      { who:'v', isV:true, hasText:true, text:"Your equity has grown and buyers are moving fast in 78745. You're in a strong position if you decide to sell." },
+      { who:'v', isV:true, hasText:true, text:"When are you thinking about selling?" }
     ];
-    this.A_DEFAULT_ADDR = { line1:'2611 S 2nd St # A, Austin, TX 78704', line2:'Off Market' };
+    this.A_DEFAULT_ADDR = { line1:'4812 Menchaca Rd #A, Austin, TX 78745', line2:'Off Market' };
     this.A_EXPLORE = [
       { title:'Understand home value', desc:'See your Zestimate, recent sales & price range.', bg:'#E7F0E2', accent:'#196100', icon:'var(--ic-IconDollarSignCircleFilled)' },
       { title:'Track the market', desc:'Watch prices, demand & timing in your area.', bg:'#E4EEEC', accent:'#1e7a52', icon:'var(--ic-IconTrendingOutline)' },
@@ -1389,55 +1356,54 @@ class Component extends DCLogic {
       { title:'Prepare to list', desc:"Line up your agent, handle the prep, and make sure nothing surprises you at the closing table." }
     ];
     this.A_COMPS = [
-      { price:'$523,000', beds:4, baths:3, sqft:2720, daysOnMarket:12, pricePerSqft:192, saleToList:101 },
-      { price:'$421,000', beds:4, baths:2, sqft:2480, daysOnMarket:22, pricePerSqft:170, saleToList:99 },
-      { price:'$342,000', beds:3, baths:2, sqft:2100, daysOnMarket:38, pricePerSqft:163, saleToList:97 },
-      { price:'$385,000', beds:4, baths:3, sqft:2590, daysOnMarket:18, pricePerSqft:149, saleToList:98 }
+      { price:'$558,000', beds:4, baths:3, sqft:2150, daysOnMarket:14, pricePerSqft:259, saleToList:101 },
+      { price:'$521,000', beds:4, baths:2, sqft:1980, daysOnMarket:21, pricePerSqft:263, saleToList:99 },
+      { price:'$485,000', beds:3, baths:2, sqft:1820, daysOnMarket:29, pricePerSqft:266, saleToList:98 },
     ];
     // AI summary + tappable prompt trees per Explore tool
     this.A_PROMPTS = [
       { // 0 — Understand home value
-        summary:"Your Zestimate is $1,695,000, up $50k in the last 30 days. Comparable homes in 78704 are selling close to ask and your price per sq ft is competitive. Your value position is strong if you're thinking about selling in the next few months.",
+        summary:"Your Zestimate is $465,000, up $27k over the past month. Comparable homes in 78745 are selling close to ask and your price per sq ft is competitive. Your value position is solid if you're thinking about selling in the next few months.",
         root:['v_acc','v_improve','v_value'],
         nodes:{
-          v_acc:{ q:"How accurate is my Zestimate?", a:"Your home facts were last updated 14 months ago. Since then, comparable sales have shifted and any renovations you've made won't be reflected yet. If your facts are out of date, your Zestimate could be off by more than you'd expect. Worth a quick review before you rely on this number.", follow:['v_value'] },
-          v_improve:{ q:"How do I improve my Zestimate accuracy?", a:"Update your home facts, especially finished square footage, recent renovations, and bathroom count. Accurate facts are the fastest way to close the gap between your Zestimate and real market value.", follow:['v_value'] },
-          v_value:{ q:"What adds the most value before listing?", a:"In 78704, kitchen and bath refreshes plus updated fixtures return the most per dollar. Marking those renovations in your home facts can also lift your Zestimate before you list.", follow:[] },
-          v_zest_calc:{ q:"How was my Zestimate calculated?", a:"Your Zestimate is based on your home facts, recent comparable sales in 78704, and public records. When your facts are accurate and comps are active, it's typically within 2–5% of market value.", follow:['v_affects'] },
-          v_affects:{ q:"What else affects my home value?", a:"Beyond square footage and bed/bath count, condition, lot size, school district, and recent renovations all move the number. Comparable sales in the last 90 days have the heaviest weight.", follow:['v_value'] },
-          v_hf_most:{ q:"Which home facts update my Zestimate the most?", a:"Finished square footage has the biggest impact, followed by bedroom and bathroom count. Renovation flags — especially kitchen and bath — can add a meaningful lift on top of that.", follow:['v_value'] },
-          c_price:{ q:"How do I price against these comps?", a:"Comps are landing between $1.5M and $1.9M, putting your Zestimate of $1,695,000 right in the middle. Pricing at or just below the top comps draws competitive offers while leaving room to negotiate.", follow:['c_standout'] },
-          c_standout:{ q:"What makes my home stand out from nearby sales?", a:"Your lot, updated finishes, and square footage put you above the midpoint of recent sales. Lead with kitchen and bath condition in your listing to move buyers from interested to making an offer.", follow:[] }
+          v_acc:{ q:"How accurate is this?", a:"Your home facts were last updated 14 months ago. Since then, comparable sales have shifted and any renovations you've made won't be reflected yet. If your facts are out of date, your Zestimate could be off by more than you'd expect. Worth a quick review before you rely on this number.", follow:['v_value'] },
+          v_improve:{ q:"How do I improve accuracy?", a:"Update your home facts, especially finished square footage, recent renovations, and bathroom count. Accurate facts are the fastest way to close the gap between your Zestimate and real market value.", follow:['v_value'] },
+          v_value:{ q:"What adds the most value?", a:"In 78745, kitchen and bath refreshes plus updated fixtures return the most per dollar. Marking those renovations in your home facts can also lift your Zestimate before you list.", follow:[] },
+          v_zest_calc:{ q:"How is my Zestimate calculated?", a:"Your Zestimate is based on your home facts, recent comparable sales in 78745, and public records. When your facts are accurate and comps are active, it's typically within 2–5% of market value.", follow:['v_affects'] },
+          v_affects:{ q:"What else affects my value?", a:"Beyond square footage and bed/bath count, condition, lot size, school district, and recent renovations all move the number. Comparable sales in the last 90 days have the heaviest weight.", follow:['v_value'] },
+          v_hf_most:{ q:"Which facts matter most?", a:"Finished square footage has the biggest impact, followed by bedroom and bathroom count. Renovation flags — especially kitchen and bath — can add a meaningful lift on top of that.", follow:['v_value'] },
+          c_price:{ q:"How do I price against comps?", a:"Comps are landing between $485K and $558K, putting your updated Zestimate right in the middle of that range. Pricing at or just below the top comp draws competitive offers while leaving room to negotiate.", follow:['c_standout'] },
+          c_standout:{ q:"What makes my home stand out?", a:"Your lot, updated finishes, and square footage put you above the midpoint of recent sales. Lead with kitchen and bath condition in your listing to move buyers from interested to making an offer.", follow:[] }
         }
       },
       { // 1 — Track the market
-        summary:"Your market is neutral right now. Conditions are stable for sellers, homes are going pending in about 28 days, and prices are projected to grow 6.4% over the next year. If you're planning to sell in the next 3 to 6 months, you don't need to wait.",
+        summary:"Your market is favoring sellers right now. Homes are going pending in about 13 days and prices are projected to grow 8.5% over the next year. Demand is outpacing supply, which means you have real pricing power if you move soon.",
         root:['m_now','m_long','m_neutral'],
         nodes:{
-          m_now:{ q:"Is now a good time to sell in my area?", a:"Yes. Your market is neutral and stable, with prices projected to grow 6.4% over the next year. For a 3 to 6 month timeline, you don't need to wait for a better window.", follow:['m_long'] },
-          m_long:{ q:"How long will it take to sell my home?", a:"Homes near you are going pending in about 28 days. Priced right, yours should see serious interest in the first couple of weeks.", follow:['m_neutral'] },
-          m_neutral:{ q:"What does a neutral market mean for my listing price?", a:"Neither buyers nor sellers have a strong edge. Pricing at or just under your Zestimate tends to draw the most competitive offers in conditions like these.", follow:['m_wait'] },
-          m_wait:{ q:"Should I wait for a sellers market?", a:"That's a gamble. The 6.4% forecast is modest and rates could shift demand either way. With a stable market now, listing on your timeline is the safer play.", follow:[] }
+          m_now:{ q:"Good time to sell now?", a:"Yes. Your market is favoring sellers, with prices projected to grow 8.5% over the next year and homes going pending in about 13 days. If you're ready, this is a strong window.", follow:['m_long'] },
+          m_long:{ q:"How long will it take to sell?", a:"Homes near you are going pending in about 13 days. In a seller's market like this, priced right you could see serious offers within the first week.", follow:['m_neutral'] },
+          m_neutral:{ q:"What does a neutral market mean?", a:"Your market is actually leaning seller right now, not neutral. Demand is outpacing supply, which means you have room to price above your Zestimate and still attract competitive offers.", follow:['m_wait'] },
+          m_wait:{ q:"Should I wait for a seller's market?", a:"You're already in one. The 8.5% forecast and 13-day pending time both point to strong demand. Waiting risks the window shifting as inventory catches up.", follow:[] }
         }
       },
       { // 2 — Determine your listing price (summary + root overridden live in renderVals)
         summary:"",
         root:['p_more','p_closing','p_mortgage'],
         nodes:{
-          p_more:{ q:"How can I increase what I walk away with?", a:"You can lift your net by targeting high-return prep, pricing competitively to spark offers, and trimming transaction costs where you can.", follow:['p_prep'] },
-          p_prep:{ q:"What prep has the best return?", a:"Fresh paint, clean landscaping, and minor kitchen and bath updates tend to return the most in your area, often several times their cost at sale.", follow:[] },
-          p_closing:{ q:"What's included in my closing costs?", a:"Your closing costs run about $42,288, covering title, escrow, transfer taxes, and agent commission. They're bundled into the total selling cost on your estimate.", follow:['p_mortgage'] },
-          p_mortgage:{ q:"How does my mortgage affect my proceeds?", a:"Your remaining mortgage is paid off from the sale first. What's left after payoff and costs is your net.", follow:['p_more'] },
-          p_timing:{ q:"Is now the right time to sell given my numbers?", a:"With proceeds this thin, timing matters more. If you can wait for your balance to drop or push the sale price higher, your net improves significantly. If you need to move now, knowing the number upfront lets you plan around it.", follow:['p_more'] }
+          p_more:{ q:"How can I increase my proceeds?", a:"You can lift your net by targeting high-return prep, pricing competitively to spark offers, and trimming transaction costs where you can.", follow:['p_prep'] },
+          p_prep:{ q:"What prep has the best ROI?", a:"Fresh paint, clean landscaping, and minor kitchen and bath updates tend to return the most in your area, often several times their cost at sale.", follow:[] },
+          p_closing:{ q:"What's in my closing costs?", a:"Your closing costs run about $42,288, covering title, escrow, transfer taxes, and agent commission. They're bundled into the total selling cost on your estimate.", follow:['p_mortgage'] },
+          p_mortgage:{ q:"How does my mortgage affect proceeds?", a:"Your remaining mortgage is paid off from the sale first. What's left after payoff and costs is your net.", follow:['p_more'] },
+          p_timing:{ q:"Is now the right time to sell?", a:"With proceeds this thin, timing matters more. If you can wait for your balance to drop or push the sale price higher, your net improves significantly. If you need to move now, knowing the number upfront lets you plan around it.", follow:['p_more'] }
         }
       },
       { // 3 — Prepare to list
-        summary:"Your next move is finding the right agent. In 78704, agents with recent local sales make a measurable difference on final price and days on market. The matches below are ranked by sales near you.",
+        summary:"Your next move is finding the right agent. In 78745, agents with recent local sales make a measurable difference on final price and days on market. The matches below are ranked by sales near you.",
         root:['ag_pick','ag_commission','ag_interview'],
         nodes:{
-          ag_pick:{ q:"How do I choose the right agent?", a:"Look for recent sales in 78704 specifically, not just overall volume. An agent who closed 5 homes in your zip in the last 6 months knows how buyers in your area think and what they'll pay.", follow:['ag_interview'] },
-          ag_commission:{ q:"What should I expect to pay in commission?", a:"Listing agent commission is typically 2.5 to 3%. Budget an additional 2 to 2.5% as a seller concession for the buyer's agent. That puts total transaction costs around 5 to 5.5% of your sale price.", follow:['ag_pick'] },
-          ag_interview:{ q:"What should I ask an agent before hiring?", a:"Ask about their last 5 sales in 78704, how they priced vs. final sale, and how they handle multiple offers. An agent who can answer those specifically is the one worth hiring.", follow:[] }
+          ag_pick:{ q:"How do I choose an agent?", a:"Look for recent sales in 78745 specifically, not just overall volume. An agent who closed 5 homes in your zip in the last 6 months knows how buyers in your area think and what they'll pay.", follow:['ag_interview'] },
+          ag_commission:{ q:"What will commission cost?", a:"Listing agent commission is typically 2.5 to 3%. Budget an additional 2 to 2.5% as a seller concession for the buyer's agent. That puts total transaction costs around 5 to 5.5% of your sale price.", follow:['ag_pick'] },
+          ag_interview:{ q:"What should I ask before hiring?", a:"Ask about their last 5 sales in 78745, how they priced vs. final sale, and how they handle multiple offers. An agent who can answer those specifically is the one worth hiring.", follow:[] }
         }
       }
     ];
@@ -1522,13 +1488,13 @@ class Component extends DCLogic {
       closing:{ action:'Review & accept an offer', text:"Since you're already listed, jump to Close your sale to manage offers and paperwork with confidence." }
     };
     this.state = {
-      a: { messages:this.INIT_A.slice(), mode:'ask', addressValue:'', chips:[], ctaLabel:'', actionIdx:0, timing:null, screen:'chat', chatClosing:false, anchor:0, moreBelow:false, spacerH:0, claimed:false, view:'home', expanded:-1, planOpen:true, insightDismissed:false, selectedComp:null, collapsing:-1, engaged:{0:false,1:false,2:false,3:false}, salePrice:600000, insightPrice:600000, mortgage:178436, checkInIdx:0, askValue:'', readyForNext:false, lastPromptKey:'', askedKeys:[], homeFPrompt:false, homeFGlow:false, insightCompsOpen:false, insightNetOpen:false, insightNetSheetOpen:false, insightCompsSheetOpen:false, chatBarHidden:false, tabBarPinned:false, understandSubOpen:false, hfChatStep:null, fromInsightNudge:false, fromIntro:false, orientationDismissed:false },
+      a: { messages:this.INIT_A.slice(), mode:'chips', addressValue:'', chips:this.A_TIMING.map(t=>({ label:t.label, onTap:()=>this.chooseTiming(t.key,t.label) })), ctaLabel:'', actionIdx:0, timing:null, screen:'chat', chatClosing:false, anchor:0, moreBelow:false, spacerH:0, claimed:true, view:'home', expanded:-1, planOpen:true, insightDismissed:false, selectedComp:null, collapsing:-1, engaged:{0:false,1:false,2:false,3:false}, salePrice:550000, insightPrice:550000, mortgage:178436, checkInIdx:0, askValue:'', readyForNext:false, lastPromptKey:'', askedKeys:[], homeFPrompt:false, homeFGlow:false, insightCompsOpen:false, insightNetOpen:false, insightNetSheetOpen:false, insightCompsSheetOpen:false, chatBarHidden:false, tabBarPinned:false, understandSubOpen:false, hfChatStep:null, fromInsightNudge:false, fromIntro:false, orientationDismissed:false },
       b: { step:0, touring:true },
       c: { screen:'list', step:0, actionIdx:0, rec:null },
       d: { step:0, touring:true, rec:null },
       w: { screen:0, stage:null, focus:null },
       ob: { beat: -1, selectedAddr: null, timeline: null, step: 0, uncertainty: null, introExiting: false },
-      hf: { open: false, section: 'Key facts', fields: { sqft:'2,656', beds:'4', fullBaths:'2', baths:'3', kitchenReno:false, bathReno:false }, savedFields: { sqft:'2,656', beds:'4', fullBaths:'2', baths:'3', kitchenReno:false, bathReno:false }, msgs:[], chatValue:'', summary:{ show:false, text:'' }, zestimate:1695000, savedZest:1695000, flashSqft:false, flashZest:false, flashZcard:false, vchat:{ open:false, closing:false, msgs:[], chatValue:'', pendingField:null, pendingCurrent:null, pendingValue:'', awaitingRenovQ:false, awaitingBedSqftQ:false, pendingUpdate:null, renoSteppers:null, awaitingAnythingElse:false, lowered:false } }
+      hf: { open: false, section: 'Key facts', fields: { sqft:'1,680', beds:'3', fullBaths:'2', baths:'2', kitchenReno:false, bathReno:false }, savedFields: { sqft:'1,680', beds:'3', fullBaths:'2', baths:'2', kitchenReno:false, bathReno:false }, msgs:[], chatValue:'', summary:{ show:false, text:'' }, zestimate:465000, savedZest:465000, flashSqft:false, flashZest:false, flashZcard:false, vchat:{ open:false, closing:false, msgs:[], chatValue:'', pendingField:null, pendingCurrent:null, pendingValue:'', awaitingRenovQ:false, awaitingBedSqftQ:false, pendingUpdate:null, renoSteppers:null, awaitingAnythingElse:false, lowered:false } }
     };
     this.ACTIONS = ["What's your home worth?","Track your market","Determine your listing price","Explore your options"];
     this.PLAN = [
@@ -1571,9 +1537,9 @@ class Component extends DCLogic {
   setD(p){ this.setState(s=>({d:{...s.d,...p}})); }
   setOb(p){ this.setState(s=>({ob:{...s.ob,...p}})); }
   obNext(){ this.setState(s=>({ob:{...s.ob, beat: s.ob.beat+1}})); }
-  obSelectAddr1(){ this.setOb({ selectedAddr: '3418 Pecos St, Austin, TX 78704' }); }
-  obSelectAddr2(){ this.setOb({ selectedAddr: '1842 Barton Hills Dr, Austin, TX 78704' }); }
-  obUseLocation(){ this.setOb({ selectedAddr: '2611 S 2nd St #A, Austin, TX 78704' }); }
+  obSelectAddr1(){ this.setOb({ selectedAddr: '2204 Teri Rd, Austin, TX 78745' }); }
+  obSelectAddr2(){ this.setOb({ selectedAddr: '6901 Brodie Ln, Austin, TX 78745' }); }
+  obUseLocation(){ this.setOb({ selectedAddr: '4812 Menchaca Rd #A, Austin, TX 78745' }); }
   obBack(){ this.setState(s=>({ob:{...s.ob, beat: s.ob.beat-1}})); }
   obPickTimeline(t){ this.setOb({ timeline: t, step: 1 }); }
   obPickNotSure(){ this.obPickTimeline('not-sure'); }
@@ -1749,7 +1715,7 @@ class Component extends DCLogic {
         const oldBaths = parseInt((this.state.hf.fields.fullBaths||'2'), 10);
         const deltaBeds = upd.field==='beds' ? Math.max(0, upd.newVal - oldBeds) : 0;
         const deltaBaths = upd.field==='fullBaths' ? Math.max(0, upd.newVal - oldBaths) : 0;
-        const oldSqftNum = parseInt((this.state.hf.fields.sqft||'2656').replace(/,/g,''), 10);
+        const oldSqftNum = parseInt((this.state.hf.fields.sqft||'1680').replace(/,/g,''), 10);
         newSqft = oldSqftNum + deltaBeds*180 + deltaBaths*60;
         const estMsg = `No problem — based on typical room sizes, I'll estimate your new square footage at ${newSqft.toLocaleString('en-US')} sqft. Updating your home facts now.`;
         setTimeout(()=>{
@@ -1812,7 +1778,7 @@ class Component extends DCLogic {
       // Field identified but no number — show inline card for the right field
       if(field==='sqft'){
         setTimeout(()=>{
-          const cur = this.state.hf.fields.sqft||'2,656';
+          const cur = this.state.hf.fields.sqft||'1,680';
           const askMsg = { isU:false, isV:true, isCard:false, text:"What's the new square footage?" };
           const inlineCard = { isU:false, isV:false, isCard:true, label:"Square footage", current:cur, field:'sqft' };
           this.setState(s=>({ hf:{...s.hf, vchat:{...s.hf.vchat, pendingField:'sqft', pendingCurrent:cur, pendingValue:'', msgs:[...s.hf.vchat.msgs, askMsg, inlineCard]}} }));
@@ -1847,7 +1813,7 @@ class Component extends DCLogic {
     // sqft increase → show inline card pre-filled, save immediately, ask anything else
     if(field==='sqft' && isIncrease){
       const newValFmt = newVal.toLocaleString('en-US');
-      const cur = f.sqft || '2,656';
+      const cur = f.sqft || '1,680';
       const inlineCard = { isU:false, isV:false, isCard:true, label:'Square footage', current:cur, field:'sqft' };
       setTimeout(()=>{
         this.setState(s=>({ hf:{...s.hf, vchat:{...s.hf.vchat, pendingField:'sqft', pendingCurrent:cur, pendingValue:String(newVal), msgs:[...s.hf.vchat.msgs, inlineCard]}} }), ()=>this.hfVCardSend());
@@ -1900,10 +1866,10 @@ class Component extends DCLogic {
   }
   hfConfirmAndLower(){
     const hf = this.state.hf;
-    const pendZest = hf.pendingZest || hf.zestimate || 1695000;
+    const pendZest = hf.pendingZest || hf.zestimate || 465000;
     const pendFields = hf.pendingFields || hf.fields;
     const zestFmt = '$'+pendZest.toLocaleString('en-US');
-    const sqftNum = parseInt((pendFields.sqft||'2656').replace(/,/g,''), 10);
+    const sqftNum = parseInt((pendFields.sqft||'1680').replace(/,/g,''), 10);
     const perSqftFmt = '$'+Math.round(pendZest/sqftNum).toLocaleString('en-US');
     const confirmText1 = `Done! Your home facts have been updated. Your Zestimate will be updated to ${zestFmt} (${perSqftFmt}/sqft).`;
     const confirmText2 = `Take a look at your Zestimate — check the numbers, ask me anything. When you're ready to move on, just say so.`;
@@ -1922,11 +1888,11 @@ class Component extends DCLogic {
     // Step 3: count-up from old (current state) to pending (new values)
     setTimeout(()=>{
       const hf = this.state.hf;
-      const fromZest = hf.zestimate || 1695000;
+      const fromZest = hf.zestimate || 465000;
       const toZest = hf.pendingZest || fromZest;
       const pendFields = hf.pendingFields || hf.fields;
-      const fromSqft = parseInt((hf.fields.sqft||'2656').replace(/,/g,''),10);
-      const toSqft = parseInt((pendFields.sqft||'2656').replace(/,/g,''),10);
+      const fromSqft = parseInt((hf.fields.sqft||'1680').replace(/,/g,''),10);
+      const toSqft = parseInt((pendFields.sqft||'1680').replace(/,/g,''),10);
       const duration = 1000;
       const steps = 30;
       const interval = duration / steps;
@@ -1954,11 +1920,11 @@ class Component extends DCLogic {
       const scroll=document.querySelector('[data-tool-scroll]'); if(scroll) scroll.scrollTop=0;
       setTimeout(()=>{
         const hf = this.state.hf;
-        const fromZest = hf.zestimate||1695000;
+        const fromZest = hf.zestimate||465000;
         const toZest = hf.pendingZest||fromZest;
         const pendFields = hf.pendingFields||hf.fields;
-        const fromSqft = parseInt((hf.fields.sqft||'2656').replace(/,/g,''),10);
-        const toSqft = parseInt((pendFields.sqft||'2656').replace(/,/g,''),10);
+        const fromSqft = parseInt((hf.fields.sqft||'1680').replace(/,/g,''),10);
+        const toSqft = parseInt((pendFields.sqft||'1680').replace(/,/g,''),10);
         const steps=30, duration=1000, interval=duration/steps;
         let step=0;
         this.setState(s=>({hf:{...s.hf, flashZcard:true, countingUp:true, factsUpdated:true}}));
@@ -1980,8 +1946,8 @@ class Component extends DCLogic {
     const { field, newVal, newSqft } = upd;
     const hf = this.state.hf;
     const f = hf.fields;
-    const oldSqftNum = parseInt((f.sqft||'2656').replace(/,/g,''), 10);
-    const oldZest = hf.zestimate || 1695000;
+    const oldSqftNum = parseInt((f.sqft||'1680').replace(/,/g,''), 10);
+    const oldZest = hf.zestimate || 465000;
     const oldPerSqft = oldZest / oldSqftNum;
 
     // Recalculate zestimate
@@ -1989,7 +1955,7 @@ class Component extends DCLogic {
     if(newSqft && newSqft !== oldSqftNum){
       newFields.sqft = newSqft.toLocaleString('en-US');
     }
-    const finalSqft = parseInt((newFields.sqft||'2656').replace(/,/g,''), 10);
+    const finalSqft = parseInt((newFields.sqft||'1680').replace(/,/g,''), 10);
     const delta = finalSqft - oldSqftNum;
     let newZest;
     if(delta > 0){ newZest = Math.round(oldZest + delta * oldPerSqft * 0.7); }
@@ -2097,7 +2063,7 @@ class Component extends DCLogic {
   }
 
   onAddr(e){ const v=e.target.value; this.setState(s=>({a:{...s.a, addressValue:v}})); }
-  useLocation(){ if(this.state.a.mode!=='input') return; this.setState(s=>({a:{...s.a, addressValue:'2611 S 2nd St # A, Austin, TX 78704'}})); }
+  useLocation(){ if(this.state.a.mode!=='input') return; this.setState(s=>({a:{...s.a, addressValue:'4812 Menchaca Rd #A, Austin, TX 78745'}})); }
   onKey(e){ if(e.key==='Enter'){ this.submitAddr(); } }
   submitAddr(){
     if(this.state.a.mode!=='input' && this.state.a.mode!=='ask') return;
@@ -2185,9 +2151,12 @@ class Component extends DCLogic {
     }, 900);
   }
   chooseUncertain(key,label){
+    if(key==='proceeds'){
+      this.chooseProceedsFlow(label);
+      return;
+    }
     const route = { idx:0, rec:()=>"Before running the numbers, confirm your home facts are accurate. Your Zestimate is the starting point for any proceeds estimate, and if it is off, everything downstream is too." };
     const frag=this.A_UNCERTAIN_FRAG[key] || 'selling';
-    // Step 1: user answer + "Your plan is taking shape" message
     this.setState(s=>{
       const msgs=[...s.a.messages,
         { who:'u', text:label },
@@ -2195,16 +2164,51 @@ class Component extends DCLogic {
       ];
       return { a:{...s.a, messages:msgs, mode:'chips', chips:[], anchor:msgs.length+999} };
     });
-    // Step 2: thinking dots appear after short pause
     setTimeout(()=>{
       this.setState(s=>({ a:{...s.a, messages:[...s.a.messages, { who:'v', isV:true, isThinking:true }], anchor:s.a.messages.length+999} }));
     }, 600);
-    // Step 3: replace dots with suggested next step card
     setTimeout(()=>{
       this.setState(s=>{
         const msgs=s.a.messages.filter(m=>!m.isThinking);
         const nextMsgs=[...msgs, { who:'v', isV:true, kind:'nextStep', nextName: route.idx===0 ? 'Confirm home facts' : this.REC_LABEL[route.idx], nextRec:route.rec(frag), nextIdx:route.idx }];
         return { a:{...s.a, messages:nextMsgs, mode:'cta', chips:[], ctaLabel:"Let's go", actionIdx:route.idx, anchor:nextMsgs.length+999} };
+      });
+    }, 2000);
+  }
+  chooseProceedsFlow(label){
+    const addMsg = (msg, delay) => setTimeout(()=>{
+      this.setState(s=>{
+        const prev = s.a.messages;
+        const msgs = (msg.isThinking===false && prev.length && prev[prev.length-1].isThinking)
+          ? [...prev.slice(0,-1), msg]
+          : [...prev, msg];
+        return {a:{...s.a, messages:msgs, anchor:msgs.length+999}};
+      });
+    }, delay);
+    // User chip tap — show user bubble, set step, show thinking
+    this.setState(s=>{
+      const msgs=[...s.a.messages, {who:'u', text:label}];
+      return {a:{...s.a, messages:msgs, chips:[], mode:'ask', proceedsChatStep:'awaitPushback', askValue:'', anchor:msgs.length+999}};
+    });
+    addMsg({who:'v', isV:true, isThinking:true}, 600);
+    addMsg({who:'v', isV:true, isThinking:false, hasText:true, text:"Based on your current home facts and the seller's market in 78745, you're looking at somewhere in the $480K to $490K range as a starting point."}, 1800);
+    setTimeout(()=>{
+      this.setState(s=>({a:{...s.a, proceedsPrefill:"That seems low. I thought it could be higher.", mode:'ask'}}));
+    }, 2200);
+  }
+  proceedsSoundsGood(){
+    this.setState(s=>{
+      const msgs=[...s.a.messages, {who:'u', text:'Sounds good'}];
+      return {a:{...s.a, messages:msgs, chips:[], mode:'ask', proceedsChatStep:null, anchor:msgs.length+999}};
+    });
+    setTimeout(()=>{
+      this.setState(s=>({ a:{...s.a, messages:[...s.a.messages, { who:'v', isV:true, isThinking:true }], anchor:s.a.messages.length+999} }));
+    }, 500);
+    setTimeout(()=>{
+      this.setState(s=>{
+        const msgs=s.a.messages.filter(m=>!m.isThinking);
+        const nextMsgs=[...msgs, { who:'v', isV:true, kind:'nextStep', nextName:'Confirm home facts', nextRec:"Your Zestimate is the starting point for your listing price. Let's make sure it reflects your updated home.", nextIdx:0 }];
+        return { a:{...s.a, messages:nextMsgs, mode:'cta', chips:[], ctaLabel:"Let's go", actionIdx:0, anchor:nextMsgs.length+999} };
       });
     }, 2000);
   }
@@ -2215,7 +2219,7 @@ class Component extends DCLogic {
   dismissInsight(){ this.setState(s=>({a:{...s.a, insightDismissed:true}})); }
   scrollToHomeFacts(){ this.setState(s=>({a:{...s.a, orientationDismissed:true, homeFGlow:true, homeFPrompt:true}}), ()=>{ const scroll=document.querySelector('[data-tool-scroll]'); const target=document.getElementById('home-facts-anchor'); if(scroll&&target){ const tr=target.getBoundingClientRect(); const sr=scroll.getBoundingClientRect(); scroll.scrollTo({ top: scroll.scrollTop+tr.top-sr.top-20, behavior:'smooth' }); } setTimeout(()=>{ this.setState(s=>({a:{...s.a, homeFGlow:false}})); }, 4000); }); }
   dismissIntro(){ this.setState(s=>({ob:{...s.ob, introExiting:true}}), ()=>{ setTimeout(()=>{ this.setState(s=>({ob:{...s.ob, beat:0, introExiting:false}, a:{...s.a, fromIntro:true}})); setTimeout(()=>{ this.setState(s=>({a:{...s.a, fromIntro:false}})); }, 400); }, 320); }); }
-  goToListingPriceNudge(){ this.setState(s=>{ const nudgePrice = s.hf.zestimate || 1695000; return {a:{...s.a, view:'tool', actionIdx:2, screen:'action', salePrice:nudgePrice, insightPrice:nudgePrice, fromInsightNudge:true, askedKeys:[], understandSubOpen:false}}; }, ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; }); }
+  goToListingPriceNudge(){ this.setState(s=>{ const nudgePrice = s.hf.zestimate || 465000; return {a:{...s.a, view:'tool', actionIdx:2, screen:'action', salePrice:nudgePrice, insightPrice:nudgePrice, fromInsightNudge:true, askedKeys:[], understandSubOpen:false}}; }, ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; }); }
   selectComp(idx){ this.setState(s=>({a:{...s.a, selectedComp: s.a.selectedComp===idx ? null : idx}})); }
   prevMs(){
     const target = Math.max(0, this.state.a.expanded-1);
@@ -2231,7 +2235,7 @@ class Component extends DCLogic {
   msOfTool(t){ for(let i=0;i<this.MS.length;i++){ if(this.MS[i].actions.some(a=>a.tool===t)) return i; } return -1; }
   backHome(){ this.setState(s=>({a:{...s.a, view:'home', expanded: this.msOfTool(s.a.actionIdx)}})); }
   toggleUnderstandSub(){ this.setState(s=>({a:{...s.a, understandSubOpen:!s.a.understandSubOpen}})); }
-  gotoSubTool(i){ this.setState(s=>({a:{...s.a, view:'tool', actionIdx:i, screen:'action', askedKeys:[], understandSubOpen:false}}), ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; }); }
+  gotoSubTool(i){ this.setState(s=>({a:{...s.a, view:'tool', actionIdx:i, screen:'action', askedKeys:[], understandSubOpen:false, selectedComp: i===2 ? null : s.a.selectedComp}}), ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; }); }
   hfCommitPending(){
     const hf = this.state.hf;
     if(hf.pendingZest || hf.pendingFields){
@@ -2267,8 +2271,21 @@ class Component extends DCLogic {
       return { a:{...s.a, screen:'chat', messages:msgs, chips:follow, mode:'ask', engaged, engCount:(s.a.engCount||0)+1, anchor:msgs.length+999, checkInIdx:(s.a.checkInIdx||0)+1, askValue:'', readyForNext:false, lastPromptKey:key, askedKeys } };
     });
   }
+  tapPromptInTree(treeIdx, key){
+    this.hfCommitPending();
+    this.setState(s=>{
+      const tree=this.A_PROMPTS[treeIdx]; if(!tree) return {};
+      const node=tree.nodes[key]; if(!node) return {};
+      const msgs=[...s.a.messages, { who:'u', text:node.q }, { who:'v', text:node.a }];
+      const askedKeys=[...(s.a.askedKeys||[]), key];
+      const rootKeys=['c_price','c_standout'];
+      const follow=rootKeys.filter(k=>!askedKeys.includes(k)).map(k=>({ label:tree.nodes[k].q, onTap:()=>this.tapPromptInTree(treeIdx,k) }));
+      return { a:{...s.a, screen:'chat', messages:msgs, chips:follow, mode:'ask', anchor:msgs.length+999, askedKeys} };
+    });
+  }
   onAskInput(e){ this.setState(s=>({a:{...s.a, askValue:e.target.value}})); }
   onAskKey(e){ if(e.key==='Enter'){ this.sendAsk(); } }
+  onAskFocus(){ const pf=this.state.a.proceedsPrefill; if(pf && !(this.state.a.askValue||'').trim()){ this.setState(s=>({a:{...s.a, askValue:pf, proceedsPrefill:null}})); } }
   sendAsk(){
     const raw=(this.state.a.askValue||'').trim(); if(!raw) return;
     // Scripted insight reply intercept
@@ -2280,6 +2297,42 @@ class Component extends DCLogic {
     // Pre-claim: treat any message as an address entry
     if(!this.state.a.claimed){
       this.setState(s=>({a:{...s.a, addressValue:raw, askValue:''}}), ()=>this.submitAddr());
+      return;
+    }
+    // Proceeds onboarding scripted flow
+    const procStep = this.state.a.proceedsChatStep;
+    if(procStep){
+      if(document.activeElement) document.activeElement.blur();
+      this.setState(s=>{ const msgs=[...s.a.messages,{who:'u',text:raw}]; return {a:{...s.a,messages:msgs,askValue:'',anchor:msgs.length+999}}; });
+      if(procStep==='awaitPushback'){
+        // Voyager: explains home facts basis, asks about renovations
+        setTimeout(()=>{ this.setState(s=>({a:{...s.a,messages:[...s.a.messages,{who:'v',isV:true,isThinking:true}],anchor:s.a.messages.length+999}})); }, 400);
+        setTimeout(()=>{
+          this.setState(s=>{
+            const msgs=[...s.a.messages.filter(m=>!m.isThinking),
+              {who:'v',isV:true,hasText:true,text:"That number is based on what we currently know about your home — 3 bedrooms, 2 bathrooms, 1,680 sqft. If anything has changed since your home was last recorded, your estimate would likely be higher."},
+              {who:'v',isV:true,hasText:true,text:"Have you made any updates or renovations recently?"}
+            ];
+            return {a:{...s.a,messages:msgs,mode:'ask',proceedsPrefill:"Yes, I've done some renovations.",proceedsChatStep:'awaitReno',anchor:msgs.length+999}};
+          });
+        }, 1800);
+      } else if(procStep==='awaitReno'){
+        // Voyager: that changes things, build the plan steps
+        setTimeout(()=>{ this.setState(s=>({a:{...s.a,messages:[...s.a.messages,{who:'v',isV:true,isThinking:true}],anchor:s.a.messages.length+999}})); }, 400);
+        setTimeout(()=>{
+          const chip = { label:'Sounds good', onTap:()=>this.proceedsSoundsGood() };
+          this.setState(s=>{
+            const msgs=[...s.a.messages.filter(m=>!m.isThinking),
+              {who:'v',isV:true,hasText:true,text:"That changes things. Let's build your selling plan around getting to an accurate listing price. Here's what we'll cover:"},
+              {who:'v',isV:true,hasText:true,text:"• Update your home facts so your Zestimate reflects what your home actually is today."},
+              {who:'v',isV:true,hasText:true,text:"• Compare your updated home to recent sales in 78745 to see where you stand against the comps."},
+              {who:'v',isV:true,hasText:true,text:"• Determine your listing price based on the full picture."},
+              {who:'v',isV:true,hasText:true,text:"How does that sound?"}
+            ];
+            return {a:{...s.a,messages:msgs,mode:'chips',chips:[chip],proceedsChatStep:null,anchor:msgs.length+999}};
+          });
+        }, 1800);
+      }
       return;
     }
     // Home facts chat flow — scripted for tool 0
@@ -2298,14 +2351,14 @@ class Component extends DCLogic {
             const match=raw.match(/[\d,]+/); newSqft=match?parseInt(match[0].replace(/,/g,''),10):3100;
             sqftMsg='Got it.';
           } else {
-            newSqft = parseInt((this.state.hf.fields.sqft||'2656').replace(/,/g,''),10)+350;
+            newSqft = parseInt((this.state.hf.fields.sqft||'1680').replace(/,/g,''),10)+350;
             sqftMsg="No problem. Based on typical room sizes I'll estimate an additional 350 sq ft.";
           }
           const confirmMsg=`${sqftMsg} I'll update your home to ${newBeds} bedrooms, ${newBaths} bathrooms, and ${newSqft.toLocaleString('en-US')} sq ft. Is there anything else you'd like to update?`;
           const newFields={...this.state.hf.fields, beds:String(newBeds), baths:String(newBaths), sqft:newSqft.toLocaleString('en-US')};
-          const newZest = Math.round((this.state.hf.zestimate||1695000)*1.04/1000)*1000;
+          const newZest = Math.round((this.state.hf.zestimate||465000)*1.134/1000)*1000;
           this.setState(s=>({
-            a:{...s.a,messages:[...s.a.messages.filter(m=>!m.isThinking),{who:'v',isV:true,hasText:true,text:confirmMsg}],mode:'ask',anchor:s.a.messages.length+999,hfChatStep:'awaitDone'},
+            a:{...s.a,messages:[...s.a.messages.filter(m=>!m.isThinking),{who:'v',isV:true,hasText:true,text:confirmMsg}],mode:'ask',askValue:'no',anchor:s.a.messages.length+999,hfChatStep:'awaitDone'},
             hf:{...s.hf, pendingFields:newFields, pendingZest:newZest}
           }));
         }, 1800);
@@ -2319,13 +2372,13 @@ class Component extends DCLogic {
           setTimeout(()=>{ this.setState(s=>({a:{...s.a,messages:[...s.a.messages,{who:'v',isV:true,hasText:true,isThinking:true}],anchor:s.a.messages.length+999}})); }, 300);
           setTimeout(()=>{
             const pf = this.state.hf.pendingFields || this.state.hf.fields;
-            const confirmMsg = `Got it. I've updated your home to ${pf.beds} bedrooms, ${pf.baths} bathrooms, and ${pf.sqft} sq ft. Take a look at your updated Zestimate below and let me know if the numbers look right.`;
+            const confirmMsg = `Got it. I've updated your home to ${pf.beds} bedrooms, ${pf.baths} bathrooms, and ${pf.sqft} sq ft. Take a look at your updated Zestimate. If anything looks off or isn't what you'd expect, come back and we can talk through it.`;
             this.setState(s=>({a:{...s.a,messages:[...s.a.messages.filter(m=>!m.isThinking),{who:'v',isV:true,hasText:true,text:confirmMsg},{who:'v',isV:true,isCard:false,isOkCTA:true}],mode:'ask',hfChatStep:null,anchor:s.a.messages.length+999}}));
           }, 1600);
         } else {
           setTimeout(()=>{
             const msgs=[...this.state.a.messages,{who:'v',isV:true,hasText:true,text:"Sure, what else would you like to update?"}];
-            this.setState(s=>({a:{...s.a,messages:msgs,mode:'ask',anchor:msgs.length+999,hfChatStep:'awaitSqft'}}));
+            this.setState(s=>({a:{...s.a,messages:msgs,mode:'ask',askValue:'no',anchor:msgs.length+999,hfChatStep:'awaitSqft'}}));
           }, 700);
         }
         return;
@@ -2337,7 +2390,7 @@ class Component extends DCLogic {
         setTimeout(()=>{ this.setState(s=>({a:{...s.a,messages:[...s.a.messages,{who:'v',isV:true,hasText:true,isThinking:true}],anchor:s.a.messages.length+999}})); }, 400);
         setTimeout(()=>{
           const msgs=[...this.state.a.messages.filter(m=>!m.isThinking),{who:'v',isV:true,hasText:true,text:"Got it, one bedroom and one bathroom added. Do you know your new total square footage? If not, I can estimate it."}];
-          this.setState(s=>({a:{...s.a,messages:msgs,mode:'ask',askValue:'',anchor:msgs.length+999,hfChatStep:'awaitSqft'}}));
+          this.setState(s=>({a:{...s.a,messages:msgs,mode:'ask',askValue:'no',anchor:msgs.length+999,hfChatStep:'awaitSqft'}}));
         }, 1400);
         return;
       }
@@ -2379,9 +2432,9 @@ class Component extends DCLogic {
   }
   openChatFromCompsInsight(){
     const chipLabels = [
-      'How do I price against these comps?',
-      'What makes my home stand out from nearby sales?',
-      'How long are homes sitting before selling?',
+      'How do I price against comps?',
+      'What makes my home stand out?',
+      'How long are homes sitting?',
     ];
     const introMsg = { who:'v', kind:'text', text:"These are the homes most similar to yours that sold recently. What would you like to know about how they compare?" };
     const chips = chipLabels.map(label=>({ label, onTap:()=>this.tapInsightChip(label) }));
@@ -2392,9 +2445,9 @@ class Component extends DCLogic {
   }
   openChatFromInsight(){
     const chipLabels = [
-      'What price should I list my home for?',
-      'How do I lower my closing costs?',
-      'What affects my net proceeds?',
+      'What price should I list for?',
+      'How do I lower closing costs?',
+      'What affects my proceeds?',
     ];
     const introMsg = { who:'v', kind:'text', text:"You've been digging into your numbers. Do you have questions about what you're seeing, or want to talk through what it means for your next move?" };
     const chips = chipLabels.map(label=>({ label, onTap:()=>this.tapInsightChip(label) }));
@@ -2425,33 +2478,16 @@ class Component extends DCLogic {
     this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
   }
   digDeeperComps(){
-    const tree = this.A_PROMPTS[1];
+    const tree = this.A_PROMPTS[0];
     const keys = ['c_price','c_standout'];
-    const chips = keys.map(k=>({ label:tree.nodes[k].q, onTap:()=>this.tapPrompt(k) }));
+    const chips = keys.map(k=>({ label:tree.nodes[k].q, onTap:()=>this.tapPromptInTree(0, k) }));
     const introMsg = { who:'v', isV:true, hasText:true, text:"These are the homes most similar to yours that sold recently. What would you like to know about how they compare?" };
     this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
   }
   digDeeperNet(){
-    const chipLabels = [
-      'What price should I list my home for?',
-      'How do I lower my closing costs?',
-      'What affects my net proceeds?',
-    ];
-    const introMsg = { who:'v', isV:true, hasText:true, text:"You've been digging into your numbers. Do you have questions about what you're seeing, or want to talk through what it means for your next move?" };
-    const chips = chipLabels.map(label=>({ label, onTap:()=>this.tapInsightChip(label) }));
-    this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
+    this.digDeeperListingPrice();
   }
-  tapInsightChip(label){
-    if(label==='What price should I list my home for?'){
-      this.runInsightPricingFlow();
-      return;
-    }
-    this.setState(s=>{
-      const msgs = [...s.a.messages, {who:'u', kind:'text', text:label}];
-      return { a:{...s.a, messages:msgs, chips:[], mode:'ask', anchor:msgs.length+999} };
-    });
-  }
-  runInsightPricingFlow(){
+  digDeeperListingPrice(){
     const add = (msg, delay) => setTimeout(()=>{
       this.setState(s=>{
         const prev = s.a.messages;
@@ -2461,18 +2497,35 @@ class Component extends DCLogic {
         return {a:{...s.a, messages:msgs, anchor:msgs.length+999}};
       });
     }, delay);
-    // Sebastian chip tap
+    const chip1 = { label:'Why is my listing price above my Zestimate?', onTap:()=>this.tapListingPriceChip1() };
+    const chip2 = { label:'Why not price at $558K like the top comp?', onTap:()=>this.tapListingPriceChip2() };
+    const introMsg = { who:'v', isV:true, hasText:true, text:'Happy to walk through the listing price recommendation. What would you like to dig into?' };
+    this.setState(s=>{ const msgs=[...s.a.messages, introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips:[chip1, chip2], mode:'chips', anchor:msgs.length+999} }; });
+  }
+  tapListingPriceChip1(){
+    const add = (msg, delay) => setTimeout(()=>{
+      this.setState(s=>{
+        const prev = s.a.messages;
+        const msgs = (msg.isThinking===false && prev.length && prev[prev.length-1].isThinking)
+          ? [...prev.slice(0,-1), msg]
+          : [...prev, msg];
+        return {a:{...s.a, messages:msgs, anchor:msgs.length+999}};
+      });
+    }, delay);
+    const chip2 = { label:'Why not price at $558K like the top comp?', onTap:()=>this.tapListingPriceChip2() };
     this.setState(s=>{
-      const msgs=[...s.a.messages, {who:'u', kind:'text', text:'What price should I list my home for?'}];
+      const msgs=[...s.a.messages, {who:'u', kind:'text', text:'Why is my listing price above my Zestimate?'}];
       return {a:{...s.a, messages:msgs, chips:[], mode:'ask', anchor:msgs.length+999}};
     });
-    // Voyager reply 1 — then wait for user to type
     add({who:'v', kind:'text', isThinking:true}, 600);
-    add({who:'v', kind:'text', isThinking:false, text:'Based on comps nearby, $600K is where you\'d likely land. What\'s driving the question?'}, 1800);
-    setTimeout(()=>{ this._awaitInsightReply = true; }, 1900);
+    add({who:'v', kind:'text', isThinking:false, text:"These three numbers represent different things, and they're not supposed to match."}, 1600);
+    add({who:'v', isV:true, isDefMsg:true, boldPart:'Zestimate ($527K)', restPart:': what your home is currently worth based on public data and recent sales in 78745.'}, 2400);
+    add({who:'v', isV:true, isDefMsg:true, boldPart:'Likely list price ($550K)', restPart:': what you can realistically ask right now. Demand is outpacing supply and homes are going pending in about 13 days, which gives you room to price above your Zestimate.'}, 3400);
+    add({who:'v', isV:true, isDefMsg:true, boldPart:'Comp range ($485K to $558K)', restPart:': what similar homes have actually sold for recently. This shows you the floor and ceiling buyers in 78745 are willing to pay.'}, 4400);
+    add({who:'v', kind:'text', text:"In a seller's market, buyers have fewer options and less leverage to negotiate down. $550K sits in the sweet spot where you attract strong offers quickly and close at or above asking."}, 5400);
+    setTimeout(()=>{ this.setState(s=>({a:{...s.a, chips:[chip2], mode:'chips'}})); }, 5800);
   }
-  fireInsightScriptedReply(userText){
-    this._awaitInsightReply = false;
+  tapListingPriceChip2(){
     const add = (msg, delay) => setTimeout(()=>{
       this.setState(s=>{
         const prev = s.a.messages;
@@ -2482,8 +2535,15 @@ class Component extends DCLogic {
         return {a:{...s.a, messages:msgs, anchor:msgs.length+999}};
       });
     }, delay);
-    add({who:'v', kind:'text', isThinking:true}, 500);
-    add({who:'v', kind:'text', isThinking:false, text:'You\'re actually asking three different things. Your list price is what you put on the market. The $432K to $600K range is where similar homes are actually selling. And your take-home is what\'s left after your mortgage payoff and selling costs. Listing higher doesn\'t always mean walking away with more. It can mean sitting longer. What really matters is what you want to take home. Let\'s anchor there.'}, 2000);
+    this.setState(s=>{
+      const msgs=[...s.a.messages, {who:'u', kind:'text', text:'Why not price at $558K like the top comp?'}];
+      return {a:{...s.a, messages:msgs, chips:[], mode:'ask', anchor:msgs.length+999}};
+    });
+    add({who:'v', kind:'text', isThinking:true}, 600);
+    add({who:'v', kind:'text', isThinking:false, text:"That comp on Teri Rd sits in a slightly different pocket of 78745. Values there tend to run a bit higher, so that sale is the ceiling of your market, not the center."}, 1600);
+    add({who:'v', kind:'text', text:"In a seller's market, pricing at $550K and generating multiple competing offers is often how you end up at $558K or above at close. Starting at $558K as your ask can slow that down. Fewer initial showings, less urgency, less room for buyers to feel like they're winning."}, 2800);
+    add({who:'v', kind:'text', text:"$550K is not settling. It's the strategic entry point that gives you the best shot at closing at or above that number. We'd expect this home to go pending in roughly 13 days at this price."}, 4000);
+    add({who:'v', kind:'text', text:"If you want to start at $558K, that's your call. Just know you're pricing to the best-case outcome from a different neighborhood pocket, and you may need a little more patience."}, 5000);
   }
   closeChat(){
     this.setState(s=>({a:{...s.a, chatClosing:true}}));
@@ -2562,7 +2622,7 @@ class Component extends DCLogic {
       const sawComps = a.lastPromptKey==='c_price' || a.lastPromptKey==='c_standout';
       recNext = a.readyForNext
         ? (sawComps
-            ? { prep:false, idx:1, name:'Track the market', btn:'View market conditions', why:"You've covered your value and how nearby homes are selling. Next, see where prices and demand are heading in 78704.", go:()=>this.gotoTool(1) }
+            ? { prep:false, idx:1, name:'Track the market', btn:'View market conditions', why:"You've covered your value and how nearby homes are selling. Next, see where prices and demand are heading in 78745.", go:()=>this.gotoTool(1) }
             : { prep:false, idx:-1, name:'Comparable homes', btn:'View comparable homes', why:"See how homes like yours are selling nearby.", go:()=>this.closeChatToComps() })
         : { prep:false, idx:2, name:'Determine your listing price', btn:'Determine your listing price', why:"See what you'd actually walk away with after payoff and selling costs.", go:()=>this.gotoTool(2) };
     }
@@ -2574,7 +2634,7 @@ class Component extends DCLogic {
     // bottomRecNext: drives the canvas bottom card — always the next tool after this screen
     let bottomRecNext = recNext;
     if(a.view==='tool' && a.actionIdx===0){
-      bottomRecNext = { prep:false, idx:1, name:'Track the market', btn:'View market conditions', why:"You've reviewed your value and comps. See where prices and demand are heading in 78704.", go:()=>this.gotoTool(1) };
+      bottomRecNext = { prep:false, idx:1, name:'Track the market', btn:'View market conditions', why:"You've reviewed your value and comps. See where prices and demand are heading in 78745.", go:()=>this.gotoTool(1) };
     }
     if(a.view==='tool' && a.actionIdx===1){
       bottomRecNext = { prep:false, idx:2, name:'Determine your listing price', btn:'Determine your listing price', why:"You've got a read on the market. See what you'd actually walk away with after payoff and costs.", go:()=>this.gotoTool(2) };
@@ -2593,23 +2653,23 @@ class Component extends DCLogic {
       .map(i=>({ label:this.REC_LABEL[i], onTap:()=>this.gotoTool(i) }));
     if(!recNext.prep && a.actionIdx!==3){ altPills.push({ label:'Prepare to list', onTap:()=>this.gotoTool(3) }); }
     // live net proceeds (tool 2) — if facts updated, default sale price to 81% of Zestimate (midpoint of sweet spot)
-    const zestForSale = hf.zestimate || 1695000;
-    const zestSweetSpot = Math.round(zestForSale * 0.81 / 5000) * 5000;
-    const saleDefault = hf.factsUpdated && a.salePrice===600000 ? zestSweetSpot : a.salePrice;
+    const zestForSale = hf.zestimate || 465000;
+    const zestSweetSpot = Math.round(zestForSale * 1.04 / 5000) * 5000;
+    const saleDefault = hf.factsUpdated && a.salePrice===550000 ? zestSweetSpot : a.salePrice;
     const sale=saleDefault, mort=a.mortgage, prep=6000;
     const closing=Math.round(sale*0.09);
     const net=Math.max(0, sale - mort - prep - closing);
     const fmt=(n)=>'$'+Math.round(n).toLocaleString('en-US');
-    const salePct=Math.round(((sale-500000)/(1000000-500000))*100);
-    const mortPct=Math.round((mort/500000)*100);
+    const salePct=Math.round(((sale-350000)/(700000-350000))*100);
+    const mortPct=Math.round((mort/350000)*100);
     const tree=this.A_PROMPTS[a.actionIdx];
-    const _ADDR_LOC = '2611 S 2nd St #A, Austin, TX 78704';
-    const _ADDR1 = '3418 Pecos St, Austin, TX 78704';
-    const _ADDR2 = '1842 Barton Hills Dr, Austin, TX 78704';
+    const _ADDR_LOC = '4812 Menchaca Rd #A, Austin, TX 78745';
+    const _ADDR1 = '2204 Teri Rd, Austin, TX 78745';
+    const _ADDR2 = '6901 Brodie Ln, Austin, TX 78745';
     const _ADDR_DATA = {
-      [_ADDR_LOC]: { short:'2611 S 2nd St #A', city:'Austin, TX 78704', stats:'4 bd · 3 ba · 2,656 sqft', statsCard:'4 bd | 3 ba | 2,656 sqft', zest:'$1,695,000' },
-      [_ADDR1]:    { short:'3418 Pecos St',     city:'Austin, TX 78704', stats:'3 bd · 2 ba · 1,980 sqft', statsCard:'3 bd | 2 ba | 1,980 sqft', zest:'$1,420,000' },
-      [_ADDR2]:    { short:'1842 Barton Hills Dr', city:'Austin, TX 78704', stats:'3 bd · 2 ba · 1,840 sqft', statsCard:'3 bd | 2 ba | 1,840 sqft', zest:'$875,000' }
+      [_ADDR_LOC]: { short:'4812 Menchaca Rd', city:'Austin, TX 78745', stats:'3 bd · 2 ba · 1,680 sqft', statsCard:'3 bd | 2 ba | 1,680 sqft', zest:'$465,000' },
+      [_ADDR1]:    { short:'2204 Teri Rd',         city:'Austin, TX 78745', stats:'3 bd · 2 ba · 1,540 sqft', statsCard:'3 bd | 2 ba | 1,540 sqft', zest:'$438,000' },
+      [_ADDR2]:    { short:'6901 Brodie Ln',        city:'Austin, TX 78745', stats:'4 bd · 2 ba · 1,920 sqft', statsCard:'4 bd | 2 ba | 1,920 sqft', zest:'$492,000' }
     };
     const selAddrData = _ADDR_DATA[ob.selectedAddr] || _ADDR_DATA[_ADDR_LOC];
 
@@ -2621,8 +2681,8 @@ class Component extends DCLogic {
       modeInput: a.mode==='input', showChips: (a.mode==='chips' || (a.mode==='ask' && (a.chips||[]).length>0)) && !a.readyForNext, showCta: a.mode==='cta' && !a.messages.some(m=>m.kind==='nextStep'), ctaLabel:a.ctaLabel,
       showReadyNudge: a.mode==='ask' && !a.readyForNext && !!hf.factsUpdated,
       homeContainerTop: a.claimed ? '0' : '46px',
-      modeAsk: a.mode==='ask', notModeAsk: a.mode!=='ask', askValue: a.askValue||'', askPlaceholder: a.claimed ? 'Ask your advisor anything' : 'Type your address…', onAskInput:(e)=>this.onAskInput(e), onAskKey:(e)=>this.onAskKey(e), sendAsk:()=>this.sendAsk(), showSend: (a.askValue||'').trim().length > 0, sendDisplay: (a.askValue||'').trim().length > 0 ? 'flex' : 'none', sendDisplayAddr: (a.addressValue||'').trim().length > 0 ? 'flex' : 'none',
-      showAddrChip: a.mode==='ask' && !a.claimed, tapAddrChip:()=>{ this.setState(s=>({a:{...s.a, askValue:'3418 Pecos St, Austin, TX 78704'}}), ()=>this.sendAsk()); }, useLocationAsk:()=>{ this.setState(s=>({a:{...s.a, askValue:'2611 S 2nd St # A, Austin, TX 78704'}}), ()=>this.sendAsk()); },
+      modeAsk: a.mode==='ask', notModeAsk: a.mode!=='ask', askValue: a.askValue||'', askPlaceholder: a.claimed ? 'Ask your advisor anything' : 'Type your address…', onAskInput:(e)=>this.onAskInput(e), onAskKey:(e)=>this.onAskKey(e), onAskFocus:()=>this.onAskFocus(), sendAsk:()=>this.sendAsk(), showSend: (a.askValue||'').trim().length > 0, sendDisplay: (a.askValue||'').trim().length > 0 ? 'flex' : 'none', sendDisplayAddr: (a.addressValue||'').trim().length > 0 ? 'flex' : 'none',
+      showAddrChip: a.mode==='ask' && !a.claimed, tapAddrChip:()=>{ this.setState(s=>({a:{...s.a, askValue:'2204 Teri Rd, Austin, TX 78745'}}), ()=>this.sendAsk()); }, useLocationAsk:()=>{ this.setState(s=>({a:{...s.a, askValue:'4812 Menchaca Rd #A, Austin, TX 78745'}}), ()=>this.sendAsk()); },
       addressValue:a.addressValue, onAddr:(e)=>this.onAddr(e), onKey:(e)=>this.onKey(e), submitAddr:()=>this.submitAddr(), useLocation:()=>this.useLocation(),
       inputPlaceholder: a.mode==='input' ? 'Enter your home address' : 'Ask Zillow…',
       chatPlaceholder: this.state.hf.open ? 'Tell me what you want to update…' : 'Ask about your home value…',
@@ -2664,7 +2724,7 @@ class Component extends DCLogic {
       tabBarBorder: a.tabBarPinned ? '1px solid var(--gray-100)' : 'none',
       understandSubMaxH: a.understandSubOpen ? '60px' : '0px',
       toolNavHeight: a.understandSubOpen ? '140px' : '100px',
-      toolTealHeight: a.understandSubOpen ? '156px' : '116px',
+      toolTealHeight: a.tabBarPinned ? (a.understandSubOpen ? '90px' : '56px') : (a.understandSubOpen ? '140px' : '100px'),
       understandChevronRotate: a.understandSubOpen ? 'rotate(180deg)' : 'rotate(0deg)',
       subTab0Active: a.actionIdx===0 ? 'rgba(255,255,255,.9)' : 'rgba(255,255,255,.18)',
       subTab0Color:  a.actionIdx===0 ? '#136F65' : '#fff',
@@ -2684,7 +2744,7 @@ class Component extends DCLogic {
       heroCity: selAddrData.city,
       heroStats: selAddrData.stats,
       heroStatsCard: selAddrData.statsCard,
-      heroZest: (hf.zestimate && hf.zestimate !== 1695000) ? '$'+hf.zestimate.toLocaleString('en-US') : selAddrData.zest,
+      heroZest: (hf.zestimate && hf.zestimate !== 465000) ? '$'+hf.zestimate.toLocaleString('en-US') : selAddrData.zest,
       comps: this.A_COMPS.map((cp,i)=>({
         ...cp,
         selected: a.selectedComp===i,
@@ -2694,13 +2754,12 @@ class Component extends DCLogic {
       compInsightText: (()=>{
         const idx = a.selectedComp;
         if(idx===null || idx===undefined) return null;
-        const cp = this.A_COMPS[idx];
-        const mySqft = parseInt((hf.fields.sqft||'2656').replace(/,/g,''),10)||2656;
-        const sqftDiff = cp.sqft - mySqft;
-        const sqftNote = sqftDiff > 0 ? `${sqftDiff} sqft larger` : sqftDiff < 0 ? `${Math.abs(sqftDiff)} sqft smaller` : 'same sqft';
-        const domNote = cp.daysOnMarket <= 15 ? 'sold quickly' : cp.daysOnMarket <= 25 ? 'sold in a typical timeframe' : 'took longer to sell';
-        const salePct = cp.saleToList >= 100 ? `sold at ${cp.saleToList}% of list` : `sold at ${cp.saleToList}% of list`;
-        return `This home is ${sqftNote} than yours with ${cp.beds} bd / ${cp.baths} ba. It ${domNote} (${cp.daysOnMarket} days) and ${salePct}. It sold for ${cp.price}.`;
+        const COMP_INSIGHTS = [
+          'This home sold in 14 days at 101% of list, which tells you buyers in 78745 are moving fast and not negotiating down. Your updated home matches this layout and size, so priced right you should see similar or stronger demand.',
+          'Slightly smaller with one fewer bathroom, and it still sold in 21 days at 99% of list. Your confirmed 4bd/3ba puts you above this comp in both size and likely buyer appeal.',
+          'Smaller overall with fewer beds and baths, and it took a bit longer to move. The gap between this and the top comp shows how much the extra bedroom and bath matter to buyers here. Your updated facts put you closer to the top.',
+        ];
+        return COMP_INSIGHTS[idx] || null;
       })(),
       compInsightDefault: a.selectedComp===null || a.selectedComp===undefined,
       selectComp: (i)=>()=>this.selectComp(i),
@@ -2714,7 +2773,7 @@ class Component extends DCLogic {
       digDeeperHomeFacts: ()=>this.digDeeperHomeFacts(),
       digDeeperMarket: ()=>this.digDeeperMarket(),
       digDeeperComps: ()=>this.digDeeperComps(),
-      digDeeperNet: ()=>this.digDeeperNet(),
+      digDeeperNet: ()=>this.digDeeperListingPrice(),
       openChatFromCompsInsight: ()=>this.openChatFromCompsInsight(),
       chatBarHidden: a.chatBarHidden,
       factsUpdated: !!hf.factsUpdated,
@@ -2753,26 +2812,27 @@ class Component extends DCLogic {
       altPills,
       // live net proceeds (tool 2)
       saleVal:sale, mortVal:mort, onSale:(e)=>this.onSale(e), onMortgage:(e)=>this.onMortgage(e),
-      sliderMin: Math.round(zestForSale*0.72/5000)*5000,
-      sliderMax: Math.round(zestForSale*1.15/5000)*5000,
+      zestimateFmt: '$'+(zestForSale).toLocaleString('en-US'),
+      sliderMin: Math.round(zestForSale*0.80/5000)*5000,
+      sliderMax: Math.round(zestForSale*1.20/5000)*5000,
+      sliderMinFmt: '$'+Math.round(zestForSale*0.80/1000)+'K',
+      sliderMaxFmt: '$'+Math.round(zestForSale*1.20/1000)+'K',
       saleStr:fmt(sale), mortStr:fmt(mort), closingStr:fmt(closing), netStr:fmt(net),
       salePct:salePct+'%', mortPct:mortPct+'%',
-      confidence: sale <= Math.round(zestForSale*0.90) ? 'High' : sale <= zestForSale ? 'Medium' : 'Low',
-      sellsIn: sale <= Math.round(zestForSale*0.90) ? '~15 days' : sale <= zestForSale ? '~28 days' : '~45+ days',
-      listPriceLabel: sale <= Math.round(zestForSale*0.90) ? 'Likely list price' : sale <= zestForSale ? 'Possible list price' : 'Optimistic list price',
+      confidence: sale <= Math.round(zestForSale*0.90) ? 'High' : sale <= Math.round(zestForSale*1.10) ? 'Medium' : 'Low',
+      sellsIn: sale <= Math.round(zestForSale*0.90) ? '~8 days' : sale <= Math.round(zestForSale*1.10) ? '~13 days' : '~30+ days',
+      listPriceLabel: sale <= Math.round(zestForSale*0.90) ? 'Underpriced' : sale <= Math.round(zestForSale*1.10) ? 'Likely list price · Seller\'s market' : 'Less likely list price',
       salePriceRange: (Math.round(zestForSale*0.72/1000))+'k - '+(Math.round(zestForSale/1000))+'k',
       onSaleCommit: (e)=>this.onSaleCommit(e),
       insightText: (()=>{
         if(a.fromInsightNudge) return "Your odds of selling near the top just peaked. They fall as inventory rises. I think now's the moment. Want me to connect you with an agent?";
         const ip = a.insightPrice || sale;
         const fmt2 = (n)=>'$'+(n>=1000000 ? (n/1000000).toFixed(n%1000000===0?0:2)+'M' : Math.round(n/1000)+'K');
-        const zLow = Math.round(zestForSale*0.72);
-        const zMid = Math.round(zestForSale*0.90);
-        const zHigh = zestForSale;
-        if(ip < zLow) return `At ${fmt2(ip)}, you're pricing below what comps support. You'll likely sell quickly, but you may be leaving equity on the table. Consider pricing closer to ${fmt2(zLow)} to stay competitive without undervaluing your home.`;
-        if(ip <= zMid) return `At ${fmt2(ip)}, you're in the sweet spot. This aligns with recent comparable sales in your area, which means strong buyer interest and a faster close. You're well-positioned to get close to your asking price.`;
-        if(ip <= zHigh) return `At ${fmt2(ip)}, you're above the recommended range. You might get more, but expect fewer offers and a longer time on market. If you don't see activity in the first two weeks, a price adjustment could help.`;
-        return `At ${fmt2(ip)}, you're pricing above what comps support. This is an optimistic target. You risk sitting on the market and potentially needing to reduce later. Dropping to ${fmt2(zHigh)} would move you into a more competitive position.`;
+        const zLow = Math.round(zestForSale*0.90);
+        const zHigh = Math.round(zestForSale*1.10);
+        if(ip < zLow) return `At ${fmt2(ip)}, you're pricing below what this market supports. In a seller's market with homes going pending in about 13 days, you're likely leaving money on the table. Pricing closer to ${fmt2(zLow)} would keep you competitive without giving away equity.`;
+        if(ip <= zHigh) return `At ${fmt2(ip)}, you're in the sweet spot for this market. Demand is outpacing supply in 78745, which means buyers are less likely to negotiate down. You're well-positioned to attract strong offers and close quickly.`;
+        return `At ${fmt2(ip)}, you're pushing past what the market is likely to support. Even in a seller's market, pricing too far above comps can slow things down. If you don't see offers in the first two weeks, a reduction would likely be needed.`;
       })(),
       milestones: (()=>{
         const N = this.MS.length;
@@ -3036,11 +3096,11 @@ class Component extends DCLogic {
     const bdOpen = sec === 'Building details';
     const otOpen = sec === 'Other property details';
     const phOpen = sec === 'Photos and media';
-    const sqftNum = parseInt((hf.fields.sqft||'2656').replace(/,/g,''),10)||2656;
-    const zestimate = hf.zestimate || 1695000;
+    const sqftNum = parseInt((hf.fields.sqft||'1680').replace(/,/g,''),10)||1680;
+    const zestimate = hf.zestimate || 465000;
     const zPerSqft = '$'+Math.round(zestimate/sqftNum).toLocaleString('en-US');
-    const savedZest = hf.savedZest || 1695000;
-    const zest30dayAmt = hf.factsUpdated ? (zestimate - savedZest) : 50000;
+    const savedZest = hf.savedZest || 465000;
+    const zest30dayAmt = hf.factsUpdated ? (zestimate - savedZest) : 27000;
     const zest30daySign = zest30dayAmt >= 0 ? '+' : '';
     const zest30dayFmt = zest30dayAmt >= 0 ? '+$'+Math.abs(Math.round(zest30dayAmt/1000))+'k' : '-$'+Math.abs(Math.round(zest30dayAmt/1000))+'k';
     const zest30dayPctVal = Math.abs((zest30dayAmt / Math.max(savedZest, 1)) * 100).toFixed(1);
@@ -3049,8 +3109,8 @@ class Component extends DCLogic {
     const zestRangeHigh = '$'+(Math.round(zestimate*1.055/1000)*1000).toLocaleString('en-US');
     const zestimateFmt = '$'+zestimate.toLocaleString('en-US');
     const whatThisMeans = hf.factsUpdated
-      ? 'Your updated home facts raised your Zestimate to '+zestimateFmt+'. Comparable homes in your area are listing between $1.7M and $1.85M, which puts your potential listing price squarely in a competitive range.'
-      : 'Up $50k in 30 days and priced competitively per sq ft. If you\'re thinking about selling in the next few months, your value position is strong.';
+      ? 'Your updated home facts raised your Zestimate to '+zestimateFmt+'. Comparable homes in 78745 are selling between $485K and $558K, which puts you squarely in a competitive listing range.'
+      : 'Up $27k over the past month and priced competitively for the area. If you\'re thinking about selling in the next few months, your value position is solid.';
     const vc = hf.vchat;
     const HF = {
       open: hf.open,
@@ -3089,8 +3149,8 @@ class Component extends DCLogic {
       zestRange: zestRangeLow+'–'+zestRangeHigh,
       whatThisMeans: whatThisMeans,
       hfSummaryChips: [
-        { q:'Which home facts update my Zestimate the most?', onTap:()=>this.tapPrompt('v_hf_most') },
-        { q:'What adds the most value before listing?', onTap:()=>this.tapPrompt('v_value') }
+        { q:'Which facts matter most?', onTap:()=>this.tapPrompt('v_hf_most') },
+        { q:'What adds the most value?', onTap:()=>this.tapPrompt('v_value') }
       ],
       factsNotUpdated: !hf.factsUpdated,
       flashSqft: hf.flashSqft,
