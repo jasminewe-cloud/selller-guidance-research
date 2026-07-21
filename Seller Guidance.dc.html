@@ -353,6 +353,10 @@
                         <button onClick="{{ m.onGo }}" style="width:100%;display:flex;align-items:center;justify-content:center;gap:7px;background:transparent;color:#111116;border:2px solid #111116;font-family:var(--font-ui);font-weight:700;font-size:15px;padding:12px;border-radius:12px;cursor:pointer;">Let's go<span style="width:16px;height:16px;background:#111116;-webkit-mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;"></span></button>
                       </div>
                     </sc-if>
+                    <!-- OK CTA — closes drawer and triggers Zestimate count-up -->
+                    <sc-if value="{{ m.isOkCTA }}">
+                      <button onClick="{{ a.hfZestOkTap }}" style="align-self:flex-start;background:var(--blue-600);color:#fff;border:none;font-family:var(--font-ui);font-weight:700;font-size:15px;padding:11px 24px;border-radius:999px;cursor:pointer;animation:vfade .25s ease both;">OK</button>
+                    </sc-if>
                   </div>
                 </sc-if>
                 <sc-if value="{{ m.isU }}">
@@ -1950,6 +1954,34 @@ class Component extends DCLogic {
       }, interval);
     }, 1300);
   }
+  hfZestOkTap(){
+    this.setState(s=>({a:{...s.a,chatClosing:true}}));
+    setTimeout(()=>{
+      this.setState(s=>({a:{...s.a,screen:'action',chatClosing:false}}));
+      const scroll=document.querySelector('[data-tool-scroll]'); if(scroll) scroll.scrollTop=0;
+      setTimeout(()=>{
+        const hf = this.state.hf;
+        const fromZest = hf.zestimate||1695000;
+        const toZest = hf.pendingZest||fromZest;
+        const pendFields = hf.pendingFields||hf.fields;
+        const fromSqft = parseInt((hf.fields.sqft||'2656').replace(/,/g,''),10);
+        const toSqft = parseInt((pendFields.sqft||'2656').replace(/,/g,''),10);
+        const steps=30, duration=1000, interval=duration/steps;
+        let step=0;
+        this.setState(s=>({hf:{...s.hf, flashZcard:true, countingUp:true, factsUpdated:true}}));
+        const ticker=setInterval(()=>{
+          step++;
+          const ease=1-Math.pow(1-step/steps,3);
+          this.setState(s=>({hf:{...s.hf, zestimate:Math.round(fromZest+(toZest-fromZest)*ease), fields:{...s.hf.fields, sqft:Math.round(fromSqft+(toSqft-fromSqft)*ease).toLocaleString('en-US')}}}));
+          if(step>=steps){
+            clearInterval(ticker);
+            const summaryTxt = this.hfBuildSummary(pendFields, hf.savedFields||hf.fields, toZest) || ('Updated to '+pendFields.beds+' bd, '+pendFields.baths+' ba, and '+pendFields.sqft+' sq ft.');
+            this.setState(s=>({hf:{...s.hf, zestimate:toZest, savedZest: s.hf.savedZest||fromZest, fields:pendFields, savedFields:pendFields, pendingZest:null, pendingFields:null, flashZcard:false, countingUp:false, summary:{show:true,text:summaryTxt}}}));
+          }
+        }, interval);
+      }, 800);
+    }, 480);
+  }
   hfVSendRaw(raw, original){ /* placeholder — falls through to hfVSend after anything-else clears */ }
   hfApplyUpdate(upd, renovNote){
     const { field, newVal, newSqft } = upd;
@@ -2292,41 +2324,11 @@ class Component extends DCLogic {
         this.setState(s=>{ const msgs=[...s.a.messages,{who:'u',text:raw}]; return {a:{...s.a,messages:msgs,askValue:'',anchor:msgs.length+999}}; });
         if(done){
           setTimeout(()=>{ this.setState(s=>({a:{...s.a,messages:[...s.a.messages,{who:'v',isV:true,hasText:true,isThinking:true}],anchor:s.a.messages.length+999}})); }, 300);
-          // Confirm what was updated and prompt user to review
           setTimeout(()=>{
             const pf = this.state.hf.pendingFields || this.state.hf.fields;
             const confirmMsg = `Got it. I've updated your home to ${pf.beds} bedrooms, ${pf.baths} bathrooms, and ${pf.sqft} sq ft. Take a look at your updated Zestimate below and let me know if the numbers look right.`;
-            this.setState(s=>({a:{...s.a,messages:[...s.a.messages.filter(m=>!m.isThinking),{who:'v',isV:true,hasText:true,text:confirmMsg}],mode:'ask',hfChatStep:null,anchor:s.a.messages.length+999}}));
+            this.setState(s=>({a:{...s.a,messages:[...s.a.messages.filter(m=>!m.isThinking),{who:'v',isV:true,hasText:true,text:confirmMsg},{who:'v',isV:true,isCard:false,isOkCTA:true}],mode:'ask',hfChatStep:null,anchor:s.a.messages.length+999}}));
           }, 1600);
-          // Slide drawer down smoothly after user has had time to read
-          setTimeout(()=>{ this.setState(s=>({a:{...s.a,chatClosing:true}})); }, 3200);
-          setTimeout(()=>{
-            // Remove chat from DOM and instantly reset scroll (invisible)
-            this.setState(s=>({a:{...s.a,screen:'action',chatClosing:false}}));
-            const scroll=document.querySelector('[data-tool-scroll]'); if(scroll) scroll.scrollTop=0;
-            // Count-up after a beat to let the tool view settle
-            setTimeout(()=>{
-              const hf = this.state.hf;
-              const fromZest = hf.zestimate||1695000;
-              const toZest = hf.pendingZest||fromZest;
-              const pendFields = hf.pendingFields||hf.fields;
-              const fromSqft = parseInt((hf.fields.sqft||'2656').replace(/,/g,''),10);
-              const toSqft = parseInt((pendFields.sqft||'2656').replace(/,/g,''),10);
-              const steps=30, duration=1000, interval=duration/steps;
-              let step=0;
-              this.setState(s=>({hf:{...s.hf, flashZcard:true, countingUp:true, factsUpdated:true}}));
-              const ticker=setInterval(()=>{
-                step++;
-                const ease=1-Math.pow(1-step/steps,3);
-                this.setState(s=>({hf:{...s.hf, zestimate:Math.round(fromZest+(toZest-fromZest)*ease), fields:{...s.hf.fields, sqft:Math.round(fromSqft+(toSqft-fromSqft)*ease).toLocaleString('en-US')}}}));
-                if(step>=steps){
-                  clearInterval(ticker);
-                  const summaryTxt = this.hfBuildSummary(pendFields, hf.savedFields||hf.fields, toZest) || ('Updated to '+pendFields.beds+' bd, '+pendFields.baths+' ba, and '+pendFields.sqft+' sq ft.');
-                  this.setState(s=>({hf:{...s.hf, zestimate:toZest, savedZest: s.hf.savedZest || fromZest, fields:pendFields, savedFields:pendFields, pendingZest:null, pendingFields:null, flashZcard:false, countingUp:false, summary:{show:true,text:summaryTxt}}}));
-                }
-              }, interval);
-            }, 800);
-          }, 3680);
         } else {
           setTimeout(()=>{
             const msgs=[...this.state.a.messages,{who:'v',isV:true,hasText:true,text:"Sure, what else would you like to update?"}];
@@ -2608,6 +2610,7 @@ class Component extends DCLogic {
       onCta: ()=>this.setA({screen:'action', view:'tool'}),
       openChat: ()=>{ this.hfCommitPending(); const prefill = this.state.a.actionIdx===0 && !this.state.hf.factsUpdated ? 'I added an additional bedroom and bathroom' : ''; this.setState(s=>({a:{...s.a, screen:'chat', mode:'ask', askValue:prefill, anchor:s.a.messages.length+9999}})); },
       openChatForHF: ()=>{ this.hfCommitPending(); this.setState(s=>({a:{...s.a, screen:'chat', mode:'ask', askValue:'I added an additional bedroom and bathroom', anchor:s.a.messages.length+9999}})); },
+      hfZestOkTap: ()=>this.hfZestOkTap(),
       closeChat: ()=>this.closeChat(),
       closeChatToComps: ()=>this.closeChatToComps(),
       restart: ()=>this.restartA(),
