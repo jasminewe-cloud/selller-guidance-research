@@ -905,7 +905,7 @@
             <div ref="{{ a.advisorCardRef }}" style="position:absolute;bottom:76px;left:16px;right:16px;z-index:21;transition:opacity 200ms ease,transform 200ms ease;">
               <div style="background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 4px 20px rgba(0,0,0,.14);">
                 <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
-                  <span style="font-family:var(--font-ui);font-size:11px;font-weight:700;color:var(--gray-500);letter-spacing:.05em;text-transform:uppercase;">{{ a.advisorStep }}</span>
+                  <span style="font-family:var(--font-ui);font-size:11px;font-weight:700;color:var(--gray-950);letter-spacing:.05em;text-transform:uppercase;">{{ a.advisorStep }}</span>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:8px;">
                   <span style="width:14px;height:14px;flex:none;margin-top:1px;background:var(--purple-700);-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:block;animation:{{ a.advisorSparkleAnim }};"></span>
@@ -2765,7 +2765,7 @@ class Component extends DCLogic {
       actionChatGlowClass: a.homeFGlow ? 'chat-glow' : '',
       sendBg: a.mode==='input' ? 'var(--blue-600)' : 'var(--gray-300)',
       scrollRef:this.aScrollRef, onScroll:()=>this.onScrollA(), toolScrollOnScroll:()=>this.onScrollTool(), moreBelow:a.moreBelow, scrollDown:()=>this.scrollDownA(), spacerHpx:(a.spacerH||0)+'px', compsRef:this.compsRef, homeFRef:this.homeFRef, toolScrollRef:this.aToolScrollRef, toolChatBarRef:this.toolChatBarRef, advisorCardRef:this.advisorCardRef, milestoneChatBarRef:this.milestoneChatBarRef, milestoneScrollRef:this.aMilestoneScrollRef, onScrollMilestone:()=>this.onScrollMilestone(),
-      advisorStep: ['Step 1 of 3 — Understand home value','Step 2 of 3 — Track the market','Step 3 of 3 — Determine your listing price',''][a.actionIdx]||'',
+      advisorStep: ['Step 1 of 3 — Update your home facts','Step 2 of 3 — Track the market','Step 3 of 3 — Determine your listing price',''][a.actionIdx]||'',
       advisorMsg: [
         'Review your Zestimate and home facts. If anything has changed, update your home facts below. Tap Dig deeper with Seller Advisor for more insights.',
         'Check the market index, then tap any comparable home to walk through it together. Tap Dig deeper with Seller Advisor for more insights.',
