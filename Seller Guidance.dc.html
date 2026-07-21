@@ -482,8 +482,8 @@
 
               <!-- TOOL 0: Understand home value -->
               <sc-if value="{{ a.t0 }}" hint-placeholder-val="{{ true }}">
-                <!-- Orientation card — only before facts updated -->
-                <sc-if value="{{ hf.factsNotUpdated }}">
+                <!-- Orientation card — only before facts updated and not yet dismissed -->
+                <sc-if value="{{ a.showOrientationCard }}">
                   <div style="background:#3B0470;border-radius:16px;padding:14px 16px;">
                     <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
                       <div style="width:26px;height:26px;flex:none;border-radius:999px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;"><span style="width:13px;height:13px;background:#fff;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:block;"></span></div>
@@ -1517,7 +1517,7 @@ class Component extends DCLogic {
       closing:{ action:'Review & accept an offer', text:"Since you're already listed, jump to Close your sale to manage offers and paperwork with confidence." }
     };
     this.state = {
-      a: { messages:this.INIT_A.slice(), mode:'ask', addressValue:'', chips:[], ctaLabel:'', actionIdx:0, timing:null, screen:'chat', chatClosing:false, anchor:0, moreBelow:false, spacerH:0, claimed:false, view:'home', expanded:-1, planOpen:true, insightDismissed:false, selectedComp:null, collapsing:-1, engaged:{0:false,1:false,2:false,3:false}, salePrice:600000, insightPrice:600000, mortgage:178436, checkInIdx:0, askValue:'', readyForNext:false, lastPromptKey:'', askedKeys:[], homeFPrompt:false, homeFGlow:false, insightCompsOpen:false, insightNetOpen:false, insightNetSheetOpen:false, insightCompsSheetOpen:false, chatBarHidden:false, tabBarPinned:false, understandSubOpen:false, hfChatStep:null, fromInsightNudge:false, fromIntro:false },
+      a: { messages:this.INIT_A.slice(), mode:'ask', addressValue:'', chips:[], ctaLabel:'', actionIdx:0, timing:null, screen:'chat', chatClosing:false, anchor:0, moreBelow:false, spacerH:0, claimed:false, view:'home', expanded:-1, planOpen:true, insightDismissed:false, selectedComp:null, collapsing:-1, engaged:{0:false,1:false,2:false,3:false}, salePrice:600000, insightPrice:600000, mortgage:178436, checkInIdx:0, askValue:'', readyForNext:false, lastPromptKey:'', askedKeys:[], homeFPrompt:false, homeFGlow:false, insightCompsOpen:false, insightNetOpen:false, insightNetSheetOpen:false, insightCompsSheetOpen:false, chatBarHidden:false, tabBarPinned:false, understandSubOpen:false, hfChatStep:null, fromInsightNudge:false, fromIntro:false, orientationDismissed:false },
       b: { step:0, touring:true },
       c: { screen:'list', step:0, actionIdx:0, rec:null },
       d: { step:0, touring:true, rec:null },
@@ -2178,7 +2178,7 @@ class Component extends DCLogic {
   toggleMs(i){ this.setState(s=>({a:{...s.a, expanded: s.a.expanded===i ? -1 : i}})); }
   togglePlan(){ this.setState(s=>({a:{...s.a, planOpen:!s.a.planOpen}})); }
   dismissInsight(){ this.setState(s=>({a:{...s.a, insightDismissed:true}})); }
-  scrollToHomeFacts(){ const scroll=document.querySelector('[data-tool-scroll]'); const target=document.getElementById('home-facts-anchor'); if(scroll&&target){ const tr=target.getBoundingClientRect(); const sr=scroll.getBoundingClientRect(); scroll.scrollTo({ top: scroll.scrollTop+tr.top-sr.top-20, behavior:'smooth' }); } setTimeout(()=>{ this.setState(s=>({a:{...s.a, screen:'chat', mode:'ask', askValue:'I added an additional bedroom and bathroom', anchor:s.a.messages.length+9999}})); }, 400); }
+  scrollToHomeFacts(){ this.setState(s=>({a:{...s.a, orientationDismissed:true, homeFGlow:true, homeFPrompt:true}}), ()=>{ const scroll=document.querySelector('[data-tool-scroll]'); const target=document.getElementById('home-facts-anchor'); if(scroll&&target){ const tr=target.getBoundingClientRect(); const sr=scroll.getBoundingClientRect(); scroll.scrollTo({ top: scroll.scrollTop+tr.top-sr.top-20, behavior:'smooth' }); } setTimeout(()=>{ this.setState(s=>({a:{...s.a, homeFGlow:false}})); }, 4000); }); }
   dismissIntro(){ this.setState(s=>({ob:{...s.ob, introExiting:true}}), ()=>{ setTimeout(()=>{ this.setState(s=>({ob:{...s.ob, beat:0, introExiting:false}, a:{...s.a, fromIntro:true}})); setTimeout(()=>{ this.setState(s=>({a:{...s.a, fromIntro:false}})); }, 400); }, 320); }); }
   goToListingPriceNudge(){ this.setState(s=>{ const nudgePrice = s.hf.zestimate || 1695000; return {a:{...s.a, view:'tool', actionIdx:2, screen:'action', salePrice:nudgePrice, insightPrice:nudgePrice, fromInsightNudge:true, askedKeys:[], understandSubOpen:false}}; }, ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; }); }
   selectComp(idx){ this.setState(s=>({a:{...s.a, selectedComp: s.a.selectedComp===idx ? null : idx}})); }
@@ -2627,6 +2627,7 @@ class Component extends DCLogic {
       actionNum: String(a.actionIdx+1),
       t0:a.actionIdx===0, t1:a.actionIdx===1, t2:a.actionIdx===2, t3:a.actionIdx===3,
       scrollToHomeFacts: ()=>this.scrollToHomeFacts(),
+      showOrientationCard: !hf.factsUpdated && !a.orientationDismissed,
       heroShort: selAddrData.short,
       heroCity: selAddrData.city,
       heroStats: selAddrData.stats,
