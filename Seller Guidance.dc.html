@@ -2284,10 +2284,9 @@ class Component extends DCLogic {
         if(done){
           setTimeout(()=>{ this.setState(s=>({a:{...s.a,messages:[...s.a.messages,{who:'v',isV:true,hasText:true,isThinking:true}],anchor:s.a.messages.length+999}})); }, 300);
           setTimeout(()=>{
-            // close chat, scroll to top
+            // close chat, then instantly reset scroll (invisible — no smooth) and count-up after pause
             this.setState(s=>({a:{...s.a,messages:[...s.a.messages.filter(m=>!m.isThinking)],mode:'ask',hfChatStep:null,screen:'action'}}));
-            setTimeout(()=>{ const scroll=document.querySelector('[data-tool-scroll]'); if(scroll) scroll.scrollTo({top:0,behavior:'smooth'}); }, 100);
-            // count-up animation after scroll settles
+            setTimeout(()=>{ const scroll=document.querySelector('[data-tool-scroll]'); if(scroll) scroll.scrollTop=0; }, 0);
             setTimeout(()=>{
               const hf = this.state.hf;
               const fromZest = hf.zestimate||1695000;
@@ -2308,7 +2307,7 @@ class Component extends DCLogic {
                   this.setState(s=>({hf:{...s.hf, zestimate:toZest, fields:pendFields, savedFields:pendFields, pendingZest:null, pendingFields:null, flashZcard:false, countingUp:false, summary:{show:true,text:summaryTxt}}}));
                 }
               }, interval);
-            }, 700);
+            }, 800);
           }, 1600);
         } else {
           setTimeout(()=>{
@@ -2599,7 +2598,7 @@ class Component extends DCLogic {
       next: ()=>this.aStep(1), prev: ()=>this.aStep(-1),
       c0:a.actionIdx===0, c1:a.actionIdx===1, c2:a.actionIdx===2, c3:a.actionIdx===3,
       viewExplore: a.view==='explore' && a.screen!=='chat',
-      viewTool: a.view==='tool' && a.screen!=='chat',
+      viewTool: a.view==='tool',
       openExplore: ()=>this.openExplore(),
       backHome: ()=>this.backHome(), backExplore: ()=>this.backExplore(),
       tabGoHome: ()=>this.backHome(), tabGoto0: ()=>this.gotoTool(0), tabGoto3: ()=>this.gotoTool(3),
