@@ -2307,7 +2307,7 @@ class Component extends DCLogic {
     }
     // Failsafe: listing price intent detected — re-orient mid-study tester (highest priority, overrides all scripted flows)
     const isListingIntent = /sell my (home|house|place) for|list(ing)? (price|my home|my house|my place)|what (price|can i|could i) (get|sell)|what could i sell|what should i (list|sell|price)|how much (can|could|should) i (sell|list|get)|what should i list|what price/i.test(raw);
-    if(isListingIntent && !this.state.hf.factsUpdated){
+    if(isListingIntent){
       this.fireListingFailsafe(raw);
       return;
     }
