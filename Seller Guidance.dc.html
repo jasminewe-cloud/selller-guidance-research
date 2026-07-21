@@ -444,7 +444,7 @@
             <!-- LAYER 1 (z:5): Teal background block — sits behind image card, extends past pills so corners overlap into teal -->
             <div style="position:absolute;top:46px;left:0;right:0;height:{{ a.toolTealHeight }};z-index:5;background:#136F65;"></div>
             <!-- LAYER 1b (z:20): Teal pill mask — fixed strip that hides photo scrolling behind pills -->
-            <div style="position:absolute;top:46px;left:0;right:0;height:46px;z-index:20;background:#136F65;"></div>
+            <div style="position:absolute;top:46px;left:0;right:0;height:52px;z-index:20;background:#136F65;"></div>
             <!-- LAYER 3 (z:30): Pill buttons only — always on top of image when scrolling -->
             <div style="position:absolute;top:46px;left:0;right:0;z-index:30;padding:4px 0 0;pointer-events:none;">
               <div style="display:flex;align-items:center;gap:6px;overflow-x:auto;padding:0 0 10px 12px;pointer-events:auto;" class="noscroll">
@@ -2723,7 +2723,7 @@ class Component extends DCLogic {
       tabBarBg: a.tabBarPinned ? 'var(--gray-50)' : 'transparent',
       tabBarBorder: a.tabBarPinned ? '1px solid var(--gray-100)' : 'none',
       understandSubMaxH: a.understandSubOpen ? '60px' : '0px',
-      toolNavHeight: a.understandSubOpen ? '140px' : '100px',
+      toolNavHeight: a.understandSubOpen ? '136px' : '98px',
       toolTealHeight: a.tabBarPinned ? (a.understandSubOpen ? '90px' : '56px') : (a.understandSubOpen ? '140px' : '100px'),
       understandChevronRotate: a.understandSubOpen ? 'rotate(180deg)' : 'rotate(0deg)',
       subTab0Active: a.actionIdx===0 ? 'rgba(255,255,255,.9)' : 'rgba(255,255,255,.18)',
