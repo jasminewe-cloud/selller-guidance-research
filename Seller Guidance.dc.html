@@ -2515,7 +2515,7 @@ class Component extends DCLogic {
         return {a:{...s.a, messages:msgs, anchor:msgs.length+999}};
       });
     }, delay);
-    const chip1 = { label:'Why is my listing price above my Zestimate?', onTap:()=>this.tapListingPriceChip1() };
+    const chip1 = { label:"Why aren't the numbers lining up?", onTap:()=>this.tapListingPriceChip1() };
     const chip2 = { label:'Why not price at $558K like the top comp?', onTap:()=>this.tapListingPriceChip2() };
     const introMsg = { who:'v', isV:true, hasText:true, text:'Happy to walk through the listing price recommendation. What would you like to dig into?' };
     this.setState(s=>{ const msgs=[...s.a.messages, introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips:[chip1, chip2], mode:'chips', anchor:msgs.length+999} }; });
@@ -2532,7 +2532,7 @@ class Component extends DCLogic {
     }, delay);
     const chip2 = { label:'Why not price at $558K like the top comp?', onTap:()=>this.tapListingPriceChip2() };
     this.setState(s=>{
-      const msgs=[...s.a.messages, {who:'u', kind:'text', text:'Why is my listing price above my Zestimate?'}];
+      const msgs=[...s.a.messages, {who:'u', kind:'text', text:"Why aren't the numbers lining up?"}];
       return {a:{...s.a, messages:msgs, chips:[], mode:'ask', anchor:msgs.length+999}};
     });
     add({who:'v', kind:'text', isThinking:true}, 600);
