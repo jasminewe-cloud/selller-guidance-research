@@ -536,20 +536,6 @@
                     </sc-for>
                   </div>
                 </div>
-                <!-- AI update summary -->
-                <sc-if value="{{ hf.summaryShow }}">
-                  <div style="background:#3B0470;border-radius:16px;padding:14px 16px;">
-                    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
-                      <div style="display:flex;align-items:flex-start;gap:10px;">
-                        <div style="width:28px;height:28px;flex:none;border-radius:999px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;margin-top:1px;"><span style="width:14px;height:14px;background:#fff;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:block;"></span></div>
-                        <p style="font-family:var(--font-ui);font-size:14px;color:#fff;line-height:1.5;margin:0;">{{ hf.summaryText }}</p>
-                      </div>
-                      <button onClick="{{ hf.dismissSummary }}" style="flex:none;background:none;border:none;cursor:pointer;padding:2px;display:flex;align-items:center;justify-content:center;">
-                        <span style="width:16px;height:16px;background:rgba(255,255,255,.6);-webkit-mask:var(--ic-IconCloseOutline) center/contain no-repeat;mask:var(--ic-IconCloseOutline) center/contain no-repeat;display:block;"></span>
-                      </button>
-                    </div>
-                  </div>
-                </sc-if>
                 <div id="home-facts-anchor" style="background:#fff;border-radius:16px;border:1px solid var(--gray-200);padding:16px;">
                   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
                     <span style="font-family:var(--font-brand);font-weight:900;font-size:17px;">Home facts</span>
@@ -582,6 +568,25 @@
                     <span style="font-family:var(--font-brand);font-weight:900;font-size:18px;color:#136F65;">{{ a.heroZest }}</span>
                   </div>
                 </div>
+                <!-- AI home facts summary — shown after facts updated -->
+                <sc-if value="{{ hf.summaryShow }}">
+                  <div style="background:#fff;border-radius:16px;box-shadow:var(--shadow-sm);padding:16px;">
+                    <div style="display:flex;align-items:center;gap:9px;margin-bottom:10px;">
+                      <div style="width:28px;height:28px;flex:none;border-radius:999px;background:var(--purple-700);display:flex;align-items:center;justify-content:center;"><span style="width:15px;height:15px;background:#fff;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;"></span></div>
+                      <span style="font-weight:700;font-size:14px;">What this means for you</span>
+                    </div>
+                    <p style="font-size:14px;line-height:1.5;color:var(--gray-900);margin:0 0 14px;">{{ hf.summaryText }}</p>
+                    <div style="font-size:11px;font-weight:800;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;margin-bottom:9px;">Ask {{ vName }} about this</div>
+                    <div class="noscroll" style="display:flex;gap:9px;overflow-x:auto;margin:0 -16px;padding:2px 16px;">
+                      <sc-for list="{{ hf.hfSummaryChips }}" as="c">
+                        <button onClick="{{ c.onTap }}" style="flex:none;background:var(--gray-50);border:1.5px solid var(--gray-950);border-radius:999px;padding:9px 9px 9px 16px;font-family:var(--font-ui);font-size:13.5px;font-weight:600;line-height:1.2;color:var(--gray-900);cursor:pointer;display:flex;align-items:center;gap:11px;white-space:nowrap;">
+                          <span>{{ c.q }}</span>
+                          <span style="flex:none;width:24px;height:24px;border-radius:999px;background:var(--gray-950);display:flex;align-items:center;justify-content:center;"><span style="width:13px;height:13px;background:#fff;-webkit-mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;"></span></span>
+                        </button>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-if>
                 <!-- Voyager home facts nudge — hidden after facts updated -->
                 <sc-if value="{{ hf.factsNotUpdated }}">
                 <div style="background:#fcf6ff;border:1px solid rgba(59,4,112,.15);border-radius:16px;padding:14px 16px;">
@@ -1401,6 +1406,9 @@ class Component extends DCLogic {
           v_acc:{ q:"How accurate is my Zestimate?", a:"Your home facts were last updated 14 months ago. Since then, comparable sales have shifted and any renovations you've made won't be reflected yet. If your facts are out of date, your Zestimate could be off by more than you'd expect. Worth a quick review before you rely on this number.", follow:['v_value'] },
           v_improve:{ q:"How do I improve my Zestimate accuracy?", a:"Update your home facts, especially finished square footage, recent renovations, and bathroom count. Accurate facts are the fastest way to close the gap between your Zestimate and real market value.", follow:['v_value'] },
           v_value:{ q:"What adds the most value before listing?", a:"In 78704, kitchen and bath refreshes plus updated fixtures return the most per dollar. Marking those renovations in your home facts can also lift your Zestimate before you list.", follow:[] },
+          v_zest_calc:{ q:"How was my Zestimate calculated?", a:"Your Zestimate is based on your home facts, recent comparable sales in 78704, and public records. When your facts are accurate and comps are active, it's typically within 2–5% of market value.", follow:['v_affects'] },
+          v_affects:{ q:"What else affects my home value?", a:"Beyond square footage and bed/bath count, condition, lot size, school district, and recent renovations all move the number. Comparable sales in the last 90 days have the heaviest weight.", follow:['v_value'] },
+          v_hf_most:{ q:"Which home facts update my Zestimate the most?", a:"Finished square footage has the biggest impact, followed by bedroom and bathroom count. Renovation flags — especially kitchen and bath — can add a meaningful lift on top of that.", follow:['v_value'] },
           c_price:{ q:"How do I price against these comps?", a:"Comps are landing between $1.5M and $1.9M, putting your Zestimate of $1,695,000 right in the middle. Pricing at or just below the top comps draws competitive offers while leaving room to negotiate.", follow:['c_standout'] },
           c_standout:{ q:"What makes my home stand out from nearby sales?", a:"Your lot, updated finishes, and square footage put you above the midpoint of recent sales. Lead with kitchen and bath condition in your listing to move buyers from interested to making an offer.", follow:[] }
         }
@@ -1592,7 +1600,7 @@ class Component extends DCLogic {
     if(!changes.length) return null;
     const list = changes.length===1 ? changes[0] : changes.slice(0,-1).join(', ')+' and '+changes[changes.length-1];
     const zestLine = newZest ? ' Your updated Zestimate is $'+newZest.toLocaleString('en-US')+'.' : '';
-    return 'Updated '+list+'.'+zestLine+' If you\'re comfortable with these numbers, you\'re ready to move on to the next step.';
+    return 'Updated '+list+'.'+zestLine;
   }
   hfDismissSummary(){ this.setState(s=>({ hf:{...s.hf, summary:{show:false,text:''}} })); }
   closeHF(){
@@ -2692,8 +2700,7 @@ class Component extends DCLogic {
         } else {
           roots = tree.root.slice();
           if(a.actionIdx===0 && this.state.hf.factsUpdated){
-            roots = roots.filter(k=>k!=='v_acc' && k!=='v_improve');
-            if(!roots.includes('v_value')) roots.unshift('v_value');
+            roots = ['v_zest_calc','v_affects','v_value'];
           }
         }
         return roots.map(k=>({ q:tree.nodes[k].q, onTap:()=>this.tapPrompt(k) }));
@@ -3003,7 +3010,7 @@ class Component extends DCLogic {
     const zestRangeHigh = '$'+(Math.round(zestimate*1.055/1000)*1000).toLocaleString('en-US');
     const zestimateFmt = '$'+zestimate.toLocaleString('en-US');
     const whatThisMeans = hf.factsUpdated
-      ? 'Your updated home facts raised your Zestimate to '+zestimateFmt+'. If you\'re comfortable with these numbers, you\'re ready to move on to the next step.'
+      ? 'Your updated home facts raised your Zestimate to '+zestimateFmt+'. Comparable homes in your area are listing between $1.7M and $1.85M, which puts your potential listing price squarely in a competitive range.'
       : 'Up $50k in 30 days and priced competitively per sq ft. If you\'re thinking about selling in the next few months, your value position is strong.';
     const vc = hf.vchat;
     const HF = {
@@ -3042,6 +3049,10 @@ class Component extends DCLogic {
       zest30dayPct: zest30dayPctFmt,
       zestRange: zestRangeLow+'–'+zestRangeHigh,
       whatThisMeans: whatThisMeans,
+      hfSummaryChips: [
+        { q:'Which home facts update my Zestimate the most?', onTap:()=>this.tapPrompt('v_hf_most') },
+        { q:'What adds the most value before listing?', onTap:()=>this.tapPrompt('v_value') }
+      ],
       factsNotUpdated: !hf.factsUpdated,
       flashSqft: hf.flashSqft,
       flashZest: hf.flashZest,
