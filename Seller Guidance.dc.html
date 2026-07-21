@@ -1264,7 +1264,10 @@
 
         <!-- INTRO SCREEN — shown first before onboarding -->
         <sc-if value="{{ ob.showIntro }}">
-          <div style="position:absolute;inset:0;z-index:70;background:#f4f4f6;display:flex;flex-direction:column;animation:{{ ob.introContentAnim }};">
+          <!-- Static background — always opaque, no animation -->
+          <div style="position:absolute;inset:0;z-index:70;background:#f4f4f6;">
+          <!-- Content — slides in on load, slides out on dismiss -->
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;animation:{{ ob.introContentAnim }};">
             <!-- Status bar -->
             <div style="height:46px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;font-weight:700;color:var(--gray-950);background:#f4f4f6;">
               <span>9:41</span>
@@ -1322,7 +1325,8 @@
                 <span style="width:18px;height:18px;background:#fff;-webkit-mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;display:inline-block;flex:none;"></span>
               </button>
             </div>
-          </div>
+          </div><!-- end content -->
+          </div><!-- end background -->
         </sc-if>
 
       </div>
