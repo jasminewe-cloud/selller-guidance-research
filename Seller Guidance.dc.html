@@ -909,9 +909,11 @@
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:8px;">
                   <span style="width:14px;height:14px;flex:none;margin-top:1px;background:var(--purple-700);-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:block;animation:{{ a.advisorSparkleAnim }};"></span>
-                  <p style="font-family:var(--font-ui);font-size:14px;line-height:1.45;color:var(--gray-950);margin:0;animation:{{ a.advisorTextAnim }};">{{ a.advisorMsg }}</p>
+                  <div style="flex:1;opacity:{{ a.advisorContentOpacity }};animation:{{ a.advisorTextAnim }};">
+                    <p style="font-family:var(--font-ui);font-size:14px;line-height:1.45;color:var(--gray-950);margin:0;">{{ a.advisorMsg }}</p>
+                    <button onClick="{{ a.advisorCtaTap }}" style="display:{{ a.advisorCtaDisplay }};margin-top:10px;width:100%;background:#fff;color:#1277E1;border:1.5px solid #1277E1;border-radius:999px;padding:10px 0;font-family:var(--font-ui);font-size:14px;font-weight:700;cursor:pointer;">{{ a.advisorCtaLabel }}</button>
+                  </div>
                 </div>
-                <button onClick="{{ a.advisorCtaTap }}" style="display:{{ a.advisorCtaDisplay }};margin-top:10px;width:100%;background:var(--gray-950);color:#fff;border:none;border-radius:999px;padding:10px 0;font-family:var(--font-ui);font-size:14px;font-weight:700;cursor:pointer;animation:{{ a.advisorTextAnim }};">{{ a.advisorCtaLabel }}</button>
               </div>
             </div>
             <!-- Persistent chat bar -->
@@ -2782,6 +2784,7 @@ class Component extends DCLogic {
         ? (hf.factsUpdated ? ()=>this.gotoTool(1) : ()=>this.scrollToHomeFacts())
         : ()=>{},
       advisorSparkleAnim: a.advisorThinking ? 'sparklePulse 1100ms ease-in-out infinite' : 'none',
+      advisorContentOpacity: a.advisorThinking ? '0' : '1',
       advisorTextAnim: a.advisorReady ? 'advisorFadeIn 600ms cubic-bezier(.25,.46,.45,.94) both' : 'none',
       openHF: () => this.openHF(),
       claimed:a.claimed, planHeading: a.claimed ? 'Your selling plan' : 'How selling works',
