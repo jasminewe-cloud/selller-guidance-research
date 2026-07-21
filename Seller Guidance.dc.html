@@ -911,6 +911,9 @@
                   <span style="width:14px;height:14px;flex:none;margin-top:1px;background:var(--purple-700);-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:block;animation:{{ a.advisorSparkleAnim }};"></span>
                   <p style="font-family:var(--font-ui);font-size:14px;line-height:1.45;color:var(--gray-950);margin:0;animation:{{ a.advisorTextAnim }};">{{ a.advisorMsg }}</p>
                 </div>
+                <sc-if value="{{ a.advisorCtaVisible }}">
+                  <button onClick="{{ a.advisorCtaTap }}" style="margin-top:10px;width:100%;background:var(--gray-950);color:#fff;border:none;border-radius:999px;padding:10px 0;font-family:var(--font-ui);font-size:14px;font-weight:700;cursor:pointer;animation:{{ a.advisorTextAnim }};">{{ a.advisorCtaLabel }}</button>
+                </sc-if>
               </div>
             </div>
             <!-- Persistent chat bar -->
@@ -2770,9 +2773,16 @@ class Component extends DCLogic {
         : ['','Step 2 of 3 — Track the market','Step 3 of 3 — Determine your listing price',''][a.actionIdx]||'',
       advisorMsg: a.actionIdx===0
         ? (hf.factsUpdated
-            ? 'Your Zestimate updated to $'+(Math.round((hf.zestimate||465000)/1000))+'K based on your new home facts. Tap Dig deeper with Seller Advisor to understand what\'s driving your value.'
-            : 'Review your Zestimate and home facts. If anything has changed, update your home facts below. Tap Dig deeper with Seller Advisor for more insights.')
-        : ['','Check the market index, then tap any comparable home to walk through it together. Tap Dig deeper with Seller Advisor for more insights.','Use the slider to explore different price points. Tap Dig deeper with Seller Advisor when you have questions about what you\'re seeing.',''][a.actionIdx]||'',
+            ? 'Your Zestimate is now $'+(Math.round((hf.zestimate||465000)/1000))+'K based on your updated home facts. If everything looks good on screen, let\'s head to the next step.'
+            : 'Review your current home facts and update anything that\'s changed.')
+        : ['','Check the market index, then tap any comparable home to walk through it together.','Use the slider to explore different price points. Tap Dig deeper with Seller Advisor when you have questions about what you\'re seeing.',''][a.actionIdx]||'',
+      advisorCtaLabel: a.actionIdx===0
+        ? (hf.factsUpdated ? 'Review your local market' : 'Update home facts')
+        : '',
+      advisorCtaVisible: a.actionIdx===0 || false,
+      advisorCtaTap: a.actionIdx===0
+        ? (hf.factsUpdated ? ()=>this.gotoTool(1) : ()=>this.scrollToHomeFacts())
+        : ()=>{},
       advisorSparkleAnim: a.advisorThinking ? 'sparklePulse 1100ms ease-in-out infinite' : 'none',
       advisorTextAnim: a.advisorReady ? 'advisorFadeIn 600ms cubic-bezier(.25,.46,.45,.94) both' : 'none',
       openHF: () => this.openHF(),
