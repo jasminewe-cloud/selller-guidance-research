@@ -593,6 +593,14 @@
                   </div>
                   <p style="font-family:var(--font-ui);font-size:13.5px;line-height:1.5;color:var(--gray-700);margin:0 0 12px;">Just tell me what changed. Bedrooms, square footage, renovations. I'll update your home facts right away.</p>
                   <button onClick="{{ a.openChatForHF }}" style="width:100%;background:transparent;border:1.5px solid var(--gray-950);border-radius:14px;padding:10px 16px;cursor:pointer;font-family:var(--font-ui);font-weight:700;font-size:14px;color:var(--gray-950);">Ask Voyager to update</button>
+                  <div style="height:1px;background:var(--gray-200);margin:14px 0 0;"></div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;padding-top:12px;">
+                    <div style="display:flex;flex-direction:column;gap:2px;">
+                      <span style="font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;">Next step</span>
+                      <span style="font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Review your local market</span>
+                    </div>
+                    <button onClick="{{ a.subGoto1 }}" style="background:transparent;border:none;cursor:pointer;padding:4px;display:flex;align-items:center;justify-content:center;"><span style="width:20px;height:20px;background:var(--gray-950);-webkit-mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;mask:var(--ic-IconChevronRightOutline) center/contain no-repeat;display:block;"></span></button>
+                  </div>
                 </div>
                 </sc-if>
               </sc-if>
