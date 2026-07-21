@@ -2051,6 +2051,7 @@ class Component extends DCLogic {
     }
   }
   scrollDownA(){ const c=this.aScrollRef.current; if(!c) return; c.scrollTo({ top:Math.min(c.scrollTop+260, c.scrollHeight), behavior:'smooth' }); }
+  scrollChatToBottom(){ const c=this.aScrollRef.current; if(!c) return; requestAnimationFrame(()=>requestAnimationFrame(()=>{ c.scrollTop=c.scrollHeight; })); }
   componentDidUpdate(prevProps){
     const c=this.aScrollRef.current; if(!c) return;
     const anchor=this.state.a.anchor;
@@ -2444,7 +2445,7 @@ class Component extends DCLogic {
       const updatedChips = (a.chips||[]).filter(c=>c.label!=='Ready to move on?');
       this.setState(s=>({ a:{...s.a, screen:'chat', view:'tool', actionIdx:0, messages:updatedMsgs, chips:updatedChips, mode:'ask', anchor:updatedMsgs.length+999}, hf:{...s.hf, zestimate:newZest, fields:pendFields, savedFields:pendFields, pendingZest:null, pendingFields:null, factsUpdated:true, factsContextInjected:true} }));
     } else {
-      this.setState(s=>({ a:{...s.a, screen:'chat', view:'tool', actionIdx:0} }));
+      this.setState(s=>({ a:{...s.a, screen:'chat', view:'tool', actionIdx:0} }), ()=>this.scrollChatToBottom());
     }
   }
   openChatFromCompsInsight(){
@@ -2749,8 +2750,8 @@ class Component extends DCLogic {
       planChevronRotate: a.planOpen ? 'rotate(0deg)' : 'rotate(180deg)',
       planCardDisplay: a.planOpen ? 'block' : 'none',
       onCta: ()=>{ if(this.state.a.fromFailsafe){ this.failsafeGoToListingPrice(); } else { this.setA({screen:'action', view:'tool'}); } },
-      openChat: ()=>{ this.hfCommitPending(); const prefill = this.state.a.actionIdx===0 && !this.state.hf.factsUpdated ? 'I added an additional bedroom and bathroom' : ''; this.setState(s=>({a:{...s.a, screen:'chat', mode:'ask', askValue:prefill, anchor:s.a.messages.length+9999}})); },
-      openChatForHF: ()=>{ this.hfCommitPending(); this.setState(s=>({a:{...s.a, screen:'chat', mode:'ask', askValue:'I added an additional bedroom and bathroom', anchor:s.a.messages.length+9999}})); },
+      openChat: ()=>{ this.hfCommitPending(); const prefill = this.state.a.actionIdx===0 && !this.state.hf.factsUpdated ? 'I added an additional bedroom and bathroom' : ''; this.setState(s=>({a:{...s.a, screen:'chat', mode:'ask', askValue:prefill, anchor:s.a.messages.length+9999}}), ()=>this.scrollChatToBottom()); },
+      openChatForHF: ()=>{ this.hfCommitPending(); this.setState(s=>({a:{...s.a, screen:'chat', mode:'ask', askValue:'I added an additional bedroom and bathroom', anchor:s.a.messages.length+9999}}), ()=>this.scrollChatToBottom()); },
       hfZestOkTap: ()=>this.hfZestOkTap(),
       closeChat: ()=>this.closeChat(),
       closeChatToComps: ()=>this.closeChatToComps(),
@@ -2828,7 +2829,7 @@ class Component extends DCLogic {
       chatBarHidden: a.chatBarHidden,
       factsUpdated: !!hf.factsUpdated,
       factsUpdatedOnT0: !!hf.factsUpdated && a.actionIdx===0,
-      openChatReady: ()=>this.setState(s=>({ a:{...s.a, screen:'chat', view:'tool', actionIdx:s.a.actionIdx, readyForNext:true, anchor:99999} })),
+      openChatReady: ()=>this.setState(s=>({ a:{...s.a, screen:'chat', view:'tool', actionIdx:s.a.actionIdx, readyForNext:true, anchor:99999} }), ()=>this.scrollChatToBottom()),
       // AI summary + root prompt chips for the current tool
       promptSummary: (()=>{
         if(a.actionIdx===2){
