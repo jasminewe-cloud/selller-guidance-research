@@ -1281,8 +1281,8 @@
 
         <!-- INTRO SCREEN — shown first before onboarding -->
         <sc-if value="{{ ob.showIntro }}">
-          <div style="position:absolute;inset:0;z-index:70;background:#f4f4f6;display:flex;flex-direction:column;animation:introSlideIn 360ms cubic-bezier(.25,.46,.45,.94) both;">
-            <!-- Status bar -->
+          <div style="position:absolute;inset:0;z-index:70;background:#f4f4f6;display:flex;flex-direction:column;">
+            <!-- Status bar — static, no animation -->
             <div style="height:46px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;font-weight:700;color:var(--gray-950);background:#f4f4f6;">
               <span>9:41</span>
               <span style="display:flex;align-items:center;gap:6px;">
@@ -1290,8 +1290,8 @@
                 <span style="width:24px;height:12px;border:1.5px solid var(--gray-950);border-radius:3px;position:relative;display:inline-block;"><i style="position:absolute;inset:1.5px;width:16px;background:var(--gray-950);border-radius:1px;display:block;"></i></span>
               </span>
             </div>
-            <!-- Body -->
-            <div class="noscroll" style="flex:1;overflow-y:auto;padding:12px 24px 0;display:flex;flex-direction:column;">
+            <!-- Body — slides in from right -->
+            <div class="noscroll" style="flex:1;overflow-y:auto;padding:12px 24px 0;display:flex;flex-direction:column;animation:introSlideIn 360ms cubic-bezier(.25,.46,.45,.94) both;">
               <!-- X close -->
               <button onClick="{{ ob.dismissIntro }}" style="width:36px;height:36px;border-radius:999px;background:var(--gray-200);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-bottom:20px;flex:none;">
                 <span style="width:16px;height:16px;background:var(--gray-700);-webkit-mask:var(--ic-IconCloseOutline) center/contain no-repeat;mask:var(--ic-IconCloseOutline) center/contain no-repeat;display:block;"></span>
@@ -1332,8 +1332,8 @@
               </div>
               <div style="flex:1;min-height:16px;"></div>
             </div>
-            <!-- Get started CTA — pinned to bottom -->
-            <div style="flex:none;padding:12px 24px 32px;background:#f4f4f6;">
+            <!-- Get started CTA — slides in with content -->
+            <div style="flex:none;padding:12px 24px 32px;background:#f4f4f6;animation:introSlideIn 360ms cubic-bezier(.25,.46,.45,.94) both;">
               <button onClick="{{ ob.dismissIntro }}" style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:#0041D9;color:#fff;border:none;border-radius:14px;padding:16px;cursor:pointer;font-family:var(--font-ui);font-weight:700;font-size:17px;">
                 Get started
                 <span style="width:18px;height:18px;background:#fff;-webkit-mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;display:inline-block;flex:none;"></span>
