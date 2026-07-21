@@ -2202,7 +2202,7 @@ class Component extends DCLogic {
       return {a:{...s.a, messages:msgs, chips:[], mode:'ask', proceedsChatStep:'awaitPushback', askValue:'', anchor:msgs.length+999}};
     });
     addMsg({who:'v', isV:true, isThinking:true}, 600);
-    addMsg({who:'v', isV:true, isThinking:false, hasText:true, text:"Based on your current home facts and the seller's market in 78745, you're looking at somewhere in the $480K to $490K range as a starting point."}, 1800);
+    addMsg({who:'v', isV:true, isThinking:false, hasText:true, text:"Based on your current home facts and the seller's market in 78745, you're looking at somewhere in the $480K to $490K range as a starting point. What are your thoughts on this?"}, 1800);
     setTimeout(()=>{
       this.setState(s=>({a:{...s.a, proceedsPrefill:"That seems low. I thought it could be higher.", mode:'ask'}}));
     }, 2200);
