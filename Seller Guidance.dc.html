@@ -27,6 +27,7 @@
   .zcard-glow{animation:zcardGlowPulse 900ms ease-out both;}
   @keyframes sheetDown{from{transform:translateY(0);}to{transform:translateY(100%);}}
   @keyframes beatIn{from{opacity:0;transform:translateX(40px);}to{opacity:1;transform:translateX(0);}}
+  @keyframes introSlideIn{from{transform:translateX(40px);}to{transform:translateX(0);}}
   .beat-screen{animation:beatIn 360ms cubic-bezier(.25,.46,.45,.94) both;}
   @keyframes cardLift{from{opacity:0;transform:translateY(80px) scale(1.1);}to{opacity:1;transform:translateY(0) scale(1);}}
   .hf-input{display:block;width:100%;height:48px;padding:0 14px;border:1px solid var(--gray-300);border-radius:8px;font-family:var(--font-ui);font-size:16px;color:var(--gray-900);background:#fff;outline:none;box-sizing:border-box;}
@@ -1280,7 +1281,7 @@
 
         <!-- INTRO SCREEN — shown first before onboarding -->
         <sc-if value="{{ ob.showIntro }}">
-          <div style="position:absolute;inset:0;z-index:70;background:#f4f4f6;display:flex;flex-direction:column;animation:beatIn 360ms cubic-bezier(.25,.46,.45,.94) both;">
+          <div style="position:absolute;inset:0;z-index:70;background:#f4f4f6;display:flex;flex-direction:column;animation:introSlideIn 360ms cubic-bezier(.25,.46,.45,.94) both;">
             <!-- Status bar -->
             <div style="height:46px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 26px;font-size:15px;font-weight:700;color:var(--gray-950);background:#f4f4f6;">
               <span>9:41</span>
