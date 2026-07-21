@@ -2027,15 +2027,15 @@ class Component extends DCLogic {
     }
     const scrollingUp = top < last - 4 && top > 40;
     const scrollingDown = top > last + 4;
-    if(scrollingUp && !this.state.a.understandSubOpen){
-      this.setState(s=>({a:{...s.a, understandSubOpen:true}}));
+    if(scrollingUp && !this.state.a.subPillsRevealed){
+      this.setState(s=>({a:{...s.a, subPillsRevealed:true}}));
     }
-    if(scrollingDown && this.state.a.understandSubOpen){
-      this.setState(s=>({a:{...s.a, understandSubOpen:false}}));
+    if(scrollingDown && this.state.a.subPillsRevealed){
+      this.setState(s=>({a:{...s.a, subPillsRevealed:false}}));
     }
     if(scrollingUp){
       clearTimeout(this._subPillsTimerM);
-      this._subPillsTimerM = setTimeout(()=>{ this.setState(s=>({a:{...s.a, understandSubOpen:false}})); }, 2000);
+      this._subPillsTimerM = setTimeout(()=>{ this.setState(s=>({a:{...s.a, subPillsRevealed:false}})); }, 1200);
     }
     this._lastAScrollTop = top;
   }
@@ -2064,15 +2064,15 @@ class Component extends DCLogic {
     // Show sub-pills on scroll-up, hide on scroll-down or idle
     const scrollingUp = top < last - 4 && top > 40;
     const scrollingDown = top > last + 4;
-    if(scrollingUp && !this.state.a.understandSubOpen){
-      this.setState(s=>({a:{...s.a, understandSubOpen:true}}));
+    if(scrollingUp && !this.state.a.subPillsRevealed){
+      this.setState(s=>({a:{...s.a, subPillsRevealed:true}}));
     }
-    if(scrollingDown && this.state.a.understandSubOpen){
-      this.setState(s=>({a:{...s.a, understandSubOpen:false}}));
+    if(scrollingDown && this.state.a.subPillsRevealed){
+      this.setState(s=>({a:{...s.a, subPillsRevealed:false}}));
     }
     if(scrollingUp){
       clearTimeout(this._subPillsTimer);
-      this._subPillsTimer = setTimeout(()=>{ this.setState(s=>({a:{...s.a, understandSubOpen:false}})); }, 2000);
+      this._subPillsTimer = setTimeout(()=>{ this.setState(s=>({a:{...s.a, subPillsRevealed:false}})); }, 1200);
     }
     this._lastToolScrollTop = top;
     if(!comps) return;
@@ -2806,9 +2806,9 @@ class Component extends DCLogic {
       tabPrepareColor:  a.actionIdx===3 ? '#136F65' : '#fff',
       tabBarBg: a.tabBarPinned ? 'var(--gray-50)' : 'transparent',
       tabBarBorder: a.tabBarPinned ? '1px solid var(--gray-100)' : 'none',
-      understandSubMaxH: a.understandSubOpen ? '60px' : '0px',
+      understandSubMaxH: (a.understandSubOpen || a.subPillsRevealed) ? '60px' : '0px',
       toolNavHeight: a.understandSubOpen ? '136px' : '98px',
-      toolTealHeight: a.tabBarPinned ? (a.understandSubOpen ? '90px' : '56px') : (a.understandSubOpen ? '140px' : '100px'),
+      toolTealHeight: a.tabBarPinned ? ((a.understandSubOpen || a.subPillsRevealed) ? '90px' : '56px') : (a.understandSubOpen ? '140px' : '100px'),
       understandChevronRotate: a.understandSubOpen ? 'rotate(180deg)' : 'rotate(0deg)',
       subTab0Active: a.actionIdx===0 ? 'rgba(255,255,255,.9)' : 'rgba(255,255,255,.18)',
       subTab0Color:  a.actionIdx===0 ? '#136F65' : '#fff',
