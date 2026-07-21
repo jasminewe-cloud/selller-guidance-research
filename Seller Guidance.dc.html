@@ -497,20 +497,6 @@
                     </button>
                   </div>
                 </sc-if>
-                <!-- AI update summary -->
-                <sc-if value="{{ hf.summaryShow }}">
-                  <div style="background:#3B0470;border-radius:16px;padding:14px 16px;">
-                    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
-                      <div style="display:flex;align-items:flex-start;gap:10px;">
-                        <div style="width:28px;height:28px;flex:none;border-radius:999px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;margin-top:1px;"><span style="width:14px;height:14px;background:#fff;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:block;"></span></div>
-                        <p style="font-family:var(--font-ui);font-size:14px;color:#fff;line-height:1.5;margin:0;">{{ hf.summaryText }}</p>
-                      </div>
-                      <button onClick="{{ hf.dismissSummary }}" style="flex:none;background:none;border:none;cursor:pointer;padding:2px;display:flex;align-items:center;justify-content:center;">
-                        <span style="width:16px;height:16px;background:rgba(255,255,255,.6);-webkit-mask:var(--ic-IconCloseOutline) center/contain no-repeat;mask:var(--ic-IconCloseOutline) center/contain no-repeat;display:block;"></span>
-                      </button>
-                    </div>
-                  </div>
-                </sc-if>
                 <div class="{{ hf.flashZcard ? 'zcard-glow' : '' }}" style="background:#136F65;border-radius:18px;padding:20px 20px 18px;">
                   <div style="display:flex;align-items:center;gap:5px;margin-bottom:4px;">
                     <span style="font-family:var(--font-ui);font-size:13px;color:rgba(255,255,255,.7);">Zestimate®</span>
@@ -550,6 +536,20 @@
                     </sc-for>
                   </div>
                 </div>
+                <!-- AI update summary -->
+                <sc-if value="{{ hf.summaryShow }}">
+                  <div style="background:#3B0470;border-radius:16px;padding:14px 16px;">
+                    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+                      <div style="display:flex;align-items:flex-start;gap:10px;">
+                        <div style="width:28px;height:28px;flex:none;border-radius:999px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;margin-top:1px;"><span style="width:14px;height:14px;background:#fff;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:block;"></span></div>
+                        <p style="font-family:var(--font-ui);font-size:14px;color:#fff;line-height:1.5;margin:0;">{{ hf.summaryText }}</p>
+                      </div>
+                      <button onClick="{{ hf.dismissSummary }}" style="flex:none;background:none;border:none;cursor:pointer;padding:2px;display:flex;align-items:center;justify-content:center;">
+                        <span style="width:16px;height:16px;background:rgba(255,255,255,.6);-webkit-mask:var(--ic-IconCloseOutline) center/contain no-repeat;mask:var(--ic-IconCloseOutline) center/contain no-repeat;display:block;"></span>
+                      </button>
+                    </div>
+                  </div>
+                </sc-if>
                 <div id="home-facts-anchor" style="background:#fff;border-radius:16px;border:1px solid var(--gray-200);padding:16px;">
                   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
                     <span style="font-family:var(--font-brand);font-weight:900;font-size:17px;">Home facts</span>
