@@ -1988,7 +1988,6 @@ class Component extends DCLogic {
     const idx = map[this.state.ob.uncertainty] ?? 0;
     this.setState(s=>({ ob:{...s.ob, beat:5}, a:{...s.a, view:'tool', actionIdx:idx, screen:'action', claimed:true, homeFPrompt: idx===0, homeFGlow: idx===0} }), ()=>{
       if(idx===0){
-        setTimeout(()=>{ const scroll=document.querySelector('[data-tool-scroll]'); const target=document.getElementById('home-facts-anchor'); if(scroll&&target){ const tr=target.getBoundingClientRect(); const sr=scroll.getBoundingClientRect(); scroll.scrollTo({ top: scroll.scrollTop+tr.top-sr.top-130, behavior:'smooth' }); } }, 150);
         setTimeout(()=>{ this.setState(s=>({a:{...s.a, homeFGlow:false}})); }, 3500);
       }
     });
@@ -2193,7 +2192,7 @@ class Component extends DCLogic {
     this.setState(s=>({a:{...s.a, expanded:-1}}));
     setTimeout(()=>{ this.setState(s=>({a:{...s.a, expanded:target}})); }, 370);
   }
-  openTool(i){ this.setState(s=>({a:{...s.a, view:'tool', actionIdx:i, askedKeys:[]}}), ()=>{ if(i===0){ setTimeout(()=>{ const scroll=document.querySelector('[data-tool-scroll]'); const target=document.getElementById('home-facts-anchor'); if(scroll&&target){ const tr=target.getBoundingClientRect(); const sr=scroll.getBoundingClientRect(); scroll.scrollTo({ top: scroll.scrollTop+tr.top-sr.top-130, behavior:'smooth' }); } }, 120); } else { const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; } }); }
+  openTool(i){ this.setState(s=>({a:{...s.a, view:'tool', actionIdx:i, askedKeys:[]}}), ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; }); }
   msOfTool(t){ for(let i=0;i<this.MS.length;i++){ if(this.MS[i].actions.some(a=>a.tool===t)) return i; } return -1; }
   backHome(){ this.setState(s=>({a:{...s.a, view:'home', expanded: this.msOfTool(s.a.actionIdx)}})); }
   toggleUnderstandSub(){ this.setState(s=>({a:{...s.a, understandSubOpen:!s.a.understandSubOpen}})); }
@@ -2451,7 +2450,7 @@ class Component extends DCLogic {
     }, 500);
   }
   // Navigate to a tool and open its card (from "Let's go", a pill, or the bottom nudge)
-  gotoTool(i){ this._toolBarHidden=false; this._lastToolScrollTop=0; const bar=this.toolChatBarRef.current; if(bar){ bar.style.opacity='1'; bar.style.pointerEvents='auto'; } this.setState(s=>({a:{...s.a, view:'tool', actionIdx:i, screen:'action', askedKeys:[], understandSubOpen:false}}), ()=>{ if(i===0){ setTimeout(()=>{ const scroll=document.querySelector('[data-tool-scroll]'); const target=document.getElementById('home-facts-anchor'); if(scroll&&target){ const tr=target.getBoundingClientRect(); const sr=scroll.getBoundingClientRect(); const dest=scroll.scrollTop+tr.top-sr.top-130; this._lastToolScrollTop=dest; scroll.scrollTo({ top: dest, behavior:'smooth' }); } }, 120); } else { const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; } }); }
+  gotoTool(i){ this._toolBarHidden=false; this._lastToolScrollTop=0; const bar=this.toolChatBarRef.current; if(bar){ bar.style.opacity='1'; bar.style.pointerEvents='auto'; } this.setState(s=>({a:{...s.a, view:'tool', actionIdx:i, screen:'action', askedKeys:[], understandSubOpen:false}}), ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; }); }
   gotoPrep(){ this.setState(s=>({a:{...s.a, view:'home', screen:'action', expanded:1}})); }
   onSale(e){ const v=parseInt(e.target.value,10)||0; this.setState(s=>({a:{...s.a, salePrice:v, fromInsightNudge:false, engaged:{...s.a.engaged,2:true}, engCount:(s.a.engCount||0)+1}})); }
   onSaleCommit(e){ const v=parseInt(e.target.value,10)||0; this.setState(s=>({a:{...s.a, insightPrice:v, fromInsightNudge:false}})); }
