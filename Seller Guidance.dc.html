@@ -28,6 +28,7 @@
   @keyframes sheetDown{from{transform:translateY(0);}to{transform:translateY(100%);}}
   @keyframes beatIn{from{opacity:0;transform:translateX(40px);}to{opacity:1;transform:translateX(0);}}
   @keyframes introSlideIn{from{transform:translateX(40px);}to{transform:translateX(0);}}
+  @keyframes introSlideOut{from{transform:translateX(0);}to{transform:translateX(-40px);}}
   .beat-screen{animation:beatIn 360ms cubic-bezier(.25,.46,.45,.94) both;}
   @keyframes cardLift{from{opacity:0;transform:translateY(80px) scale(1.1);}to{opacity:1;transform:translateY(0) scale(1);}}
   .hf-input{display:block;width:100%;height:48px;padding:0 14px;border:1px solid var(--gray-300);border-radius:8px;font-family:var(--font-ui);font-size:16px;color:var(--gray-900);background:#fff;outline:none;box-sizing:border-box;}
@@ -1272,8 +1273,8 @@
                 <span style="width:24px;height:12px;border:1.5px solid var(--gray-950);border-radius:3px;position:relative;display:inline-block;"><i style="position:absolute;inset:1.5px;width:16px;background:var(--gray-950);border-radius:1px;display:block;"></i></span>
               </span>
             </div>
-            <!-- Body — slides in from right -->
-            <div class="noscroll" style="flex:1;overflow-y:auto;padding:12px 24px 0;display:flex;flex-direction:column;animation:introSlideIn 360ms cubic-bezier(.25,.46,.45,.94) both;">
+            <!-- Body — slides in/out -->
+            <div class="noscroll" style="flex:1;overflow-y:auto;padding:12px 24px 0;display:flex;flex-direction:column;animation:{{ ob.introContentAnim }};">
               <!-- X close -->
               <button onClick="{{ ob.dismissIntro }}" style="width:36px;height:36px;border-radius:999px;background:var(--gray-200);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;margin-bottom:20px;flex:none;">
                 <span style="width:16px;height:16px;background:var(--gray-700);-webkit-mask:var(--ic-IconCloseOutline) center/contain no-repeat;mask:var(--ic-IconCloseOutline) center/contain no-repeat;display:block;"></span>
@@ -1314,8 +1315,8 @@
               </div>
               <div style="flex:1;min-height:16px;"></div>
             </div>
-            <!-- Get started CTA — slides in with content -->
-            <div style="flex:none;padding:12px 24px 32px;background:#f4f4f6;animation:introSlideIn 360ms cubic-bezier(.25,.46,.45,.94) both;">
+            <!-- Get started CTA — slides in/out with content -->
+            <div style="flex:none;padding:12px 24px 32px;background:#f4f4f6;animation:{{ ob.introContentAnim }};">
               <button onClick="{{ ob.dismissIntro }}" style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:#0041D9;color:#fff;border:none;border-radius:14px;padding:16px;cursor:pointer;font-family:var(--font-ui);font-weight:700;font-size:17px;">
                 Get started
                 <span style="width:18px;height:18px;background:#fff;-webkit-mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;display:inline-block;flex:none;"></span>
@@ -1502,7 +1503,7 @@ class Component extends DCLogic {
       c: { screen:'list', step:0, actionIdx:0, rec:null },
       d: { step:0, touring:true, rec:null },
       w: { screen:0, stage:null, focus:null },
-      ob: { beat: -1, selectedAddr: null, timeline: null, step: 0, uncertainty: null },
+      ob: { beat: -1, selectedAddr: null, timeline: null, step: 0, uncertainty: null, introExiting: false },
       hf: { open: false, section: 'Key facts', fields: { sqft:'2,656', beds:'4', fullBaths:'2', baths:'3', kitchenReno:false, bathReno:false }, savedFields: { sqft:'2,656', beds:'4', fullBaths:'2', baths:'3', kitchenReno:false, bathReno:false }, msgs:[], chatValue:'', summary:{ show:false, text:'' }, zestimate:1695000, flashSqft:false, flashZest:false, flashZcard:false, vchat:{ open:false, closing:false, msgs:[], chatValue:'', pendingField:null, pendingCurrent:null, pendingValue:'', awaitingRenovQ:false, awaitingBedSqftQ:false, pendingUpdate:null, renoSteppers:null, awaitingAnythingElse:false, lowered:false } }
     };
     this.ACTIONS = ["What's your home worth?","Track your market","Determine your listing price","Explore your options"];
@@ -2159,7 +2160,7 @@ class Component extends DCLogic {
   toggleMs(i){ this.setState(s=>({a:{...s.a, expanded: s.a.expanded===i ? -1 : i}})); }
   togglePlan(){ this.setState(s=>({a:{...s.a, planOpen:!s.a.planOpen}})); }
   dismissInsight(){ this.setState(s=>({a:{...s.a, insightDismissed:true}})); }
-  dismissIntro(){ this.setState(s=>({ob:{...s.ob, beat:0}})); }
+  dismissIntro(){ this.setState(s=>({ob:{...s.ob, introExiting:true}}), ()=>{ setTimeout(()=>{ this.setState(s=>({ob:{...s.ob, beat:0, introExiting:false}})); }, 320); }); }
   goToListingPriceNudge(){ this.setState(s=>{ const nudgePrice = s.hf.zestimate || 1695000; return {a:{...s.a, view:'tool', actionIdx:2, screen:'action', salePrice:nudgePrice, insightPrice:nudgePrice, fromInsightNudge:true, askedKeys:[], understandSubOpen:false}}; }, ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; }); }
   selectComp(idx){ this.setState(s=>({a:{...s.a, selectedComp: s.a.selectedComp===idx ? null : idx}})); }
   prevMs(){
@@ -2912,7 +2913,8 @@ class Component extends DCLogic {
     const OB = {
       statusBg: heroVisible ? 'transparent' : onToolScreen ? '#136F65' : 'var(--gray-50)',
       statusColor: heroVisible ? '#fff' : onToolScreen ? '#fff' : 'var(--gray-950)',
-      showIntro: ob.beat === -1,
+      showIntro: ob.beat === -1 || ob.introExiting,
+      introContentAnim: ob.introExiting ? 'introSlideOut 320ms cubic-bezier(.25,.46,.45,.94) both' : 'introSlideIn 360ms cubic-bezier(.25,.46,.45,.94) both',
       dismissIntro: ()=>this.dismissIntro(),
       active: ob.beat < 5,
       beat0: ob.beat === 0,
