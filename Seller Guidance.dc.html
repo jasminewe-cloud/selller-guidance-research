@@ -577,9 +577,9 @@
                     <div style="display:flex;align-items:center;justify-content:space-between;padding-top:12px;">
                       <div style="display:flex;flex-direction:column;gap:2px;">
                         <span style="font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;">Next step</span>
-                        <span style="font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">{{ a.nextName }}</span>
+                        <span style="font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Review your local market</span>
                       </div>
-                      <button onClick="{{ a.nextGo }}" style="width:32px;height:32px;flex:none;border-radius:999px;background:var(--gray-950);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;"><span style="width:14px;height:14px;background:#fff;-webkit-mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;display:block;"></span></button>
+                      <button onClick="{{ a.subGoto1 }}" style="width:32px;height:32px;flex:none;border-radius:999px;background:var(--gray-950);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;"><span style="width:14px;height:14px;background:#fff;-webkit-mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;display:block;"></span></button>
                     </div>
                   </div>
                 </sc-if>
@@ -664,9 +664,9 @@
                   <div style="display:flex;align-items:center;justify-content:space-between;padding-top:12px;">
                     <div style="display:flex;flex-direction:column;gap:2px;">
                       <span style="font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;">Next step</span>
-                      <span style="font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">{{ a.nextName }}</span>
+                      <span style="font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Determine your listing price</span>
                     </div>
-                    <button onClick="{{ a.nextGo }}" style="width:32px;height:32px;flex:none;border-radius:999px;background:var(--gray-950);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;"><span style="width:14px;height:14px;background:#fff;-webkit-mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;display:block;"></span></button>
+                    <button onClick="{{ a.subGoto2 }}" style="width:32px;height:32px;flex:none;border-radius:999px;background:var(--gray-950);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;"><span style="width:14px;height:14px;background:#fff;-webkit-mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;mask:var(--ic-IconArrowRightOutline) center/contain no-repeat;display:block;"></span></button>
                   </div>
                 </div>
               </sc-if>
@@ -2409,29 +2409,29 @@ class Component extends DCLogic {
     const tree = this.PROMPT_TREES[0];
     const keys = ['v_zest_calc','v_affects','v_value'];
     const chips = keys.map(k=>({ label:tree.nodes[k].q, onTap:()=>this.tapPrompt(k) }));
-    const introMsg = { who:'v', text:"Happy to go deeper on your Zestimate. What would you like to know?" };
-    this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
+    const introMsg = { who:'v', isV:true, hasText:true, text:"Happy to go deeper on your Zestimate. What would you like to know?" };
+    this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
   }
   digDeeperHomeFacts(){
     const tree = this.PROMPT_TREES[0];
     const keys = ['v_hf_most','v_value'];
     const chips = keys.map(k=>({ label:tree.nodes[k].q, onTap:()=>this.tapPrompt(k) }));
-    const introMsg = { who:'v', text:"Here are some things sellers often want to know after updating their home facts." };
-    this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
+    const introMsg = { who:'v', isV:true, hasText:true, text:"Here are some things sellers often want to know after updating their home facts." };
+    this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
   }
   digDeeperMarket(){
     const tree = this.PROMPT_TREES[1];
     const keys = ['m_now','m_long','m_neutral'];
     const chips = keys.map(k=>({ label:tree.nodes[k].q, onTap:()=>this.tapPrompt(k) }));
-    const introMsg = { who:'v', text:"Let's dig into what this market means for your sale. What's on your mind?" };
-    this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
+    const introMsg = { who:'v', isV:true, hasText:true, text:"Let's dig into what this market means for your sale. What's on your mind?" };
+    this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
   }
   digDeeperComps(){
     const tree = this.PROMPT_TREES[1];
     const keys = ['c_price','c_standout'];
     const chips = keys.map(k=>({ label:tree.nodes[k].q, onTap:()=>this.tapPrompt(k) }));
-    const introMsg = { who:'v', text:"These are the homes most similar to yours that sold recently. What would you like to know about how they compare?" };
-    this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
+    const introMsg = { who:'v', isV:true, hasText:true, text:"These are the homes most similar to yours that sold recently. What would you like to know about how they compare?" };
+    this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
   }
   digDeeperNet(){
     const chipLabels = [
@@ -2439,9 +2439,9 @@ class Component extends DCLogic {
       'How do I lower my closing costs?',
       'What affects my net proceeds?',
     ];
-    const introMsg = { who:'v', text:"You've been digging into your numbers. Do you have questions about what you're seeing, or want to talk through what it means for your next move?" };
+    const introMsg = { who:'v', isV:true, hasText:true, text:"You've been digging into your numbers. Do you have questions about what you're seeing, or want to talk through what it means for your next move?" };
     const chips = chipLabels.map(label=>({ label, onTap:()=>this.tapInsightChip(label) }));
-    this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
+    this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
   }
   tapInsightChip(label){
     if(label==='What price should I list my home for?'){
