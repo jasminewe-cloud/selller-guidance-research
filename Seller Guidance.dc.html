@@ -475,8 +475,9 @@
               <!-- Spacer pushes content below the teal bg block; image sits on top of teal via z-index -->
               <div style="height:{{ a.toolNavHeight }};flex:none;"></div>
               <!-- LAYER 2 (z:10): Home photo — on top of teal bg, behind pills -->
-              <div style="padding:0 14px;position:relative;z-index:10;">
-                <img src="assets/Photo.png" alt="Your home" style="display:block;width:100%;height:190px;object-fit:cover;border-radius:16px;" />
+              <div style="position:relative;z-index:10;">
+                <img src="assets/Photo.png" alt="Your home" style="display:block;width:100%;height:200px;object-fit:cover;border-radius:0;" />
+                <div style="position:absolute;top:0;left:0;right:0;height:60%;background:linear-gradient(to bottom,#136F65 0%,rgba(19,111,101,0) 100%);pointer-events:none;"></div>
               </div>
               <div style="padding:12px 14px 96px;display:flex;flex-direction:column;gap:14px;">
                 <!-- header -->
