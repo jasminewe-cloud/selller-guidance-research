@@ -2578,7 +2578,7 @@ class Component extends DCLogic {
     this.setState(s=>{
       const msgs=[...s.a.messages, {who:'u', text:raw}];
       return {
-        a:{...s.a, messages:msgs, chips:[], mode:'ask', anchor:msgs.length+999},
+        a:{...s.a, messages:msgs, chips:[], mode:'ask', askValue:'', anchor:msgs.length+999},
         hf:{...s.hf, factsUpdated:true, zestimate:newZest, savedZest:465000, fields:{...s.hf.fields,...newFields}, pendingFields:null}
       };
     });
