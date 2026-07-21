@@ -2585,28 +2585,15 @@ class Component extends DCLogic {
     add({who:'v', isV:true, isThinking:true}, 600);
     add({who:'v', isV:true, isThinking:false, hasText:true, text:"Good question. Based on your updated home facts — 4 bedrooms, 3 bathrooms, 2,030 sqft — your Zestimate is now $527K."}, 1800);
     add({who:'v', isV:true, hasText:true, text:"We're in a seller's market in 78745 right now. Homes are going pending in about 13 days and demand is outpacing supply. That gives you room to price above your Zestimate."}, 3000);
-    add({who:'v', isV:true, hasText:true, text:"Based on all of that, we'd suggest listing around $550K. Want to see how that breaks down?"}, 4200);
+    add({who:'v', isV:true, hasText:true, text:"Based on all of that, we'd suggest listing around $550K. Review the listing price tool to see the full breakdown."}, 4200);
     setTimeout(()=>{
-      const chip = { label:"Yes, show me", onTap:()=>this.failsafeGoToListingPrice() };
-      this.setState(s=>({a:{...s.a, chips:[chip], mode:'chips'}}));
+      this.setState(s=>({a:{...s.a, chips:[], mode:'cta', ctaLabel:"Let's go", actionIdx:2, fromFailsafe:true}}));
     }, 4600);
   }
   failsafeGoToListingPrice(){
-    this.setState(s=>{
-      const msgs=[...s.a.messages, {who:'u', text:'Yes, show me'}];
-      return {a:{...s.a, messages:msgs, chips:[], mode:'ask', anchor:msgs.length+999}};
+    this.setState(s=>({a:{...s.a, view:'tool', screen:'action', fromFailsafe:true}}), ()=>{
+      const el=this.aToolScrollRef && this.aToolScrollRef.current; if(el) el.scrollTop=0;
     });
-    setTimeout(()=>{
-      this.setState(s=>({a:{...s.a, messages:[...s.a.messages,{who:'v',isV:true,isThinking:true}], anchor:s.a.messages.length+999}}));
-    }, 400);
-    setTimeout(()=>{
-      this.setState(s=>{
-        const msgs=[...s.a.messages.filter(m=>!m.isThinking),
-          {who:'v', isV:true, hasText:true, text:"Here's your listing price tool. Use the slider to explore different price points, then tap 'Dig deeper with Seller Advisor' at the bottom if you have any questions about what you're seeing."}
-        ];
-        return {a:{...s.a, messages:msgs, mode:'cta', ctaLabel:"Let's go", actionIdx:2, fromFailsafe:true, anchor:msgs.length+999}};
-      });
-    }, 1600);
   }
   closeChat(){
     this.setState(s=>({a:{...s.a, chatClosing:true}}));
@@ -2741,7 +2728,7 @@ class Component extends DCLogic {
       chatAnim: a.chatClosing ? 'sheetDown 480ms cubic-bezier(.4,0,.6,1) both' : (a.fromIntro ? 'sheetUp 320ms 80ms cubic-bezier(.25,.46,.45,.94) both' : 'sheetUp 320ms cubic-bezier(.25,.46,.45,.94) both'),
       action: a.screen==='action',
       messages: aMsgs, chips:a.chips,
-      modeInput: a.mode==='input', showChips: (a.mode==='chips' || (a.mode==='ask' && (a.chips||[]).length>0)) && !a.readyForNext, showCta: a.mode==='cta' && !a.messages.some(m=>m.kind==='nextStep'), ctaLabel:a.ctaLabel,
+      modeInput: a.mode==='input', showChips: (a.mode==='chips' || (a.mode==='ask' && (a.chips||[]).length>0)) && !a.readyForNext, showCta: a.mode==='cta' && !a.messages.some(m=>m.kind==='nextStep'), ctaLabel:a.ctaLabel, fromFailsafe:!!a.fromFailsafe,
       showReadyNudge: a.mode==='ask' && !a.readyForNext && !!hf.factsUpdated,
       homeContainerTop: a.claimed ? '0' : '46px',
       modeAsk: a.mode==='ask'||a.mode==='chips'||a.mode==='none', notModeAsk: a.mode!=='ask'&&a.mode!=='chips'&&a.mode!=='none', askValue: a.askValue||'', askPlaceholder: a.claimed ? 'Ask your advisor anything' : 'Type your address…', onAskInput:(e)=>this.onAskInput(e), onAskKey:(e)=>this.onAskKey(e), onAskFocus:()=>this.onAskFocus(), sendAsk:()=>this.sendAsk(), showSend: (a.askValue||'').trim().length > 0, sendDisplay: (a.askValue||'').trim().length > 0 ? 'flex' : 'none', sendDisplayAddr: (a.addressValue||'').trim().length > 0 ? 'flex' : 'none',
@@ -2761,7 +2748,7 @@ class Component extends DCLogic {
       showInsight: a.claimed && !a.insightDismissed && Object.values(a.engaged).some(Boolean),
       planChevronRotate: a.planOpen ? 'rotate(0deg)' : 'rotate(180deg)',
       planCardDisplay: a.planOpen ? 'block' : 'none',
-      onCta: ()=>this.setA({screen:'action', view:'tool'}),
+      onCta: ()=>{ if(this.state.a.fromFailsafe){ this.failsafeGoToListingPrice(); } else { this.setA({screen:'action', view:'tool'}); } },
       openChat: ()=>{ this.hfCommitPending(); const prefill = this.state.a.actionIdx===0 && !this.state.hf.factsUpdated ? 'I added an additional bedroom and bathroom' : ''; this.setState(s=>({a:{...s.a, screen:'chat', mode:'ask', askValue:prefill, anchor:s.a.messages.length+9999}})); },
       openChatForHF: ()=>{ this.hfCommitPending(); this.setState(s=>({a:{...s.a, screen:'chat', mode:'ask', askValue:'I added an additional bedroom and bathroom', anchor:s.a.messages.length+9999}})); },
       hfZestOkTap: ()=>this.hfZestOkTap(),
