@@ -2284,10 +2284,19 @@ class Component extends DCLogic {
         this.setState(s=>{ const msgs=[...s.a.messages,{who:'u',text:raw}]; return {a:{...s.a,messages:msgs,askValue:'',anchor:msgs.length+999}}; });
         if(done){
           setTimeout(()=>{ this.setState(s=>({a:{...s.a,messages:[...s.a.messages,{who:'v',isV:true,hasText:true,isThinking:true}],anchor:s.a.messages.length+999}})); }, 300);
+          // Confirm what was updated and prompt user to review
           setTimeout(()=>{
-            // close chat, then instantly reset scroll (invisible — no smooth) and count-up after pause
-            this.setState(s=>({a:{...s.a,messages:[...s.a.messages.filter(m=>!m.isThinking)],mode:'ask',hfChatStep:null,screen:'action'}}));
-            setTimeout(()=>{ const scroll=document.querySelector('[data-tool-scroll]'); if(scroll) scroll.scrollTop=0; }, 0);
+            const pf = this.state.hf.pendingFields || this.state.hf.fields;
+            const confirmMsg = `Got it. I've updated your home to ${pf.beds} bedrooms, ${pf.baths} bathrooms, and ${pf.sqft} sq ft. Take a look at your updated Zestimate below and let me know if the numbers look right.`;
+            this.setState(s=>({a:{...s.a,messages:[...s.a.messages.filter(m=>!m.isThinking),{who:'v',isV:true,hasText:true,text:confirmMsg}],mode:'ask',hfChatStep:null,anchor:s.a.messages.length+999}}));
+          }, 1600);
+          // Slide drawer down smoothly after user has had time to read
+          setTimeout(()=>{ this.setState(s=>({a:{...s.a,chatClosing:true}})); }, 3200);
+          setTimeout(()=>{
+            // Remove chat from DOM and instantly reset scroll (invisible)
+            this.setState(s=>({a:{...s.a,screen:'action',chatClosing:false}}));
+            const scroll=document.querySelector('[data-tool-scroll]'); if(scroll) scroll.scrollTop=0;
+            // Count-up after a beat to let the tool view settle
             setTimeout(()=>{
               const hf = this.state.hf;
               const fromZest = hf.zestimate||1695000;
@@ -2309,7 +2318,7 @@ class Component extends DCLogic {
                 }
               }, interval);
             }, 800);
-          }, 1600);
+          }, 3680);
         } else {
           setTimeout(()=>{
             const msgs=[...this.state.a.messages,{who:'v',isV:true,hasText:true,text:"Sure, what else would you like to update?"}];
