@@ -2406,28 +2406,28 @@ class Component extends DCLogic {
     });
   }
   digDeeperZestimate(){
-    const tree = this.PROMPT_TREES[0];
+    const tree = this.A_PROMPTS[0];
     const keys = ['v_zest_calc','v_affects','v_value'];
     const chips = keys.map(k=>({ label:tree.nodes[k].q, onTap:()=>this.tapPrompt(k) }));
     const introMsg = { who:'v', isV:true, hasText:true, text:"Happy to go deeper on your Zestimate. What would you like to know?" };
     this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
   }
   digDeeperHomeFacts(){
-    const tree = this.PROMPT_TREES[0];
+    const tree = this.A_PROMPTS[0];
     const keys = ['v_hf_most','v_value'];
     const chips = keys.map(k=>({ label:tree.nodes[k].q, onTap:()=>this.tapPrompt(k) }));
     const introMsg = { who:'v', isV:true, hasText:true, text:"Here are some things sellers often want to know after updating their home facts." };
     this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
   }
   digDeeperMarket(){
-    const tree = this.PROMPT_TREES[1];
+    const tree = this.A_PROMPTS[1];
     const keys = ['m_now','m_long','m_neutral'];
     const chips = keys.map(k=>({ label:tree.nodes[k].q, onTap:()=>this.tapPrompt(k) }));
     const introMsg = { who:'v', isV:true, hasText:true, text:"Let's dig into what this market means for your sale. What's on your mind?" };
     this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
   }
   digDeeperComps(){
-    const tree = this.PROMPT_TREES[1];
+    const tree = this.A_PROMPTS[1];
     const keys = ['c_price','c_standout'];
     const chips = keys.map(k=>({ label:tree.nodes[k].q, onTap:()=>this.tapPrompt(k) }));
     const introMsg = { who:'v', isV:true, hasText:true, text:"These are the homes most similar to yours that sold recently. What would you like to know about how they compare?" };
