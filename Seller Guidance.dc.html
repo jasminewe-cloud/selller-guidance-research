@@ -196,7 +196,7 @@
                         <sc-for list="{{ ms.actions }}" as="ac" hint-placeholder-count="4">
                           <button onClick="{{ ac.onTap }}" style="width:100%;display:flex;align-items:center;gap:10px;background:none;border:none;padding:12px 0;cursor:pointer;text-align:left;">
                             <span style="flex:1;font-family:var(--font-ui);font-size:14px;font-weight:600;color:var(--gray-950);">{{ ac.label }}</span>
-                            <span style="font-family:var(--font-ui);font-size:12px;color:var(--gray-400);flex:none;">{{ ac.status }}</span>
+                            <span style="font-family:var(--font-ui);font-size:12px;color:{{ ac.statusColor }};flex:none;">{{ ac.status }}</span>
                           </button>
                         </sc-for>
                       </div>
@@ -2695,7 +2695,7 @@ class Component extends DCLogic {
       togglePlan: ()=>this.togglePlan(),
       dismissInsight: ()=>this.dismissInsight(),
       goToListingPriceNudge: ()=>this.goToListingPriceNudge(),
-      showInsight: a.claimed && !a.insightDismissed,
+      showInsight: a.claimed && !a.insightDismissed && Object.values(a.engaged).some(Boolean),
       planChevronRotate: a.planOpen ? 'rotate(0deg)' : 'rotate(180deg)',
       planCardDisplay: a.planOpen ? 'block' : 'none',
       onCta: ()=>this.setA({screen:'action', view:'tool'}),
@@ -2858,7 +2858,14 @@ class Component extends DCLogic {
             cursor: locked ? 'default' : 'pointer',
             rowOpacity: '1',
             onTap: isFirst ? (()=>this.toggleMs(0)) : locked ? (()=>{}) : (()=>{}),
-            actions: m.actions.map((ac)=>({ label:ac.label, status:'Not started', onTap: ac.tool!=null ? (()=>this.openTool(ac.tool)) : (()=>{}) }))
+            actions: m.actions.map((ac)=>{
+              const t = ac.tool;
+              const isCurrent = t === a.actionIdx;
+              const wasVisited = t != null && a.engaged[t];
+              const status = isCurrent ? 'In progress' : wasVisited ? 'Visited' : 'Not started';
+              const statusColor = isCurrent ? 'var(--blue-600)' : wasVisited ? '#196100' : 'var(--gray-400)';
+              return { label:ac.label, status, statusColor, onTap: ac.tool!=null ? (()=>this.openTool(ac.tool)) : (()=>{}) };
+            })
           };
         });
       })()
