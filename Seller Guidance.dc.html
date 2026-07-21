@@ -2025,6 +2025,18 @@ class Component extends DCLogic {
       const bar = this.milestoneChatBarRef.current;
       if(bar){ bar.style.opacity = hidden ? '0' : '1'; bar.style.pointerEvents = hidden ? 'none' : 'auto'; }
     }
+    const scrollingUp = top < last - 4 && top > 40;
+    const scrollingDown = top > last + 4;
+    if(scrollingUp && !this.state.a.understandSubOpen){
+      this.setState(s=>({a:{...s.a, understandSubOpen:true}}));
+    }
+    if(scrollingDown && this.state.a.understandSubOpen){
+      this.setState(s=>({a:{...s.a, understandSubOpen:false}}));
+    }
+    if(scrollingUp){
+      clearTimeout(this._subPillsTimerM);
+      this._subPillsTimerM = setTimeout(()=>{ this.setState(s=>({a:{...s.a, understandSubOpen:false}})); }, 2000);
+    }
     this._lastAScrollTop = top;
   }
   onScrollA(){
@@ -2048,6 +2060,19 @@ class Component extends DCLogic {
     const pinned = top > 190;
     if(pinned !== this.state.a.tabBarPinned){
       this.setState(s=>({a:{...s.a, tabBarPinned:pinned, understandSubOpen: pinned ? false : s.a.understandSubOpen}}));
+    }
+    // Show sub-pills on scroll-up, hide on scroll-down or idle
+    const scrollingUp = top < last - 4 && top > 40;
+    const scrollingDown = top > last + 4;
+    if(scrollingUp && !this.state.a.understandSubOpen){
+      this.setState(s=>({a:{...s.a, understandSubOpen:true}}));
+    }
+    if(scrollingDown && this.state.a.understandSubOpen){
+      this.setState(s=>({a:{...s.a, understandSubOpen:false}}));
+    }
+    if(scrollingUp){
+      clearTimeout(this._subPillsTimer);
+      this._subPillsTimer = setTimeout(()=>{ this.setState(s=>({a:{...s.a, understandSubOpen:false}})); }, 2000);
     }
     this._lastToolScrollTop = top;
     if(!comps) return;
