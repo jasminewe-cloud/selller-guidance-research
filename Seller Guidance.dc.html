@@ -912,6 +912,10 @@
                   <div style="flex:1;opacity:{{ a.advisorContentOpacity }};animation:{{ a.advisorTextAnim }};">
                     <p style="font-family:var(--font-ui);font-size:14px;line-height:1.45;color:var(--gray-950);margin:0;">{{ a.advisorMsg }}</p>
                     <button onClick="{{ a.advisorCtaTap }}" style="display:{{ a.advisorCtaDisplay }};margin-top:10px;width:100%;background:#fff;color:#0041D9;border:1.5px solid #0041D9;border-radius:999px;padding:10px 0;font-family:var(--font-ui);font-size:14px;font-weight:700;cursor:pointer;">{{ a.advisorCtaLabel }}</button>
+                    <div style="display:{{ a.advisorListingCtasDisplay }};gap:8px;margin-top:10px;">
+                      <button style="flex:1;background:#fff;color:#0041D9;border:1.5px solid #0041D9;border-radius:999px;padding:10px 8px;font-family:var(--font-ui);font-size:13px;font-weight:700;cursor:pointer;">Prepare to list</button>
+                      <button style="flex:1;background:#fff;color:#0041D9;border:1.5px solid #0041D9;border-radius:999px;padding:10px 8px;font-family:var(--font-ui);font-size:13px;font-weight:700;cursor:pointer;">Talk to an agent</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1498,7 +1502,7 @@ class Component extends DCLogic {
       closing:{ action:'Review & accept an offer', text:"Since you're already listed, jump to Close your sale to manage offers and paperwork with confidence." }
     };
     this.state = {
-      a: { messages:this.INIT_A.slice(), mode:'chips', addressValue:'', chips:this.A_TIMING.map(t=>({ label:t.label, onTap:()=>this.chooseTiming(t.key,t.label) })), ctaLabel:'', actionIdx:0, timing:null, screen:'chat', chatClosing:false, anchor:0, moreBelow:false, spacerH:0, claimed:true, view:'home', expanded:-1, planOpen:true, insightDismissed:false, selectedComp:null, collapsing:-1, engaged:{0:false,1:false,2:false,3:false}, salePrice:550000, insightPrice:550000, mortgage:178436, checkInIdx:0, askValue:'', readyForNext:false, lastPromptKey:'', askedKeys:[], homeFPrompt:false, homeFGlow:false, insightCompsOpen:false, insightNetOpen:false, insightNetSheetOpen:false, insightCompsSheetOpen:false, chatBarHidden:false, tabBarPinned:false, understandSubOpen:false, hfChatStep:null, fromInsightNudge:false, fromIntro:false, orientationDismissed:false, advisorThinking:false, advisorReady:true, marketExplored:false },
+      a: { messages:this.INIT_A.slice(), mode:'chips', addressValue:'', chips:this.A_TIMING.map(t=>({ label:t.label, onTap:()=>this.chooseTiming(t.key,t.label) })), ctaLabel:'', actionIdx:0, timing:null, screen:'chat', chatClosing:false, anchor:0, moreBelow:false, spacerH:0, claimed:true, view:'home', expanded:-1, planOpen:true, insightDismissed:false, selectedComp:null, collapsing:-1, engaged:{0:false,1:false,2:false,3:false}, salePrice:550000, insightPrice:550000, mortgage:178436, checkInIdx:0, askValue:'', readyForNext:false, lastPromptKey:'', askedKeys:[], homeFPrompt:false, homeFGlow:false, insightCompsOpen:false, insightNetOpen:false, insightNetSheetOpen:false, insightCompsSheetOpen:false, chatBarHidden:false, tabBarPinned:false, understandSubOpen:false, hfChatStep:null, fromInsightNudge:false, fromIntro:false, orientationDismissed:false, advisorThinking:false, advisorReady:true, marketExplored:false, listingExplored:false },
       b: { step:0, touring:true },
       c: { screen:'list', step:0, actionIdx:0, rec:null },
       d: { step:0, touring:true, rec:null },
@@ -2548,7 +2552,7 @@ class Component extends DCLogic {
     const chip1 = { label:"Why aren't the numbers lining up?", onTap:()=>this.tapListingPriceChip1() };
     const chip2 = { label:'Why not price at $558K like the top comp?', onTap:()=>this.tapListingPriceChip2() };
     const introMsg = { who:'v', isV:true, hasText:true, text:'Happy to walk through the listing price recommendation. What would you like to dig into?' };
-    this.setState(s=>{ const msgs=[...s.a.messages, introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips:[chip1, chip2], mode:'chips', anchor:msgs.length+999} }; });
+    this.setState(s=>{ const msgs=[...s.a.messages, introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips:[chip1, chip2], mode:'chips', anchor:msgs.length+999, listingExplored:true} }; });
   }
   tapListingPriceChip1(){
     const add = (msg, delay) => setTimeout(()=>{
@@ -2782,14 +2786,19 @@ class Component extends DCLogic {
           ? (a.marketExplored
               ? 'When you\'re done walking through the comparable homes, let\'s move to the next step.'
               : 'Check the market index, then tap any comparable home to walk through it together.')
-          : ['','','Use the slider to explore different price points. Tap Dig deeper with Seller Advisor when you have questions about what you\'re seeing.',''][a.actionIdx]||'',
+          : a.actionIdx===2
+            ? (a.listingExplored
+                ? 'Take your time with this. When you\'ve landed on a listing price, here are your next steps.'
+                : 'Your likely listing price is $550K, based on the current seller\'s market. Use the slider to explore different price points and see how it affects days on market. Tap Dig deeper with Seller Advisor if you have questions about what you\'re seeing.')
+            : '',
       advisorCtaLabel: a.actionIdx===0
         ? (hf.factsUpdated ? 'Review your local market' : 'Update home facts')
-        : a.actionIdx===1 && a.marketExplored ? 'Determine your selling price' : '',
+        : a.actionIdx===1 && a.marketExplored ? 'Determine your listing price' : '',
       advisorCtaDisplay: (a.actionIdx===0 || (a.actionIdx===1 && a.marketExplored)) ? 'block' : 'none',
       advisorCtaTap: a.actionIdx===0
         ? (hf.factsUpdated ? ()=>this.gotoTool(1) : ()=>this.scrollToHomeFacts())
         : a.actionIdx===1 ? ()=>this.gotoTool(2) : ()=>{},
+      advisorListingCtasDisplay: (a.actionIdx===2 && a.listingExplored) ? 'flex' : 'none',
       advisorSparkleAnim: a.advisorThinking ? 'sparklePulse 1100ms ease-in-out infinite' : 'none',
       advisorContentOpacity: a.advisorThinking ? '0' : '1',
       advisorTextAnim: a.advisorReady ? 'advisorFadeIn 600ms cubic-bezier(.25,.46,.45,.94) both' : 'none',
