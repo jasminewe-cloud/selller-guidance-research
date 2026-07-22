@@ -456,7 +456,7 @@
         <sc-if value="{{ a.viewTool }}">
           <div style="position:absolute;inset:0;z-index:46;background:transparent;">
             <!-- LAYER 3 (z:30): Pill buttons only — always on top of image when scrolling -->
-            <div style="position:absolute;top:46px;left:0;right:0;z-index:30;padding:4px 0 0;pointer-events:none;">
+            <div style="position:absolute;top:0;left:0;right:0;z-index:30;padding:{{ a.pillBarPaddingTop }} 0 0;pointer-events:none;background:{{ a.pillBarBg }};box-shadow:{{ a.pillBarShadow }};">
               <div style="display:flex;align-items:center;gap:6px;overflow-x:auto;padding:0 0 10px 12px;pointer-events:auto;" class="noscroll">
                 <button onClick="{{ a.tabGoHome }}" style="flex:none;display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.tabHomeActive }};color:{{ a.tabHomeColor }};backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
                   <span style="width:14px;height:14px;flex:none;display:inline-block;background:{{ a.tabHomeColor }};-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;"></span>
@@ -2853,13 +2853,16 @@ class Component extends DCLogic {
       tabGoHome: ()=>this.backHome(), tabGoto0: ()=>this.gotoTool(0), tabGoto3: ()=>this.gotoTool(3),
       tabToggleUnderstand: ()=>this.toggleUnderstandSub(),
       subGoto0: ()=>this.gotoSubTool(0), subGoto1: ()=>this.gotoSubTool(1), subGoto2: ()=>this.gotoSubTool(2), subGoto3: ()=>this.gotoSubTool(3),
-      tabHomeActive: 'rgba(0,0,0,.45)',
-      tabHomeColor: '#fff',
-      tabUnderstandActive: (a.actionIdx===0||a.actionIdx===1||a.actionIdx===2) ? '#fff' : 'rgba(0,0,0,.45)',
-      tabUnderstandColor:  (a.actionIdx===0||a.actionIdx===1||a.actionIdx===2) ? 'var(--gray-950)' : '#fff',
-      tabPrepareActive: a.actionIdx===3 ? '#fff' : 'rgba(0,0,0,.45)',
-      tabPrepareColor:  a.actionIdx===3 ? 'var(--gray-950)' : '#fff',
-      tabBarBg: a.tabBarPinned ? 'var(--gray-50)' : 'transparent',
+      pillBarBg: a.tabBarPinned ? '#fff' : 'transparent',
+      pillBarShadow: a.tabBarPinned ? '0 1px 0 rgba(0,0,0,.08)' : 'none',
+      pillBarPaddingTop: a.tabBarPinned ? '50px' : '50px',
+      tabHomeActive: a.tabBarPinned ? 'rgba(0,0,0,.08)' : 'rgba(0,0,0,.45)',
+      tabHomeColor: a.tabBarPinned ? 'var(--gray-950)' : '#fff',
+      tabUnderstandActive: (a.actionIdx===0||a.actionIdx===1||a.actionIdx===2) ? '#fff' : (a.tabBarPinned ? 'rgba(0,0,0,.08)' : 'rgba(0,0,0,.45)'),
+      tabUnderstandColor:  (a.actionIdx===0||a.actionIdx===1||a.actionIdx===2) ? 'var(--gray-950)' : (a.tabBarPinned ? 'var(--gray-950)' : '#fff'),
+      tabPrepareActive: a.actionIdx===3 ? '#fff' : (a.tabBarPinned ? 'rgba(0,0,0,.08)' : 'rgba(0,0,0,.45)'),
+      tabPrepareColor:  a.actionIdx===3 ? 'var(--gray-950)' : (a.tabBarPinned ? 'var(--gray-950)' : '#fff'),
+      tabBarBg: a.tabBarPinned ? '#fff' : 'transparent',
       tabBarBorder: a.tabBarPinned ? '1px solid var(--gray-100)' : 'none',
       understandSubMaxH: (a.understandSubOpen || a.subPillsRevealed) ? '60px' : '0px',
       toolNavHeight: a.tabBarPinned ? ((a.understandSubOpen || a.subPillsRevealed) ? '90px' : '56px') : '0px',
@@ -3194,8 +3197,8 @@ class Component extends DCLogic {
     const onToolScreen = a.view==='tool' && a.screen!=='chat';
     const heroVisible = (a.claimed && a.view==='home');
     const OB = {
-      statusBg: (heroVisible || onToolScreen) ? 'transparent' : 'var(--gray-50)',
-      statusColor: (heroVisible || onToolScreen) ? '#fff' : 'var(--gray-950)',
+      statusBg: (heroVisible || (onToolScreen && !a.tabBarPinned)) ? 'transparent' : 'var(--gray-50)',
+      statusColor: (heroVisible || (onToolScreen && !a.tabBarPinned)) ? '#fff' : 'var(--gray-950)',
       showIntro: ob.beat === -1 || ob.introExiting,
       introContentAnim: ob.introExiting ? 'introSlideOut 320ms cubic-bezier(.25,.46,.45,.94) both' : 'introSlideIn 360ms cubic-bezier(.25,.46,.45,.94) both',
       dismissIntro: ()=>this.dismissIntro(),
