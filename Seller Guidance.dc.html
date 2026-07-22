@@ -457,7 +457,7 @@
         <sc-if value="{{ a.viewTool }}">
           <div style="position:absolute;inset:0;z-index:46;background:transparent;">
             <!-- LAYER 3 (z:30): Pill buttons only — always on top of image when scrolling -->
-            <div style="position:absolute;top:0;left:0;right:0;z-index:30;padding:{{ a.pillBarPaddingTop }} 0 0;pointer-events:none;background:{{ a.pillBarBg }};box-shadow:{{ a.pillBarShadow }};">
+            <div style="position:absolute;top:0;left:0;right:0;z-index:30;padding:{{ a.pillBarPaddingTop }} 0 0;pointer-events:none;background:{{ a.pillBarBg }};box-shadow:{{ a.pillBarShadow }};transition:background 200ms ease,box-shadow 200ms ease;">
               <div style="display:flex;align-items:center;gap:6px;overflow-x:auto;padding:0 0 10px 12px;pointer-events:auto;" class="noscroll">
                 <button onClick="{{ a.tabGoHome }}" style="flex:none;display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.tabHomeActive }};color:{{ a.tabHomeColor }};backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
                   <span style="width:14px;height:14px;flex:none;display:inline-block;background:{{ a.tabHomeColor }};-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;"></span>
@@ -482,7 +482,7 @@
               </div>
             </div>
             <!-- Scroll container — starts at top:0, content offset by spacer -->
-            <div ref="{{ a.toolScrollRef }}" data-tool-scroll onScroll="{{ a.toolScrollOnScroll }}" class="noscroll" style="position:absolute;top:{{ a.toolNavHeight }};left:0;right:0;bottom:0;overflow-y:auto;">
+            <div ref="{{ a.toolScrollRef }}" data-tool-scroll onScroll="{{ a.toolScrollOnScroll }}" class="noscroll" style="position:absolute;top:{{ a.toolNavHeight }};left:0;right:0;bottom:0;overflow-y:auto;transition:top 200ms ease;">
               <!-- LAYER 2 (z:10): Home photo — on top of teal bg, behind pills -->
               <div style="position:relative;z-index:10;">
                 <img src="assets/Photo.png" alt="Your home" style="display:block;width:100%;height:200px;object-fit:cover;border-radius:0;" />
