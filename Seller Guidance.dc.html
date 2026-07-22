@@ -492,7 +492,7 @@
                 <img src="assets/Photo.png" alt="Your home" style="display:block;width:100%;height:200px;object-fit:cover;border-radius:0;" />
                 <div style="position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,rgba(245,245,245,0) 0%,#f5f5f5 100%);pointer-events:none;"></div>
               </div>
-              <div id="tool-content-area" style="padding:12px 14px 96px;display:flex;flex-direction:column;gap:14px;background:var(--gray-50);">
+              <div id="tool-content-area" onClick="{{ a.tapOutsideComps }}" style="padding:12px 14px 96px;display:flex;flex-direction:column;gap:14px;background:var(--gray-50);">
                 <!-- header -->
                 <div>
                   <h3 style="font-family:var(--font-brand);font-weight:900;font-size:26px;color:var(--gray-950);line-height:1.05;margin:0;">{{ a.toolTitle }}</h3>
@@ -1528,7 +1528,7 @@ class Component extends DCLogic {
       closing:{ action:'Review & accept an offer', text:"Since you're already listed, jump to Close your sale to manage offers and paperwork with confidence." }
     };
     this.state = {
-      a: { messages:this.INIT_A.slice(), mode:'chips', addressValue:'', chips:this.A_TIMING.map(t=>({ label:t.label, onTap:()=>this.chooseTiming(t.key,t.label) })), ctaLabel:'', actionIdx:0, timing:null, screen:'chat', chatClosing:false, anchor:0, moreBelow:false, spacerH:0, claimed:true, view:'home', expanded:-1, planOpen:true, insightDismissed:false, selectedComp:null, collapsing:-1, engaged:{0:false,1:false,2:false,3:false}, salePrice:550000, insightPrice:550000, mortgage:178436, checkInIdx:0, askValue:'', readyForNext:false, lastPromptKey:'', askedKeys:[], homeFPrompt:false, homeFGlow:false, insightCompsOpen:false, insightNetOpen:false, insightNetSheetOpen:false, insightCompsSheetOpen:false, chatBarHidden:false, tabBarPinned:false, understandSubOpen:false, hfChatStep:null, fromInsightNudge:false, fromIntro:false, orientationDismissed:false, advisorThinking:false, advisorReady:true, marketExplored:false, listingExplored:false, toolBarsHidden:false, milestoneBarsHidden:false },
+      a: { messages:this.INIT_A.slice(), mode:'chips', addressValue:'', chips:this.A_TIMING.map(t=>({ label:t.label, onTap:()=>this.chooseTiming(t.key,t.label) })), ctaLabel:'', actionIdx:0, timing:null, screen:'chat', chatClosing:false, anchor:0, moreBelow:false, spacerH:0, claimed:true, view:'home', expanded:-1, planOpen:true, insightDismissed:false, selectedComp:null, collapsing:-1, engaged:{0:false,1:false,2:false,3:false}, salePrice:550000, insightPrice:550000, mortgage:178436, checkInIdx:0, askValue:'', readyForNext:false, lastPromptKey:'', askedKeys:[], homeFPrompt:false, homeFGlow:false, insightCompsOpen:false, insightNetOpen:false, insightNetSheetOpen:false, insightCompsSheetOpen:false, chatBarHidden:false, tabBarPinned:false, understandSubOpen:false, hfChatStep:null, fromInsightNudge:false, fromIntro:false, orientationDismissed:false, advisorThinking:false, advisorReady:true, marketExplored:false, listingExplored:false, toolBarsHidden:false, milestoneBarsHidden:false, lastCompIdx:null },
       b: { step:0, touring:true },
       c: { screen:'list', step:0, actionIdx:0, rec:null },
       d: { step:0, touring:true, rec:null },
@@ -2270,7 +2270,7 @@ class Component extends DCLogic {
   scrollToHomeFacts(){ this.setState(s=>({a:{...s.a, orientationDismissed:true, homeFGlow:true, homeFPrompt:true}}), ()=>{ const scroll=document.querySelector('[data-tool-scroll]'); const target=document.getElementById('home-facts-anchor'); if(scroll&&target){ const tr=target.getBoundingClientRect(); const sr=scroll.getBoundingClientRect(); scroll.scrollTo({ top: scroll.scrollTop+tr.top-sr.top-20, behavior:'smooth' }); } setTimeout(()=>{ this.setState(s=>({a:{...s.a, homeFGlow:false}})); }, 4000); }); }
   dismissIntro(){ this.setState(s=>({ob:{...s.ob, introExiting:true}}), ()=>{ setTimeout(()=>{ this.setState(s=>({ob:{...s.ob, beat:0, introExiting:false}, a:{...s.a, fromIntro:true}})); setTimeout(()=>{ this.setState(s=>({a:{...s.a, fromIntro:false}})); }, 400); }, 320); }); }
   goToListingPriceNudge(){ this.setState(s=>{ const nudgePrice = s.hf.zestimate || 465000; return {a:{...s.a, view:'tool', actionIdx:2, screen:'action', salePrice:nudgePrice, insightPrice:nudgePrice, fromInsightNudge:true, askedKeys:[], understandSubOpen:false}}; }, ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; }); }
-  selectComp(idx){ this.setState(s=>({a:{...s.a, selectedComp: s.a.selectedComp===idx ? null : idx, marketExplored:true}})); }
+  selectComp(idx){ this.setState(s=>({a:{...s.a, selectedComp: s.a.selectedComp===idx ? null : idx, lastCompIdx:idx}})); }
   prevMs(){
     const target = Math.max(0, this.state.a.expanded-1);
     this.setState(s=>({a:{...s.a, expanded:-1}}));
@@ -2797,6 +2797,11 @@ class Component extends DCLogic {
         : a.actionIdx===1
           ? (a.marketExplored
               ? 'When you\'re done walking through the comparable homes, let\'s move to the next step.'
+              : a.lastCompIdx!==null ? [
+                  'This home sold in 14 days at 101% of list, which tells you buyers in 78745 are moving fast and not negotiating down. Your updated home matches this layout and size, so priced right you should see similar or stronger demand.',
+                  'Slightly smaller with one fewer bathroom, and it still sold in 21 days at 99% of list. Your confirmed 4bd/3ba puts you above this comp in both size and likely buyer appeal.',
+                  'Smaller overall with fewer beds and baths, and it took a bit longer to move. The gap between this and the top comp shows how much the extra bedroom and bath matter to buyers here. Your updated facts put you closer to the top.',
+                ][a.lastCompIdx]
               : 'Check the market index, then tap any comparable home to walk through it together.')
           : a.actionIdx===2
             ? (a.listingExplored
@@ -2884,7 +2889,7 @@ class Component extends DCLogic {
       comps: this.A_COMPS.map((cp,i)=>({
         ...cp,
         selected: a.selectedComp===i,
-        onTap: ()=>this.selectComp(i),
+        onTap: (e)=>{ if(e&&e.stopPropagation) e.stopPropagation(); this.selectComp(i); },
         cardOutline: a.selectedComp===i ? '2px solid var(--blue-600)' : '2px solid transparent',
       })),
       compInsightText: (()=>{
@@ -2899,6 +2904,7 @@ class Component extends DCLogic {
       })(),
       compInsightDefault: a.selectedComp===null || a.selectedComp===undefined,
       selectComp: (i)=>()=>this.selectComp(i),
+      tapOutsideComps: ()=>{ if(this.state.a.actionIdx===1 && this.state.a.selectedComp!==null) this.setState(s=>({a:{...s.a, selectedComp:null}})); },
       compChip0: ()=>this.tapPrompt('c_price'),
       compChip1: ()=>this.tapPrompt('c_standout'),
       insightNetSheetOpen: a.insightNetSheetOpen, openInsightNetSheet: ()=>this.setState(s=>({a:{...s.a, insightNetSheetOpen:true}})), closeInsightNetSheet: ()=>this.setState(s=>({a:{...s.a, insightNetSheetOpen:false}})),
