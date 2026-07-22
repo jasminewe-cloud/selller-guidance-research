@@ -2576,11 +2576,15 @@ class Component extends DCLogic {
     });
     add({who:'v', kind:'text', isThinking:true}, 600);
     add({who:'v', kind:'text', isThinking:false, text:"These three numbers represent different things, and they're not supposed to match."}, 1600);
-    add({who:'v', isV:true, isDefMsg:true, boldPart:'Zestimate ($527K)', restPart:': what your home is currently worth based on public data and recent sales in 78745.'}, 2400);
-    add({who:'v', isV:true, isDefMsg:true, boldPart:'Likely list price ($550K)', restPart:': what you can realistically ask right now. Demand is outpacing supply and homes are going pending in about 13 days, which gives you room to price above your Zestimate.'}, 3400);
-    add({who:'v', isV:true, isDefMsg:true, boldPart:'Comp range ($485K to $558K)', restPart:': what similar homes have actually sold for recently. This shows you the floor and ceiling buyers in 78745 are willing to pay.'}, 4400);
-    add({who:'v', kind:'text', text:"In a seller's market, buyers have fewer options and less leverage to negotiate down. $550K sits in the sweet spot where you attract strong offers quickly and close at or above asking."}, 5400);
-    setTimeout(()=>{ this.setState(s=>({a:{...s.a, chips:[chip2], mode:'chips'}})); }, 5800);
+    add({who:'v', kind:'text', isThinking:true}, 2000);
+    add({who:'v', isV:true, isDefMsg:true, boldPart:'Zestimate ($527K)', restPart:': what your home is currently worth based on public data and recent sales in 78745.'}, 2800);
+    add({who:'v', kind:'text', isThinking:true}, 3200);
+    add({who:'v', isV:true, isDefMsg:true, boldPart:'Likely list price ($550K)', restPart:': what you can realistically ask right now. Demand is outpacing supply and homes are going pending in about 13 days, which gives you room to price above your Zestimate.'}, 4000);
+    add({who:'v', kind:'text', isThinking:true}, 4400);
+    add({who:'v', isV:true, isDefMsg:true, boldPart:'Comp range ($485K to $558K)', restPart:': what similar homes have actually sold for recently. This shows you the floor and ceiling buyers in 78745 are willing to pay.'}, 5200);
+    add({who:'v', kind:'text', isThinking:true}, 5600);
+    add({who:'v', kind:'text', text:"In a seller's market, buyers have fewer options and less leverage to negotiate down. $550K sits in the sweet spot where you attract strong offers quickly and close at or above asking."}, 6400);
+    setTimeout(()=>{ this.setState(s=>({a:{...s.a, chips:[chip2], mode:'chips'}})); }, 6800);
   }
   tapListingPriceChip2(){
     const add = (msg, delay) => setTimeout(()=>{
@@ -2598,9 +2602,12 @@ class Component extends DCLogic {
     });
     add({who:'v', kind:'text', isThinking:true}, 600);
     add({who:'v', kind:'text', isThinking:false, text:"That comp on Teri Rd sits in a slightly different pocket of 78745. Values there tend to run a bit higher, so that sale is the ceiling of your market, not the center."}, 1600);
+    add({who:'v', kind:'text', isThinking:true}, 2000);
     add({who:'v', kind:'text', text:"In a seller's market, pricing at $550K and generating multiple competing offers is often how you end up at $558K or above at close. Starting at $558K as your ask can slow that down. Fewer initial showings, less urgency, less room for buyers to feel like they're winning."}, 2800);
+    add({who:'v', kind:'text', isThinking:true}, 3200);
     add({who:'v', kind:'text', text:"$550K is not settling. It's the strategic entry point that gives you the best shot at closing at or above that number. We'd expect this home to go pending in roughly 13 days at this price."}, 4000);
-    add({who:'v', kind:'text', text:"If you want to start at $558K, that's your call. Just know you're pricing to the best-case outcome from a different neighborhood pocket, and you may need a little more patience."}, 5000);
+    add({who:'v', kind:'text', isThinking:true}, 4400);
+    add({who:'v', kind:'text', text:"If you want to start at $558K, that's your call. Just know you're pricing to the best-case outcome from a different neighborhood pocket, and you may need a little more patience."}, 5200);
   }
   fireListingFailsafe(raw){
     const add = (msg, delay) => setTimeout(()=>{
