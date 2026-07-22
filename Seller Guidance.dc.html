@@ -2982,7 +2982,7 @@ class Component extends DCLogic {
       sliderMaxFmt: '$'+Math.round(zestForSale*1.20/1000)+'K',
       saleStr:fmt(sale), mortStr:fmt(mort), closingStr:fmt(closing), netStr:fmt(net),
       salePct:salePct+'%', mortPct:mortPct+'%',
-      confidence: sale <= Math.round(zestForSale*0.90) ? 'High' : sale <= Math.round(zestForSale*1.10) ? 'Medium' : 'Low',
+      confidence: sale < Math.round(zestForSale*0.97) ? 'Medium' : sale <= Math.round(zestForSale*1.10) ? 'High' : sale <= Math.round(zestForSale*1.18) ? 'Medium' : 'Low',
       sellsIn: sale <= Math.round(zestForSale*0.90) ? '~8 days' : sale <= Math.round(zestForSale*1.10) ? '~13 days' : '~30+ days',
       listPriceLabel: sale <= Math.round(zestForSale*0.90) ? 'Underpriced' : sale <= Math.round(zestForSale*1.10) ? 'Likely list price · Seller\'s market' : 'Less likely list price',
       salePriceRange: (Math.round(zestForSale*0.72/1000))+'k - '+(Math.round(zestForSale/1000))+'k',
