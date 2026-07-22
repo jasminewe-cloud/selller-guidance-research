@@ -620,7 +620,7 @@
               </sc-if>
               <!-- Comparable homes — track market tool -->
               <sc-if value="{{ a.t1 }}">
-                <div ref="{{ a.compsRef }}">
+                <div id="comps-section-anchor" ref="{{ a.compsRef }}">
                   <div style="font-family:var(--font-brand);font-weight:900;font-size:17px;margin:10px 2px 10px;">Comparable homes</div>
                   <div class="noscroll" style="display:flex;gap:10px;overflow-x:auto;padding:0 14px 4px;margin:0 -14px;">
                     <sc-for list="{{ a.comps }}" as="cp" hint-placeholder-count="4">
@@ -2072,9 +2072,10 @@ class Component extends DCLogic {
       this._subPillsTimer = setTimeout(()=>{ this.setState(s=>({a:{...s.a, subPillsRevealed:false}})); }, 3000);
     }
     this._lastToolScrollTop = top;
-    if(!comps) return;
+    const compsEl = comps || document.getElementById('comps-section-anchor');
+    if(!compsEl) return;
     const sr = scroll.getBoundingClientRect();
-    const cr = comps.getBoundingClientRect();
+    const cr = compsEl.getBoundingClientRect();
     const visible = cr.top < sr.bottom - 40;
     if(visible !== this.state.hf.compsVisible){
       this.setState(s=>({ hf:{...s.hf, compsVisible:visible} }));
