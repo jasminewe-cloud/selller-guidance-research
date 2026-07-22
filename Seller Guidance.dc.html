@@ -911,7 +911,7 @@
                   <span style="width:14px;height:14px;flex:none;margin-top:1px;background:var(--purple-700);-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:block;animation:{{ a.advisorSparkleAnim }};"></span>
                   <div style="flex:1;opacity:{{ a.advisorContentOpacity }};animation:{{ a.advisorTextAnim }};">
                     <p style="font-family:var(--font-ui);font-size:14px;line-height:1.45;color:var(--gray-950);margin:0;">{{ a.advisorMsg }}</p>
-                    <button onClick="{{ a.advisorCtaTap }}" style="display:{{ a.advisorCtaDisplay }};margin-top:10px;width:100%;background:#fff;color:#1277E1;border:1.5px solid #1277E1;border-radius:999px;padding:10px 0;font-family:var(--font-ui);font-size:14px;font-weight:700;cursor:pointer;">{{ a.advisorCtaLabel }}</button>
+                    <button onClick="{{ a.advisorCtaTap }}" style="display:{{ a.advisorCtaDisplay }};margin-top:10px;width:100%;background:#fff;color:#0041D9;border:1.5px solid #0041D9;border-radius:999px;padding:10px 0;font-family:var(--font-ui);font-size:14px;font-weight:700;cursor:pointer;">{{ a.advisorCtaLabel }}</button>
                   </div>
                 </div>
               </div>
@@ -1498,7 +1498,7 @@ class Component extends DCLogic {
       closing:{ action:'Review & accept an offer', text:"Since you're already listed, jump to Close your sale to manage offers and paperwork with confidence." }
     };
     this.state = {
-      a: { messages:this.INIT_A.slice(), mode:'chips', addressValue:'', chips:this.A_TIMING.map(t=>({ label:t.label, onTap:()=>this.chooseTiming(t.key,t.label) })), ctaLabel:'', actionIdx:0, timing:null, screen:'chat', chatClosing:false, anchor:0, moreBelow:false, spacerH:0, claimed:true, view:'home', expanded:-1, planOpen:true, insightDismissed:false, selectedComp:null, collapsing:-1, engaged:{0:false,1:false,2:false,3:false}, salePrice:550000, insightPrice:550000, mortgage:178436, checkInIdx:0, askValue:'', readyForNext:false, lastPromptKey:'', askedKeys:[], homeFPrompt:false, homeFGlow:false, insightCompsOpen:false, insightNetOpen:false, insightNetSheetOpen:false, insightCompsSheetOpen:false, chatBarHidden:false, tabBarPinned:false, understandSubOpen:false, hfChatStep:null, fromInsightNudge:false, fromIntro:false, orientationDismissed:false, advisorThinking:false, advisorReady:true },
+      a: { messages:this.INIT_A.slice(), mode:'chips', addressValue:'', chips:this.A_TIMING.map(t=>({ label:t.label, onTap:()=>this.chooseTiming(t.key,t.label) })), ctaLabel:'', actionIdx:0, timing:null, screen:'chat', chatClosing:false, anchor:0, moreBelow:false, spacerH:0, claimed:true, view:'home', expanded:-1, planOpen:true, insightDismissed:false, selectedComp:null, collapsing:-1, engaged:{0:false,1:false,2:false,3:false}, salePrice:550000, insightPrice:550000, mortgage:178436, checkInIdx:0, askValue:'', readyForNext:false, lastPromptKey:'', askedKeys:[], homeFPrompt:false, homeFGlow:false, insightCompsOpen:false, insightNetOpen:false, insightNetSheetOpen:false, insightCompsSheetOpen:false, chatBarHidden:false, tabBarPinned:false, understandSubOpen:false, hfChatStep:null, fromInsightNudge:false, fromIntro:false, orientationDismissed:false, advisorThinking:false, advisorReady:true, marketExplored:false },
       b: { step:0, touring:true },
       c: { screen:'list', step:0, actionIdx:0, rec:null },
       d: { step:0, touring:true, rec:null },
@@ -2075,6 +2075,9 @@ class Component extends DCLogic {
     if(visible !== this.state.hf.compsVisible){
       this.setState(s=>({ hf:{...s.hf, compsVisible:visible} }));
     }
+    if(visible && this.state.a.actionIdx===1 && !this.state.a.marketExplored){
+      this.setState(s=>({a:{...s.a, marketExplored:true}}));
+    }
   }
   scrollDownA(){ const c=this.aScrollRef.current; if(!c) return; c.scrollTo({ top:Math.min(c.scrollTop+260, c.scrollHeight), behavior:'smooth' }); }
   scrollChatToBottom(){ const c=this.aScrollRef.current; if(!c) return; requestAnimationFrame(()=>requestAnimationFrame(()=>{ c.scrollTop=c.scrollHeight; })); }
@@ -2258,7 +2261,7 @@ class Component extends DCLogic {
   scrollToHomeFacts(){ this.setState(s=>({a:{...s.a, orientationDismissed:true, homeFGlow:true, homeFPrompt:true}}), ()=>{ const scroll=document.querySelector('[data-tool-scroll]'); const target=document.getElementById('home-facts-anchor'); if(scroll&&target){ const tr=target.getBoundingClientRect(); const sr=scroll.getBoundingClientRect(); scroll.scrollTo({ top: scroll.scrollTop+tr.top-sr.top-20, behavior:'smooth' }); } setTimeout(()=>{ this.setState(s=>({a:{...s.a, homeFGlow:false}})); }, 4000); }); }
   dismissIntro(){ this.setState(s=>({ob:{...s.ob, introExiting:true}}), ()=>{ setTimeout(()=>{ this.setState(s=>({ob:{...s.ob, beat:0, introExiting:false}, a:{...s.a, fromIntro:true}})); setTimeout(()=>{ this.setState(s=>({a:{...s.a, fromIntro:false}})); }, 400); }, 320); }); }
   goToListingPriceNudge(){ this.setState(s=>{ const nudgePrice = s.hf.zestimate || 465000; return {a:{...s.a, view:'tool', actionIdx:2, screen:'action', salePrice:nudgePrice, insightPrice:nudgePrice, fromInsightNudge:true, askedKeys:[], understandSubOpen:false}}; }, ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; }); }
-  selectComp(idx){ this.setState(s=>({a:{...s.a, selectedComp: s.a.selectedComp===idx ? null : idx}})); }
+  selectComp(idx){ this.setState(s=>({a:{...s.a, selectedComp: s.a.selectedComp===idx ? null : idx, marketExplored:true}})); }
   prevMs(){
     const target = Math.max(0, this.state.a.expanded-1);
     this.setState(s=>({a:{...s.a, expanded:-1}}));
@@ -2775,14 +2778,18 @@ class Component extends DCLogic {
         ? (hf.factsUpdated
             ? 'Your Zestimate is now $'+(Math.round((hf.zestimate||465000)/1000))+'K based on your updated home facts. If everything looks good on screen, let\'s head to the next step.'
             : 'Review your current home facts and update anything that\'s changed.')
-        : ['','Check the market index, then tap any comparable home to walk through it together.','Use the slider to explore different price points. Tap Dig deeper with Seller Advisor when you have questions about what you\'re seeing.',''][a.actionIdx]||'',
+        : a.actionIdx===1
+          ? (a.marketExplored
+              ? 'When you\'re done walking through the comparable homes, let\'s move to the next step.'
+              : 'Check the market index, then tap any comparable home to walk through it together.')
+          : ['','','Use the slider to explore different price points. Tap Dig deeper with Seller Advisor when you have questions about what you\'re seeing.',''][a.actionIdx]||'',
       advisorCtaLabel: a.actionIdx===0
         ? (hf.factsUpdated ? 'Review your local market' : 'Update home facts')
-        : '',
-      advisorCtaDisplay: a.actionIdx===0 ? 'block' : 'none',
+        : a.actionIdx===1 && a.marketExplored ? 'Determine your selling price' : '',
+      advisorCtaDisplay: (a.actionIdx===0 || (a.actionIdx===1 && a.marketExplored)) ? 'block' : 'none',
       advisorCtaTap: a.actionIdx===0
         ? (hf.factsUpdated ? ()=>this.gotoTool(1) : ()=>this.scrollToHomeFacts())
-        : ()=>{},
+        : a.actionIdx===1 ? ()=>this.gotoTool(2) : ()=>{},
       advisorSparkleAnim: a.advisorThinking ? 'sparklePulse 1100ms ease-in-out infinite' : 'none',
       advisorContentOpacity: a.advisorThinking ? '0' : '1',
       advisorTextAnim: a.advisorReady ? 'advisorFadeIn 600ms cubic-bezier(.25,.46,.45,.94) both' : 'none',
