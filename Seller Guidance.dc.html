@@ -2550,7 +2550,7 @@ class Component extends DCLogic {
       ...['c_price','c_standout'].map(k=>({ label:cTree.nodes[k].q, onTap:()=>this.tapPromptInTree(0, k) }))
     ];
     const introMsg = { who:'v', isV:true, hasText:true, text:"What would you like to explore about the market or comparable homes?" };
-    this.setState(s=>{ const msgs=[...s.a.messages,introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
+    this.setState(s=>{ const msgs=[introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
   }
   digDeeperNet(){
     this.digDeeperListingPrice();
@@ -2568,7 +2568,7 @@ class Component extends DCLogic {
     const chip1 = { label:"Why aren't the numbers lining up?", onTap:()=>this.tapListingPriceChip1() };
     const chip2 = { label:'Why not price at $558K like the top comp?', onTap:()=>this.tapListingPriceChip2() };
     const introMsg = { who:'v', isV:true, hasText:true, text:'Happy to walk through the listing price recommendation. What would you like to dig into?' };
-    this.setState(s=>{ const msgs=[...s.a.messages, introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips:[chip1, chip2], mode:'chips', anchor:msgs.length+999, listingExplored:true} }; });
+    this.setState(s=>{ const msgs=[introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips:[chip1, chip2], mode:'chips', anchor:msgs.length+999, listingExplored:true} }; });
   }
   tapListingPriceChip1(){
     const add = (msg, delay) => setTimeout(()=>{
