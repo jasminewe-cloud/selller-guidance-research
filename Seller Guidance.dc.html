@@ -2658,7 +2658,7 @@ class Component extends DCLogic {
     }, 500);
   }
   // Navigate to a tool and open its card (from "Let's go", a pill, or the bottom nudge)
-  gotoTool(i){ this._lastToolScrollTop=0; this.setState(s=>({a:{...s.a, view:'tool', actionIdx:i, screen:'action', askedKeys:[], understandSubOpen:false, toolBarsHidden:false, tabBarPinned:false}}), ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; const c=document.getElementById('tool-content-area'); if(c){ c.classList.remove('fade-in-content'); void c.offsetWidth; c.classList.add('fade-in-content'); } setTimeout(()=>this.startAdvisorCard(), 350); }); }
+  gotoTool(i){ this._lastToolScrollTop=0; this.setState(s=>({a:{...s.a, view:'tool', actionIdx:i, screen:'action', askedKeys:[], understandSubOpen:false, toolBarsHidden:false, tabBarPinned:false, selectedComp: i===2 ? null : s.a.selectedComp}}), ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; const c=document.getElementById('tool-content-area'); if(c){ c.classList.remove('fade-in-content'); void c.offsetWidth; c.classList.add('fade-in-content'); } setTimeout(()=>this.startAdvisorCard(), 350); }); }
   gotoPrep(){ this.setState(s=>({a:{...s.a, view:'home', screen:'action', expanded:1}})); }
   onSale(e){ const v=parseInt(e.target.value,10)||0; this.setState(s=>({a:{...s.a, salePrice:v, fromInsightNudge:false, engaged:{...s.a.engaged,2:true}, engCount:(s.a.engCount||0)+1}})); }
   onSaleCommit(e){ const v=parseInt(e.target.value,10)||0; this.setState(s=>({a:{...s.a, insightPrice:v, fromInsightNudge:false}})); }
@@ -2783,7 +2783,7 @@ class Component extends DCLogic {
       addressValue:a.addressValue, onAddr:(e)=>this.onAddr(e), onKey:(e)=>this.onKey(e), submitAddr:()=>this.submitAddr(), useLocation:()=>this.useLocation(),
       inputPlaceholder: a.mode==='input' ? 'Enter your home address' : 'Ask Zillow…',
       chatPlaceholder: this.state.hf.open ? 'Tell me what you want to update…' : 'Ask about your home value…',
-      actionChatPlaceholder: a.homeFGlow ? 'Use me to update your home facts' : (a.selectedComp !== null && a.selectedComp !== undefined) ? `Ask about the ${this.A_COMPS[a.selectedComp].price} comp…` : a.actionIdx===0 ? 'Ask about your home value…' : a.actionIdx===1 ? 'Ask about comparable homes…' : `Ask about your ${sale <= Math.round(zestForSale*0.90) ? '$'+Math.round(sale/1000)+'K listing price' : sale <= zestForSale ? 'pricing strategy' : 'pricing and risk'}…`,
+      actionChatPlaceholder: a.homeFGlow ? 'Use me to update your home facts' : (a.selectedComp !== null && a.selectedComp !== undefined) ? `Ask about the ${this.A_COMPS[a.selectedComp].price} comp…` : a.actionIdx===0 ? 'Ask about your home value…' : a.actionIdx===1 ? 'Ask about comparable homes…' : a.actionIdx===2 ? 'Ask about your listing price…' : 'Ask your advisor anything…',
       actionChatGlowClass: a.homeFGlow ? 'chat-glow' : '',
       sendBg: a.mode==='input' ? 'var(--blue-600)' : 'var(--gray-300)',
       scrollRef:this.aScrollRef, onScroll:()=>this.onScrollA(), toolScrollOnScroll:()=>this.onScrollTool(), moreBelow:a.moreBelow, scrollDown:()=>this.scrollDownA(), spacerHpx:(a.spacerH||0)+'px', compsRef:this.compsRef, homeFRef:this.homeFRef, toolScrollRef:this.aToolScrollRef, toolChatBarRef:this.toolChatBarRef, advisorCardRef:this.advisorCardRef, milestoneChatBarRef:this.milestoneChatBarRef, milestoneScrollRef:this.aMilestoneScrollRef, onScrollMilestone:()=>this.onScrollMilestone(),
@@ -2828,7 +2828,7 @@ class Component extends DCLogic {
       planChevronRotate: a.planOpen ? 'rotate(0deg)' : 'rotate(180deg)',
       planCardDisplay: a.planOpen ? 'block' : 'none',
       onCta: ()=>{ if(this.state.a.fromFailsafe){ this.failsafeGoToListingPrice(); } else { this.setA({screen:'action', view:'tool'}); } },
-      openChat: ()=>{ this.hfCommitPending(); if(this.state.a.actionIdx===1){ this.digDeeperComps(); return; } const prefill = this.state.a.actionIdx===0 && !this.state.hf.factsUpdated ? 'I added an additional bedroom and bathroom' : ''; this.setState(s=>({a:{...s.a, screen:'chat', mode:'ask', askValue:prefill, anchor:s.a.messages.length+9999}}), ()=>this.scrollChatToBottom()); },
+      openChat: ()=>{ this.hfCommitPending(); if(this.state.a.actionIdx===1){ this.digDeeperComps(); return; } if(this.state.a.actionIdx===2){ this.digDeeperListingPrice(); return; } const prefill = this.state.a.actionIdx===0 && !this.state.hf.factsUpdated ? 'I added an additional bedroom and bathroom' : ''; this.setState(s=>({a:{...s.a, screen:'chat', mode:'ask', askValue:prefill, anchor:s.a.messages.length+9999}}), ()=>this.scrollChatToBottom()); },
       openChatForHF: ()=>{ this.hfCommitPending(); this.setState(s=>({a:{...s.a, screen:'chat', mode:'ask', askValue:'I added an additional bedroom and bathroom', anchor:s.a.messages.length+9999}}), ()=>this.scrollChatToBottom()); },
       hfZestOkTap: ()=>this.hfZestOkTap(),
       closeChat: ()=>this.closeChat(),
