@@ -467,8 +467,8 @@
                   <span style="width:14px;height:14px;flex:none;display:inline-block;background:{{ a.tabUnderstandColor }};-webkit-mask:var(--ic-IconChevronDownOutline) center/contain no-repeat;mask:var(--ic-IconChevronDownOutline) center/contain no-repeat;transform:{{ a.understandChevronRotate }};transition:transform 200ms;"></span>
                 </button>
                 <button onClick="{{ a.tabGoto3 }}" style="flex:none;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.tabPrepareActive }};color:{{ a.tabPrepareColor }};backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">Prepare</button>
-                <button style="flex:none;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;white-space:nowrap;border:none;background:rgba(0,0,0,.45);color:rgba(255,255,255,.5);cursor:default;min-width:78px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">List</button>
-                <button style="flex:none;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;white-space:nowrap;border:none;background:rgba(0,0,0,.45);color:rgba(255,255,255,.5);cursor:default;min-width:78px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">Close</button>
+                <button style="flex:none;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;white-space:nowrap;border:none;background:{{ a.tabDisabledActive }};color:{{ a.tabDisabledColor }};cursor:default;min-width:78px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">List</button>
+                <button style="flex:none;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;white-space:nowrap;border:none;background:{{ a.tabDisabledActive }};color:{{ a.tabDisabledColor }};cursor:default;min-width:78px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">Close</button>
               </div>
               <!-- Understand sub-tab row -->
               <div style="overflow:hidden;max-height:{{ a.understandSubMaxH }};transition:max-height 220ms cubic-bezier(.4,0,.2,1);pointer-events:auto;">
@@ -2856,6 +2856,8 @@ class Component extends DCLogic {
       pillBarBg: a.tabBarPinned ? '#fff' : 'transparent',
       pillBarShadow: a.tabBarPinned ? '0 1px 0 rgba(0,0,0,.08)' : 'none',
       pillBarPaddingTop: a.tabBarPinned ? '50px' : '50px',
+      tabDisabledActive: a.tabBarPinned ? 'rgba(0,0,0,.08)' : 'rgba(0,0,0,.45)',
+      tabDisabledColor: a.tabBarPinned ? 'var(--gray-400)' : 'rgba(255,255,255,.5)',
       tabHomeActive: a.tabBarPinned ? 'rgba(0,0,0,.08)' : 'rgba(0,0,0,.45)',
       tabHomeColor: a.tabBarPinned ? 'var(--gray-950)' : '#fff',
       tabUnderstandActive: (a.actionIdx===0||a.actionIdx===1||a.actionIdx===2) ? '#fff' : (a.tabBarPinned ? 'rgba(0,0,0,.08)' : 'rgba(0,0,0,.45)'),
@@ -3197,7 +3199,7 @@ class Component extends DCLogic {
     const onToolScreen = a.view==='tool' && a.screen!=='chat';
     const heroVisible = (a.claimed && a.view==='home');
     const OB = {
-      statusBg: (heroVisible || (onToolScreen && !a.tabBarPinned)) ? 'transparent' : 'var(--gray-50)',
+      statusBg: (heroVisible || (onToolScreen && !a.tabBarPinned)) ? 'transparent' : '#fff',
       statusColor: (heroVisible || (onToolScreen && !a.tabBarPinned)) ? '#fff' : 'var(--gray-950)',
       showIntro: ob.beat === -1 || ob.introExiting,
       introContentAnim: ob.introExiting ? 'introSlideOut 320ms cubic-bezier(.25,.46,.45,.94) both' : 'introSlideIn 360ms cubic-bezier(.25,.46,.45,.94) both',
