@@ -930,7 +930,7 @@
                           <stop offset="100%" stop-color="#F97316"/>
                         </linearGradient>
                       </defs>
-                      <circle cx="11" cy="11" r="8.5" fill="none" stroke="url(#ringGrad)" stroke-width="4" stroke-linecap="round" stroke-dasharray="32 22"/>
+                      <circle cx="11" cy="11" r="8.5" fill="none" stroke="url(#ringGrad)" stroke-width="4" stroke-linecap="round" stroke-dasharray="{{ a.advisorRingDash }}"/>
                     </svg>
                   </div>
                   <div style="flex:1;opacity:{{ a.advisorContentOpacity }};animation:{{ a.advisorTextAnim }};">
@@ -2825,6 +2825,7 @@ class Component extends DCLogic {
         : a.actionIdx===1 ? ()=>this.gotoTool(2) : ()=>{},
       advisorListingCtasDisplay: (a.actionIdx===2 && a.listingExplored) ? 'flex' : 'none',
       advisorRingClass: a.advisorThinking ? 'ring-spin' : '',
+      advisorRingDash: a.advisorThinking ? '32 22' : '54 0',
       advisorContentOpacity: a.advisorThinking ? '0' : '1',
       advisorTextAnim: a.advisorReady ? 'advisorFadeIn 600ms cubic-bezier(.25,.46,.45,.94) both' : 'none',
       openHF: () => this.openHF(),
