@@ -2849,7 +2849,7 @@ class Component extends DCLogic {
       togglePlan: ()=>this.togglePlan(),
       dismissInsight: ()=>this.dismissInsight(),
       goToListingPriceNudge: ()=>this.goToListingPriceNudge(),
-      showInsight: a.claimed && !a.insightDismissed && Object.values(a.engaged).some(Boolean),
+      showInsight: false,
       planChevronRotate: a.planOpen ? 'rotate(0deg)' : 'rotate(180deg)',
       planCardDisplay: a.planOpen ? 'block' : 'none',
       onCta: ()=>{ if(this.state.a.fromFailsafe){ this.failsafeGoToListingPrice(); } else { this.setA({screen:'action', view:'tool'}); } },
