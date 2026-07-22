@@ -2242,7 +2242,7 @@ class Component extends DCLogic {
     addMsg({who:'v', isV:true, isThinking:true}, 600);
     addMsg({who:'v', isV:true, isThinking:false, hasText:true, text:"Based on your current home facts and the seller's market in 78745, you're looking at somewhere in the $480K to $490K range as a starting point. What are your thoughts on this?"}, 900);
     setTimeout(()=>{
-      this.setState(s=>({a:{...s.a, proceedsPrefill:"That seems low. I thought it could be higher.", mode:'ask'}}));
+      this.setState(s=>({a:{...s.a, askValue:"That seems low. I thought it could be higher.", mode:'ask'}}));
     }, 2200);
   }
   proceedsSoundsGood(){
@@ -2369,7 +2369,7 @@ class Component extends DCLogic {
               {who:'v',isV:true,hasText:true,text:"That number is based on what we currently know about your home — 3 bedrooms, 2 bathrooms, 1,680 sqft. If anything has changed since your home was last recorded, your estimate would likely be higher."},
               {who:'v',isV:true,hasText:true,text:"Have you made any updates or renovations recently?"}
             ];
-            return {a:{...s.a,messages:msgs,mode:'ask',proceedsPrefill:"Yes, I've done some renovations.",proceedsChatStep:'awaitReno',anchor:msgs.length+999}};
+            return {a:{...s.a,messages:msgs,mode:'ask',askValue:"Yes, I've done some renovations.",proceedsChatStep:'awaitReno',anchor:msgs.length+999}};
           });
         }, 900);
       } else if(procStep==='awaitReno'){
