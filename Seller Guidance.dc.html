@@ -2037,13 +2037,13 @@ class Component extends DCLogic {
     const last = this._lastAScrollTop || 0;
     let hidden = this._milestoneBarHidden || false;
     if(top > last + 3 && top > 40) hidden = true;
-    if(top < last - 1 || top < 40) hidden = false;
+    if(top < last || top < 40) hidden = false;
     if(hidden !== this._milestoneBarHidden){
       this._milestoneBarHidden = hidden;
       const bar = this.milestoneChatBarRef.current;
       if(bar){ bar.style.opacity = hidden ? '0' : '1'; bar.style.pointerEvents = hidden ? 'none' : 'auto'; }
     }
-    const scrollingUp = top < last - 1 && top > 40;
+    const scrollingUp = top < last && top > 40;
     const scrollingDown = top > last + 3;
     if(scrollingUp && !this.state.a.subPillsRevealed){
       this.setState(s=>({a:{...s.a, subPillsRevealed:true}}));
@@ -2068,7 +2068,7 @@ class Component extends DCLogic {
     const last = this._lastToolScrollTop || 0;
     let hidden = this._toolBarHidden || false;
     if(top > last + 3 && top > 40) hidden = true;
-    if(top < last - 1 || top < 40) hidden = false;
+    if(top < last || top < 40) hidden = false;
     if(this.state.a.homeFGlow) hidden = false;
     if(hidden !== this._toolBarHidden){
       this._toolBarHidden = hidden;
@@ -2082,7 +2082,7 @@ class Component extends DCLogic {
       this.setState(s=>({a:{...s.a, tabBarPinned:pinned, understandSubOpen: pinned ? false : s.a.understandSubOpen}}));
     }
     // Show sub-pills on scroll-up, hide on scroll-down or idle
-    const scrollingUp = top < last - 1 && top > 40;
+    const scrollingUp = top < last && top > 40;
     const scrollingDown = top > last + 3;
     if(scrollingUp && !this.state.a.subPillsRevealed){
       this.setState(s=>({a:{...s.a, subPillsRevealed:true}}));
