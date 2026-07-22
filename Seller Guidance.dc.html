@@ -1928,7 +1928,7 @@ class Component extends DCLogic {
     }, 1300);
   }
   hfZestOkTap(){
-    this.setState(s=>({a:{...s.a,chatClosing:true}}));
+    this.setState(s=>({a:{...s.a,chatClosing:true, advisorThinking:true, advisorReady:false}}));
     setTimeout(()=>{
       this.setState(s=>({a:{...s.a,screen:'action',chatClosing:false}}));
       const scroll=document.querySelector('[data-tool-scroll]'); if(scroll) scroll.scrollTop=0;
