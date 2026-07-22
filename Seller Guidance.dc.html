@@ -1963,7 +1963,7 @@ class Component extends DCLogic {
         const toSqft = parseInt((pendFields.sqft||'1680').replace(/,/g,''),10);
         const steps=30, duration=1000, interval=duration/steps;
         let step=0;
-        this.setState(s=>({hf:{...s.hf, flashZcard:true, countingUp:true, factsUpdated:true}}));
+        this.setState(s=>({hf:{...s.hf, flashZcard:true, countingUp:true}}));
         const ticker=setInterval(()=>{
           step++;
           const ease=1-Math.pow(1-step/steps,3);
@@ -1971,7 +1971,7 @@ class Component extends DCLogic {
           if(step>=steps){
             clearInterval(ticker);
             const summaryTxt = this.hfBuildSummary(pendFields, hf.savedFields||hf.fields, toZest) || ('Updated to '+pendFields.beds+' bd, '+pendFields.baths+' ba, and '+pendFields.sqft+' sq ft.');
-            this.setState(s=>({hf:{...s.hf, zestimate:toZest, savedZest: s.hf.savedZest||fromZest, fields:pendFields, savedFields:pendFields, pendingZest:null, pendingFields:null, flashZcard:false, countingUp:false, summary:{show:true,text:summaryTxt}}}), ()=>{ this.startAdvisorCard(); });
+            this.setState(s=>({hf:{...s.hf, zestimate:toZest, savedZest: s.hf.savedZest||fromZest, fields:pendFields, savedFields:pendFields, pendingZest:null, pendingFields:null, flashZcard:false, countingUp:false, summary:{show:true,text:summaryTxt}, factsUpdated:true}}), ()=>{ this.startAdvisorCard(); });
           }
         }, interval);
       }, 800);
