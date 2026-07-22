@@ -2297,6 +2297,12 @@ class Component extends DCLogic {
     }
   }
   // Tapping a prompt chip: open Voyager, answer it, surface follow-ups, mark engaged
+  _marketAndCompsChips(askedKeys){
+    const mTree=this.A_PROMPTS[1]; const cTree=this.A_PROMPTS[0];
+    const mChips=['m_now','m_long','m_neutral'].filter(k=>!askedKeys.includes(k)).map(k=>({ label:mTree.nodes[k].q, onTap:()=>this.tapPrompt(k) }));
+    const cChips=['c_price','c_standout'].filter(k=>!askedKeys.includes(k)).map(k=>({ label:cTree.nodes[k].q, onTap:()=>this.tapPromptInTree(0,k) }));
+    return [...mChips, ...cChips];
+  }
   tapPrompt(key){
     this.hfCommitPending();
     this.setState(s=>{
@@ -2305,20 +2311,25 @@ class Component extends DCLogic {
       const node=tree.nodes[key]; if(!node) return {};
       const msgs=[...s.a.messages, { who:'u', text:node.q }, { who:'v', text:node.a }];
       const askedKeys=[...(s.a.askedKeys||[]), key];
-      const rootKeys = t===0
-        ? (key==='c_price'||key==='c_standout'||askedKeys.some(k=>k==='c_price'||k==='c_standout')
-            ? ['c_price','c_standout']
-            : tree.root)
-        : tree.root;
-      const accImproveAsked = t===0 && askedKeys.some(k=>k==='v_acc'||k==='v_improve');
-      let follow = rootKeys.filter(k=>{
-        if(!askedKeys.includes(k)){
-          if(accImproveAsked && (k==='v_acc'||k==='v_improve')) return false;
-          if(this.state.hf.factsUpdated && (k==='v_acc'||k==='v_improve')) return false;
-          return true;
-        }
-        return false;
-      }).map(k=>({ label:tree.nodes[k].q, onTap:()=>this.tapPrompt(k) }));
+      let follow;
+      if(t===1){
+        follow=this._marketAndCompsChips(askedKeys);
+      } else {
+        const rootKeys = t===0
+          ? (key==='c_price'||key==='c_standout'||askedKeys.some(k=>k==='c_price'||k==='c_standout')
+              ? ['c_price','c_standout']
+              : tree.root)
+          : tree.root;
+        const accImproveAsked = t===0 && askedKeys.some(k=>k==='v_acc'||k==='v_improve');
+        follow = rootKeys.filter(k=>{
+          if(!askedKeys.includes(k)){
+            if(accImproveAsked && (k==='v_acc'||k==='v_improve')) return false;
+            if(this.state.hf.factsUpdated && (k==='v_acc'||k==='v_improve')) return false;
+            return true;
+          }
+          return false;
+        }).map(k=>({ label:tree.nodes[k].q, onTap:()=>this.tapPrompt(k) }));
+      }
       const engaged={...s.a.engaged, [t]:true};
       return { a:{...s.a, screen:'chat', messages:msgs, chips:follow, mode:'ask', engaged, engCount:(s.a.engCount||0)+1, anchor:msgs.length+999, checkInIdx:(s.a.checkInIdx||0)+1, askValue:'', readyForNext:false, lastPromptKey:key, askedKeys } };
     });
@@ -2330,8 +2341,13 @@ class Component extends DCLogic {
       const node=tree.nodes[key]; if(!node) return {};
       const msgs=[...s.a.messages, { who:'u', text:node.q }, { who:'v', text:node.a }];
       const askedKeys=[...(s.a.askedKeys||[]), key];
-      const rootKeys=['c_price','c_standout'];
-      const follow=rootKeys.filter(k=>!askedKeys.includes(k)).map(k=>({ label:tree.nodes[k].q, onTap:()=>this.tapPromptInTree(treeIdx,k) }));
+      let follow;
+      if(s.a.actionIdx===1){
+        follow=this._marketAndCompsChips(askedKeys);
+      } else {
+        const rootKeys=['c_price','c_standout'];
+        follow=rootKeys.filter(k=>!askedKeys.includes(k)).map(k=>({ label:tree.nodes[k].q, onTap:()=>this.tapPromptInTree(treeIdx,k) }));
+      }
       return { a:{...s.a, screen:'chat', messages:msgs, chips:follow, mode:'ask', anchor:msgs.length+999, askedKeys} };
     });
   }
