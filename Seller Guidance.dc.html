@@ -100,12 +100,14 @@
                   <span style="width:16px;height:16px;background:#fff;-webkit-mask:var(--ic-IconChevronLeftOutline) center/contain no-repeat;mask:var(--ic-IconChevronLeftOutline) center/contain no-repeat;display:block;"></span>
                 </button>
 
-                <div style="position:absolute;left:0;right:0;bottom:0;padding:32px 14px 12px;background:linear-gradient(to top, rgba(17,17,22,.80), rgba(17,17,22,0));color:#fff;">
-                  <div style="font-family:var(--font-brand);font-weight:900;font-size:24px;line-height:1.05;">{{ a.heroZest }}</div>
-                  <div style="font-size:13px;opacity:.92;margin-top:2px;">{{ a.heroShort }}, Austin, TX</div>
-                  <div style="font-size:12px;opacity:.82;margin-top:1px;">{{ a.heroStatsCard }}</div>
-                </div>
-                <div style="position:absolute;left:0;right:0;bottom:0;height:32px;background:linear-gradient(to top, #fff, rgba(255,255,255,0));pointer-events:none;"></div>
+                <sc-if value="{{ a.screen === 'chat' }}">
+                  <div style="position:absolute;left:0;right:0;bottom:0;padding:32px 14px 12px;background:linear-gradient(to top, rgba(17,17,22,.80), rgba(17,17,22,0));color:#fff;">
+                    <div style="font-family:var(--font-brand);font-weight:900;font-size:24px;line-height:1.05;">{{ a.heroZest }}</div>
+                    <div style="font-size:13px;opacity:.92;margin-top:2px;">{{ a.heroShort }}, Austin, TX</div>
+                    <div style="font-size:12px;opacity:.82;margin-top:1px;">{{ a.heroStatsCard }}</div>
+                  </div>
+                </sc-if>
+                <div style="position:absolute;left:0;right:0;bottom:0;height:80px;background:linear-gradient(to top, #fff, rgba(255,255,255,0));pointer-events:none;"></div>
               </div>
             </sc-if>
 
