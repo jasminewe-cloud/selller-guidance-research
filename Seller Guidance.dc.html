@@ -531,7 +531,7 @@
                     <span style="font-weight:700;font-size:14px;">What this means for you</span>
                   </div>
                   <p style="font-size:14px;line-height:1.5;color:var(--gray-900);margin:0 0 14px;">{{ hf.whatThisMeans }}</p>
-                  <button onClick="{{ a.digDeeperZestimate }}" style="width:100%;display:flex;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--gray-950);border-radius:14px;padding:11px 16px;cursor:pointer;font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Dig deeper with Seller Advisor</button>
+                  <button onClick="{{ a.digDeeperZestimate }}" style="display:none;width:100%;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--gray-950);border-radius:14px;padding:11px 16px;cursor:pointer;font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Dig deeper with Seller Advisor</button>
                 </div>
                 <div id="home-facts-anchor" style="background:#fff;border-radius:16px;border:1px solid var(--gray-200);padding:16px;">
                   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
@@ -573,7 +573,7 @@
                       <span style="font-weight:700;font-size:14px;">What this means for you</span>
                     </div>
                     <p style="font-size:14px;line-height:1.5;color:var(--gray-900);margin:0 0 14px;">{{ hf.summaryText }}</p>
-                    <button onClick="{{ a.digDeeperHomeFacts }}" style="width:100%;display:flex;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--gray-950);border-radius:14px;padding:11px 16px;cursor:pointer;font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Dig deeper with Seller Advisor</button>
+                    <button onClick="{{ a.digDeeperHomeFacts }}" style="display:none;width:100%;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--gray-950);border-radius:14px;padding:11px 16px;cursor:pointer;font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Dig deeper with Seller Advisor</button>
                     <div style="height:1px;background:var(--gray-200);margin:14px 0 0;"></div>
                     <div style="display:flex;align-items:center;justify-content:space-between;padding-top:12px;">
                       <div style="display:flex;flex-direction:column;gap:2px;">
@@ -629,7 +629,7 @@
                     <span style="font-weight:700;font-size:14px;">What this means for you</span>
                   </div>
                   <p style="font-size:14px;line-height:1.5;color:var(--gray-900);margin:0 0 14px;">Your market is leaning toward sellers right now. Prices are projected to grow 8.5% over the next year and homes are going pending in about 13 days. Demand is outpacing supply, which gives you room to price above your Zestimate and still attract strong offers quickly.</p>
-                  <button onClick="{{ a.digDeeperMarket }}" style="width:100%;display:flex;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--gray-950);border-radius:14px;padding:11px 16px;cursor:pointer;font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Dig deeper with Seller Advisor</button>
+                  <button onClick="{{ a.digDeeperMarket }}" style="display:none;width:100%;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--gray-950);border-radius:14px;padding:11px 16px;cursor:pointer;font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Dig deeper with Seller Advisor</button>
                 </div>
               </sc-if>
               <!-- Comparable homes — track market tool -->
@@ -655,7 +655,7 @@
                     <sc-if value="{{ a.compInsightDefault }}">These recently sold homes are comparable to yours. Their sale prices form the basis for your likely listing range. Tap any comp to see how it stacks up against your home.</sc-if>
                     <sc-if value="{{ !a.compInsightDefault }}">{{ a.compInsightText }}</sc-if>
                   </div>
-                  <button onClick="{{ a.digDeeperComps }}" style="width:100%;display:flex;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--gray-950);border-radius:14px;padding:11px 16px;cursor:pointer;font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Dig deeper with Seller Advisor</button>
+                  <button onClick="{{ a.digDeeperComps }}" style="display:none;width:100%;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--gray-950);border-radius:14px;padding:11px 16px;cursor:pointer;font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Dig deeper with Seller Advisor</button>
                   <div style="height:1px;background:var(--gray-200);margin:14px 0 0;"></div>
                   <div style="display:flex;align-items:center;justify-content:space-between;padding-top:12px;">
                     <div style="display:flex;flex-direction:column;gap:2px;">
@@ -724,7 +724,7 @@
                     <span style="font-weight:700;font-size:14px;color:var(--gray-950);">What this means for you</span>
                   </div>
                   <div style="font-size:13.5px;line-height:1.5;color:var(--gray-700);margin-bottom:12px;">{{ a.insightText }}</div>
-                  <button onClick="{{ a.digDeeperNet }}" style="width:100%;display:flex;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--gray-950);border-radius:14px;padding:11px 16px;cursor:pointer;font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Dig deeper with Seller Advisor</button>
+                  <button onClick="{{ a.digDeeperNet }}" style="display:none;width:100%;align-items:center;justify-content:center;background:transparent;border:1.5px solid var(--gray-950);border-radius:14px;padding:11px 16px;cursor:pointer;font-family:var(--font-ui);font-size:14px;font-weight:700;color:var(--gray-950);">Dig deeper with Seller Advisor</button>
                   <div style="height:1px;background:var(--gray-200);margin:14px 0 0;"></div>
                   <div style="display:flex;align-items:center;justify-content:space-between;padding-top:12px;">
                     <div style="display:flex;flex-direction:column;gap:2px;">
