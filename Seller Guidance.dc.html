@@ -909,9 +909,17 @@
                   <span style="font-family:var(--font-ui);font-size:11px;font-weight:700;color:var(--gray-950);letter-spacing:.05em;text-transform:uppercase;">{{ a.advisorStep }}</span>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:8px;">
-                  <span style="width:18px;height:18px;flex:none;margin-top:1px;border-radius:999px;background:conic-gradient(from 0deg,#3B82F6,#8B5CF6,#EC4899,#EF4444,#F97316,#3B82F6);display:block;animation:{{ a.advisorRingAnim }};position:relative;">
-                    <span style="position:absolute;inset:3px;border-radius:999px;background:#fff;display:block;"></span>
-                  </span>
+                  <svg width="20" height="20" viewBox="0 0 20 20" style="flex:none;margin-top:1px;display:block;animation:{{ a.advisorRingAnim }};" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#3B82F6"/>
+                        <stop offset="33%" stop-color="#8B5CF6"/>
+                        <stop offset="66%" stop-color="#EC4899"/>
+                        <stop offset="100%" stop-color="#F97316"/>
+                      </linearGradient>
+                    </defs>
+                    <circle cx="10" cy="10" r="8" fill="none" stroke="url(#ringGrad)" stroke-width="3.5"/>
+                  </svg>
                   <div style="flex:1;opacity:{{ a.advisorContentOpacity }};animation:{{ a.advisorTextAnim }};">
                     <p style="font-family:var(--font-ui);font-size:14px;line-height:1.45;color:var(--gray-950);margin:0;">{{ a.advisorMsg }}</p>
                     <button onClick="{{ a.advisorCtaTap }}" style="display:{{ a.advisorCtaDisplay }};margin-top:10px;width:100%;background:#fff;color:#0041D9;border:1.5px solid #0041D9;border-radius:999px;padding:10px 0;font-family:var(--font-ui);font-size:14px;font-weight:700;cursor:pointer;">{{ a.advisorCtaLabel }}</button>
