@@ -2299,9 +2299,9 @@ class Component extends DCLogic {
   // Tapping a prompt chip: open Voyager, answer it, surface follow-ups, mark engaged
   _marketAndCompsChips(askedKeys){
     const mTree=this.A_PROMPTS[1]; const cTree=this.A_PROMPTS[0];
-    const mChips=['m_now','m_long','m_neutral'].filter(k=>!askedKeys.includes(k)).map(k=>({ label:mTree.nodes[k].q, onTap:()=>this.tapPrompt(k) }));
     const cChips=['c_price','c_standout'].filter(k=>!askedKeys.includes(k)).map(k=>({ label:cTree.nodes[k].q, onTap:()=>this.tapPromptInTree(0,k) }));
-    return [...mChips, ...cChips];
+    const mChips=['m_now','m_long','m_neutral'].filter(k=>!askedKeys.includes(k)).map(k=>({ label:mTree.nodes[k].q, onTap:()=>this.tapPrompt(k) }));
+    return [...cChips, ...mChips];
   }
   tapPrompt(key){
     this.hfCommitPending();
@@ -2562,8 +2562,8 @@ class Component extends DCLogic {
     const mTree = this.A_PROMPTS[1];
     const cTree = this.A_PROMPTS[0];
     const chips = [
-      ...['m_now','m_long','m_neutral'].map(k=>({ label:mTree.nodes[k].q, onTap:()=>this.tapPrompt(k) })),
-      ...['c_price','c_standout'].map(k=>({ label:cTree.nodes[k].q, onTap:()=>this.tapPromptInTree(0, k) }))
+      ...['c_price','c_standout'].map(k=>({ label:cTree.nodes[k].q, onTap:()=>this.tapPromptInTree(0, k) })),
+      ...['m_now','m_long','m_neutral'].map(k=>({ label:mTree.nodes[k].q, onTap:()=>this.tapPrompt(k) }))
     ];
     const introMsg = { who:'v', isV:true, hasText:true, text:"What would you like to explore about the market or comparable homes?" };
     this.setState(s=>{ const msgs=[introMsg]; return { a:{...s.a, screen:'chat', view:'tool', messages:msgs, chips, mode:'chips', anchor:msgs.length+999} }; });
