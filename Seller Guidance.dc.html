@@ -2229,7 +2229,7 @@ class Component extends DCLogic {
     const addMsg = (msg, delay) => setTimeout(()=>{
       this.setState(s=>{
         const prev = s.a.messages;
-        const msgs = (msg.isThinking===false && prev.length && prev[prev.length-1].isThinking)
+        const msgs = (!msg.isThinking && prev.length && prev[prev.length-1].isThinking)
           ? [...prev.slice(0,-1), msg]
           : [...prev, msg];
         return {a:{...s.a, messages:msgs, anchor:msgs.length+999}};
@@ -2548,7 +2548,7 @@ class Component extends DCLogic {
     const add = (msg, delay) => setTimeout(()=>{
       this.setState(s=>{
         const prev = s.a.messages;
-        const msgs = (msg.isThinking===false && prev.length && prev[prev.length-1].isThinking)
+        const msgs = (!msg.isThinking && prev.length && prev[prev.length-1].isThinking)
           ? [...prev.slice(0,-1), msg]
           : [...prev, msg];
         return {a:{...s.a, messages:msgs, anchor:msgs.length+999}};
@@ -2563,7 +2563,7 @@ class Component extends DCLogic {
     const add = (msg, delay) => setTimeout(()=>{
       this.setState(s=>{
         const prev = s.a.messages;
-        const msgs = (msg.isThinking===false && prev.length && prev[prev.length-1].isThinking)
+        const msgs = (!msg.isThinking && prev.length && prev[prev.length-1].isThinking)
           ? [...prev.slice(0,-1), msg]
           : [...prev, msg];
         return {a:{...s.a, messages:msgs, anchor:msgs.length+999}};
@@ -2590,7 +2590,7 @@ class Component extends DCLogic {
     const add = (msg, delay) => setTimeout(()=>{
       this.setState(s=>{
         const prev = s.a.messages;
-        const msgs = (msg.isThinking===false && prev.length && prev[prev.length-1].isThinking)
+        const msgs = (!msg.isThinking && prev.length && prev[prev.length-1].isThinking)
           ? [...prev.slice(0,-1), msg]
           : [...prev, msg];
         return {a:{...s.a, messages:msgs, anchor:msgs.length+999}};
@@ -2613,7 +2613,7 @@ class Component extends DCLogic {
     const add = (msg, delay) => setTimeout(()=>{
       this.setState(s=>{
         const prev = s.a.messages;
-        const msgs = (msg.isThinking===false && prev.length && prev[prev.length-1].isThinking)
+        const msgs = (!msg.isThinking && prev.length && prev[prev.length-1].isThinking)
           ? [...prev.slice(0,-1), msg]
           : [...prev, msg];
         return {a:{...s.a, messages:msgs, anchor:msgs.length+999}};
