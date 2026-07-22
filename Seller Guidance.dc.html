@@ -337,9 +337,9 @@
                       </sc-if>
                       <sc-if value="{{ !m.isFetching }}">
                         <div style="display:flex;gap:5px;align-items:center;padding:4px 0;">
-                          <span style="width:8px;height:8px;border-radius:999px;background:var(--gray-950);animation:dotBounce .85s cubic-bezier(.36,.07,.19,.97) 0s infinite both;display:block;"></span>
-                          <span style="width:8px;height:8px;border-radius:999px;background:var(--gray-950);animation:dotBounce .85s cubic-bezier(.36,.07,.19,.97) .17s infinite both;display:block;"></span>
-                          <span style="width:8px;height:8px;border-radius:999px;background:var(--gray-950);animation:dotBounce .85s cubic-bezier(.36,.07,.19,.97) .34s infinite both;display:block;"></span>
+                          <span style="width:8px;height:8px;border-radius:999px;background:var(--gray-950);animation:dotBounce .55s cubic-bezier(.36,.07,.19,.97) 0s infinite both;display:block;"></span>
+                          <span style="width:8px;height:8px;border-radius:999px;background:var(--gray-950);animation:dotBounce .55s cubic-bezier(.36,.07,.19,.97) .11s infinite both;display:block;"></span>
+                          <span style="width:8px;height:8px;border-radius:999px;background:var(--gray-950);animation:dotBounce .55s cubic-bezier(.36,.07,.19,.97) .22s infinite both;display:block;"></span>
                         </div>
                       </sc-if>
                     </sc-if>
@@ -1690,7 +1690,7 @@ class Component extends DCLogic {
     // scroll again after Voyager replies (covers all delayed setState paths)
     setTimeout(()=>this.hfVScrollBottom(), 500);
     setTimeout(()=>this.hfVScrollBottom(), 1000);
-    setTimeout(()=>this.hfVScrollBottom(), 1800);
+    setTimeout(()=>this.hfVScrollBottom(), 900);
 
     // --- Awaiting "anything else?" answer ---
     if(vc.awaitingAnythingElse){
@@ -2236,7 +2236,7 @@ class Component extends DCLogic {
       return {a:{...s.a, messages:msgs, chips:[], mode:'ask', proceedsChatStep:'awaitPushback', askValue:'', anchor:msgs.length+999}};
     });
     addMsg({who:'v', isV:true, isThinking:true}, 600);
-    addMsg({who:'v', isV:true, isThinking:false, hasText:true, text:"Based on your current home facts and the seller's market in 78745, you're looking at somewhere in the $480K to $490K range as a starting point. What are your thoughts on this?"}, 1800);
+    addMsg({who:'v', isV:true, isThinking:false, hasText:true, text:"Based on your current home facts and the seller's market in 78745, you're looking at somewhere in the $480K to $490K range as a starting point. What are your thoughts on this?"}, 900);
     setTimeout(()=>{
       this.setState(s=>({a:{...s.a, proceedsPrefill:"That seems low. I thought it could be higher.", mode:'ask'}}));
     }, 2200);
@@ -2367,7 +2367,7 @@ class Component extends DCLogic {
             ];
             return {a:{...s.a,messages:msgs,mode:'ask',proceedsPrefill:"Yes, I've done some renovations.",proceedsChatStep:'awaitReno',anchor:msgs.length+999}};
           });
-        }, 1800);
+        }, 900);
       } else if(procStep==='awaitReno'){
         // Voyager: that changes things, build the plan steps
         setTimeout(()=>{ this.setState(s=>({a:{...s.a,messages:[...s.a.messages,{who:'v',isV:true,isThinking:true}],anchor:s.a.messages.length+999}})); }, 400);
@@ -2383,7 +2383,7 @@ class Component extends DCLogic {
             ];
             return {a:{...s.a,messages:msgs,mode:'chips',chips:[chip],proceedsChatStep:null,anchor:msgs.length+999}};
           });
-        }, 1800);
+        }, 900);
       }
       return;
     }
@@ -2413,7 +2413,7 @@ class Component extends DCLogic {
             a:{...s.a,messages:[...s.a.messages.filter(m=>!m.isThinking),{who:'v',isV:true,hasText:true,text:confirmMsg}],mode:'ask',askValue:'no',anchor:s.a.messages.length+999,hfChatStep:'awaitDone'},
             hf:{...s.hf, pendingFields:newFields, pendingZest:newZest}
           }));
-        }, 1800);
+        }, 900);
         return;
       }
       // Step: awaiting "anything else" / done
@@ -2618,7 +2618,7 @@ class Component extends DCLogic {
       };
     });
     add({who:'v', isV:true, isThinking:true}, 600);
-    add({who:'v', isV:true, isThinking:false, hasText:true, text:"Good question. Based on your updated home facts — 4 bedrooms, 3 bathrooms, 2,030 sqft — your Zestimate is now $527K."}, 1800);
+    add({who:'v', isV:true, isThinking:false, hasText:true, text:"Good question. Based on your updated home facts — 4 bedrooms, 3 bathrooms, 2,030 sqft — your Zestimate is now $527K."}, 900);
     add({who:'v', isV:true, hasText:true, text:"We're in a seller's market in 78745 right now. Homes are going pending in about 13 days and demand is outpacing supply. That gives you room to price above your Zestimate."}, 3000);
     add({who:'v', isV:true, hasText:true, text:"Based on all of that, we'd suggest listing around $550K. Review the listing price tool to see the full breakdown."}, 4200);
     setTimeout(()=>{
