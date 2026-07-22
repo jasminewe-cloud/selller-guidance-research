@@ -337,10 +337,20 @@
                         </div>
                       </sc-if>
                       <sc-if value="{{ !m.isFetching }}">
-                        <div style="display:flex;gap:5px;align-items:center;padding:4px 0;">
-                          <span style="width:8px;height:8px;border-radius:999px;background:var(--gray-950);animation:dotBounce .55s cubic-bezier(.36,.07,.19,.97) 0s infinite both;display:block;"></span>
-                          <span style="width:8px;height:8px;border-radius:999px;background:var(--gray-950);animation:dotBounce .55s cubic-bezier(.36,.07,.19,.97) .11s infinite both;display:block;"></span>
-                          <span style="width:8px;height:8px;border-radius:999px;background:var(--gray-950);animation:dotBounce .55s cubic-bezier(.36,.07,.19,.97) .22s infinite both;display:block;"></span>
+                        <div style="padding:4px 0;">
+                          <div style="width:22px;height:22px;display:block;animation:ringSpinAdvisor 600ms linear infinite;transform-origin:center center;">
+                            <svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+                              <defs>
+                                <linearGradient id="ringGradChat" x1="0%" y1="0%" x2="100%" y2="100%">
+                                  <stop offset="0%" stop-color="#3B82F6"/>
+                                  <stop offset="33%" stop-color="#8B5CF6"/>
+                                  <stop offset="66%" stop-color="#EC4899"/>
+                                  <stop offset="100%" stop-color="#F97316"/>
+                                </linearGradient>
+                              </defs>
+                              <circle cx="11" cy="11" r="8.5" fill="none" stroke="url(#ringGradChat)" stroke-width="4" stroke-linecap="round" stroke-dasharray="32 22"/>
+                            </svg>
+                          </div>
                         </div>
                       </sc-if>
                     </sc-if>
