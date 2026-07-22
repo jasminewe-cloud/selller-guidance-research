@@ -2632,7 +2632,7 @@ class Component extends DCLogic {
   }
   closeChat(){
     this.setState(s=>({a:{...s.a, chatClosing:true}}));
-    setTimeout(()=>{ this.setState(s=>({a:{...s.a, screen:'action', chatClosing:false, askedKeys:[], hfChatStep:null}})); }, 500);
+    setTimeout(()=>{ this.setState(s=>({a:{...s.a, screen:'action', chatClosing:false, askedKeys:[], hfChatStep:null}}), ()=>this.startAdvisorCard()); }, 500);
   }
   closeChatToComps(){
     this.setState(s=>({a:{...s.a, chatClosing:true}}));
