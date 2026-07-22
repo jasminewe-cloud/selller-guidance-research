@@ -2277,7 +2277,7 @@ class Component extends DCLogic {
     this.setState(s=>({a:{...s.a, expanded:-1}}));
     setTimeout(()=>{ this.setState(s=>({a:{...s.a, expanded:target}})); }, 370);
   }
-  startAdvisorCard(){ this.setState(s=>({a:{...s.a, advisorThinking:true, advisorReady:false}})); setTimeout(()=>{ this.setState(s=>({a:{...s.a, advisorThinking:false, advisorReady:true}})); }, 1200); }
+  startAdvisorCard(){ this.setState(s=>({a:{...s.a, advisorThinking:true, advisorReady:false}})); setTimeout(()=>{ this.setState(s=>({a:{...s.a, advisorThinking:false, advisorReady:true}})); }, 700); }
   openTool(i){ this.setState(s=>({a:{...s.a, view:'tool', actionIdx:i, askedKeys:[]}}), ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; this.startAdvisorCard(); }); }
   msOfTool(t){ for(let i=0;i<this.MS.length;i++){ if(this.MS[i].actions.some(a=>a.tool===t)) return i; } return -1; }
   backHome(){ this.setState(s=>({a:{...s.a, view:'home', expanded: this.msOfTool(s.a.actionIdx)}})); }
