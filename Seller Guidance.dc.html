@@ -3194,8 +3194,8 @@ class Component extends DCLogic {
     const onToolScreen = a.view==='tool' && a.screen!=='chat';
     const heroVisible = (a.claimed && a.view==='home');
     const OB = {
-      statusBg: heroVisible ? 'transparent' : onToolScreen ? '#136F65' : 'var(--gray-50)',
-      statusColor: heroVisible ? '#fff' : onToolScreen ? '#fff' : 'var(--gray-950)',
+      statusBg: (heroVisible || onToolScreen) ? 'transparent' : 'var(--gray-50)',
+      statusColor: (heroVisible || onToolScreen) ? '#fff' : 'var(--gray-950)',
       showIntro: ob.beat === -1 || ob.introExiting,
       introContentAnim: ob.introExiting ? 'introSlideOut 320ms cubic-bezier(.25,.46,.45,.94) both' : 'introSlideIn 360ms cubic-bezier(.25,.46,.45,.94) both',
       dismissIntro: ()=>this.dismissIntro(),
