@@ -2795,14 +2795,7 @@ class Component extends DCLogic {
             ? 'Your Zestimate is now $'+(Math.round((hf.zestimate||465000)/1000))+'K based on your updated home facts. If everything looks good on screen, let\'s head to the next step.'
             : 'Review your current home facts and update anything that\'s changed.')
         : a.actionIdx===1
-          ? (a.marketExplored
-              ? 'When you\'re done walking through the comparable homes, let\'s move to the next step.'
-              : a.lastCompIdx!==null ? [
-                  'This home sold in 14 days at 101% of list, which tells you buyers in 78745 are moving fast and not negotiating down. Your updated home matches this layout and size, so priced right you should see similar or stronger demand.',
-                  'Slightly smaller with one fewer bathroom, and it still sold in 21 days at 99% of list. Your confirmed 4bd/3ba puts you above this comp in both size and likely buyer appeal.',
-                  'Smaller overall with fewer beds and baths, and it took a bit longer to move. The gap between this and the top comp shows how much the extra bedroom and bath matter to buyers here. Your updated facts put you closer to the top.',
-                ][a.lastCompIdx]
-              : 'Check the market index, then tap any comparable home to walk through it together.')
+          ? (()=>{ const COMP_INS=['This home sold in 14 days at 101% of list, which tells you buyers in 78745 are moving fast and not negotiating down. Your updated home matches this layout and size, so priced right you should see similar or stronger demand.','Slightly smaller with one fewer bathroom, and it still sold in 21 days at 99% of list. Your confirmed 4bd/3ba puts you above this comp in both size and likely buyer appeal.','Smaller overall with fewer beds and baths, and it took a bit longer to move. The gap between this and the top comp shows how much the extra bedroom and bath matter to buyers here. Your updated facts put you closer to the top.']; return a.selectedComp!==null ? COMP_INS[a.selectedComp] : a.marketExplored ? 'When you\'re done walking through the comparable homes, let\'s move to the next step.' : a.lastCompIdx!==null ? COMP_INS[a.lastCompIdx] : 'Check the market index, then tap any comparable home to walk through it together.'; })()
           : a.actionIdx===2
             ? (a.listingExplored
                 ? 'Take your time with this. When you\'ve landed on a listing price, here are your next steps.'
@@ -2811,7 +2804,7 @@ class Component extends DCLogic {
       advisorCtaLabel: a.actionIdx===0
         ? (hf.factsUpdated ? 'Review your local market' : 'Update home facts')
         : a.actionIdx===1 && a.marketExplored ? 'Determine your listing price' : '',
-      advisorCtaDisplay: (a.actionIdx===0 || (a.actionIdx===1 && a.marketExplored)) ? 'block' : 'none',
+      advisorCtaDisplay: (a.actionIdx===0 || (a.actionIdx===1 && a.marketExplored && a.selectedComp===null)) ? 'block' : 'none',
       advisorCtaTap: a.actionIdx===0
         ? (hf.factsUpdated ? ()=>this.gotoTool(1) : ()=>this.scrollToHomeFacts())
         : a.actionIdx===1 ? ()=>this.gotoTool(2) : ()=>{},
