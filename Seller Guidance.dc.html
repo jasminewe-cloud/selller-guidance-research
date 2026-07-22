@@ -261,7 +261,7 @@
         </div>
 
         <!-- Advisor chat bar — outside overflow:hidden container -->
-        <div ref="{{ a.milestoneChatBarRef }}" style="position:absolute;left:0;right:0;bottom:0;z-index:20;padding:8px 16px 20px;background:transparent;transition:opacity 200ms ease;">
+        <div ref="{{ a.milestoneChatBarRef }}" style="position:absolute;left:0;right:0;bottom:0;z-index:20;padding:8px 16px 20px;background:transparent;transition:opacity 200ms ease;opacity:{{ a.milestoneBarsOpacity }};pointer-events:{{ a.milestoneBarsPointer }};">
           <div style="display:flex;gap:8px;align-items:center;">
             <button onClick="{{ a.openChat }}" style="flex:1;display:flex;align-items:center;background:#fff;border:none;border-radius:999px;padding:0 8px 0 16px;cursor:pointer;text-align:left;box-shadow:0 2px 12px rgba(0,0,0,.18);">
               <span style="flex:1;font-family:var(--font-ui);font-size:15px;color:var(--gray-400);padding:12px 6px 12px 0;">Ask your advisor anything</span>
@@ -913,7 +913,7 @@
               </div>
             </sc-if>
             <!-- Advisor guidance card — floats above chat bar -->
-            <div ref="{{ a.advisorCardRef }}" style="position:absolute;bottom:76px;left:16px;right:16px;z-index:21;transition:opacity 200ms ease,transform 200ms ease;">
+            <div ref="{{ a.advisorCardRef }}" style="position:absolute;bottom:76px;left:16px;right:16px;z-index:21;transition:opacity 200ms ease,transform 200ms ease;opacity:{{ a.toolBarsOpacity }};pointer-events:{{ a.toolBarsPointer }};">
               <div style="background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 4px 20px rgba(0,0,0,.14);">
                 <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
                   <span style="font-family:var(--font-ui);font-size:11px;font-weight:700;color:var(--gray-950);letter-spacing:.05em;text-transform:uppercase;">{{ a.advisorStep }}</span>
@@ -944,7 +944,7 @@
               </div>
             </div>
             <!-- Persistent chat bar -->
-            <div ref="{{ a.toolChatBarRef }}" style="position:absolute;bottom:0;left:0;right:0;z-index:20;padding:8px 16px 20px;background:transparent;transition:opacity 200ms ease;">
+            <div ref="{{ a.toolChatBarRef }}" style="position:absolute;bottom:0;left:0;right:0;z-index:20;padding:8px 16px 20px;background:transparent;transition:opacity 200ms ease;opacity:{{ a.toolBarsOpacity }};pointer-events:{{ a.toolBarsPointer }};">
               <div class="{{ a.actionChatGlowClass }}" onClick="{{ a.openChat }}" style="display:flex;align-items:center;background:#fff;border-radius:999px;padding:0 8px 0 16px;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,.18);">
                 <span style="flex:1;font-family:var(--font-ui);font-size:15px;color:var(--gray-400);padding:12px 6px 12px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ a.actionChatPlaceholder }}</span>
                 <span style="width:36px;height:36px;flex:none;border-radius:999px;background:var(--gray-950);display:flex;align-items:center;justify-content:center;margin:3px 0;"><span style="width:16px;height:16px;background:#fff;-webkit-mask:var(--ic-IconMicrophoneOutline) center/contain no-repeat;mask:var(--ic-IconMicrophoneOutline) center/contain no-repeat;"></span></span>
@@ -1525,7 +1525,7 @@ class Component extends DCLogic {
       closing:{ action:'Review & accept an offer', text:"Since you're already listed, jump to Close your sale to manage offers and paperwork with confidence." }
     };
     this.state = {
-      a: { messages:this.INIT_A.slice(), mode:'chips', addressValue:'', chips:this.A_TIMING.map(t=>({ label:t.label, onTap:()=>this.chooseTiming(t.key,t.label) })), ctaLabel:'', actionIdx:0, timing:null, screen:'chat', chatClosing:false, anchor:0, moreBelow:false, spacerH:0, claimed:true, view:'home', expanded:-1, planOpen:true, insightDismissed:false, selectedComp:null, collapsing:-1, engaged:{0:false,1:false,2:false,3:false}, salePrice:550000, insightPrice:550000, mortgage:178436, checkInIdx:0, askValue:'', readyForNext:false, lastPromptKey:'', askedKeys:[], homeFPrompt:false, homeFGlow:false, insightCompsOpen:false, insightNetOpen:false, insightNetSheetOpen:false, insightCompsSheetOpen:false, chatBarHidden:false, tabBarPinned:false, understandSubOpen:false, hfChatStep:null, fromInsightNudge:false, fromIntro:false, orientationDismissed:false, advisorThinking:false, advisorReady:true, marketExplored:false, listingExplored:false },
+      a: { messages:this.INIT_A.slice(), mode:'chips', addressValue:'', chips:this.A_TIMING.map(t=>({ label:t.label, onTap:()=>this.chooseTiming(t.key,t.label) })), ctaLabel:'', actionIdx:0, timing:null, screen:'chat', chatClosing:false, anchor:0, moreBelow:false, spacerH:0, claimed:true, view:'home', expanded:-1, planOpen:true, insightDismissed:false, selectedComp:null, collapsing:-1, engaged:{0:false,1:false,2:false,3:false}, salePrice:550000, insightPrice:550000, mortgage:178436, checkInIdx:0, askValue:'', readyForNext:false, lastPromptKey:'', askedKeys:[], homeFPrompt:false, homeFGlow:false, insightCompsOpen:false, insightNetOpen:false, insightNetSheetOpen:false, insightCompsSheetOpen:false, chatBarHidden:false, tabBarPinned:false, understandSubOpen:false, hfChatStep:null, fromInsightNudge:false, fromIntro:false, orientationDismissed:false, advisorThinking:false, advisorReady:true, marketExplored:false, listingExplored:false, toolBarsHidden:false, milestoneBarsHidden:false },
       b: { step:0, touring:true },
       c: { screen:'list', step:0, actionIdx:0, rec:null },
       d: { step:0, touring:true, rec:null },
@@ -2035,22 +2035,17 @@ class Component extends DCLogic {
     const c = this.aMilestoneScrollRef && this.aMilestoneScrollRef.current; if(!c) return;
     const top = c.scrollTop;
     const last = this._lastAScrollTop || 0;
-    this._peakAScrollTop = Math.max(this._peakAScrollTop || 0, top);
-    const peak = this._peakAScrollTop;
-    let hidden = this._milestoneBarHidden || false;
-    if(!hidden && top > last + 3 && top > 40){ hidden = true; }
-    else if(hidden && (top < peak - 20 || top < 40)){ hidden = false; this._peakAScrollTop = top; }
-    if(hidden !== this._milestoneBarHidden){
-      this._milestoneBarHidden = hidden;
-      const bar = this.milestoneChatBarRef.current;
-      if(bar){ bar.style.opacity = hidden ? '0' : '1'; bar.style.pointerEvents = hidden ? 'none' : 'auto'; }
-    }
+    this._lastAScrollTop = top;
+    const hidden = this.state.a.milestoneBarsHidden;
+    const shouldHide = !hidden && top > last + 3 && top > 40;
+    const shouldShow = hidden && top < last;
+    if(shouldHide){ this.setState(s=>({a:{...s.a, milestoneBarsHidden:true}})); }
+    if(shouldShow){ this.setState(s=>({a:{...s.a, milestoneBarsHidden:false}})); }
     const scrollingUp = top < last && top > 40;
     const scrollingDown = top > last + 3;
     if(scrollingUp && !this.state.a.subPillsRevealed){ this.setState(s=>({a:{...s.a, subPillsRevealed:true}})); }
     if(scrollingDown && this.state.a.subPillsRevealed){ this.setState(s=>({a:{...s.a, subPillsRevealed:false}})); }
     if(scrollingUp){ clearTimeout(this._subPillsTimerM); this._subPillsTimerM = setTimeout(()=>{ this.setState(s=>({a:{...s.a, subPillsRevealed:false}})); }, 3000); }
-    this._lastAScrollTop = top;
   }
   onScrollA(){
     this.refreshMore();
@@ -2061,19 +2056,12 @@ class Component extends DCLogic {
     if(!scroll) return;
     const top = scroll.scrollTop;
     const last = this._lastToolScrollTop || 0;
-    this._peakToolScrollTop = Math.max(this._peakToolScrollTop || 0, top);
-    const peak = this._peakToolScrollTop;
-    let hidden = this._toolBarHidden || false;
-    if(!hidden && top > last + 3 && top > 40){ hidden = true; }
-    else if(hidden && (top < peak - 20 || top < 40)){ hidden = false; this._peakToolScrollTop = top; }
-    if(this.state.a.homeFGlow) hidden = false;
-    if(hidden !== this._toolBarHidden){
-      this._toolBarHidden = hidden;
-      const bar = this.toolChatBarRef.current;
-      if(bar){ bar.style.opacity = hidden ? '0' : '1'; bar.style.pointerEvents = hidden ? 'none' : 'auto'; }
-      const card = this.advisorCardRef.current;
-      if(card){ card.style.opacity = hidden ? '0' : '1'; card.style.pointerEvents = hidden ? 'none' : 'auto'; }
-    }
+    this._lastToolScrollTop = top;
+    const hidden = this.state.a.toolBarsHidden;
+    const shouldHide = !hidden && top > last + 3 && top > 40 && !this.state.a.homeFGlow;
+    const shouldShow = hidden && (top < last || top < 40);
+    if(shouldHide){ this.setState(s=>({a:{...s.a, toolBarsHidden:true}})); }
+    if(shouldShow){ this.setState(s=>({a:{...s.a, toolBarsHidden:false}})); }
     const pinned = top > 190;
     if(pinned !== this.state.a.tabBarPinned){
       this.setState(s=>({a:{...s.a, tabBarPinned:pinned, understandSubOpen: pinned ? false : s.a.understandSubOpen}}));
@@ -2660,7 +2648,7 @@ class Component extends DCLogic {
     }, 500);
   }
   // Navigate to a tool and open its card (from "Let's go", a pill, or the bottom nudge)
-  gotoTool(i){ this._toolBarHidden=false; this._lastToolScrollTop=0; const bar=this.toolChatBarRef.current; if(bar){ bar.style.opacity='1'; bar.style.pointerEvents='auto'; } const card=this.advisorCardRef.current; if(card){ card.style.opacity='1'; card.style.pointerEvents='auto'; } this.setState(s=>({a:{...s.a, view:'tool', actionIdx:i, screen:'action', askedKeys:[], understandSubOpen:false}}), ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; this.startAdvisorCard(); }); }
+  gotoTool(i){ this._lastToolScrollTop=0; this.setState(s=>({a:{...s.a, view:'tool', actionIdx:i, screen:'action', askedKeys:[], understandSubOpen:false, toolBarsHidden:false}}), ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; this.startAdvisorCard(); }); }
   gotoPrep(){ this.setState(s=>({a:{...s.a, view:'home', screen:'action', expanded:1}})); }
   onSale(e){ const v=parseInt(e.target.value,10)||0; this.setState(s=>({a:{...s.a, salePrice:v, fromInsightNudge:false, engaged:{...s.a.engaged,2:true}, engCount:(s.a.engCount||0)+1}})); }
   onSaleCommit(e){ const v=parseInt(e.target.value,10)||0; this.setState(s=>({a:{...s.a, insightPrice:v, fromInsightNudge:false}})); }
@@ -2817,6 +2805,10 @@ class Component extends DCLogic {
       advisorRingDash: a.advisorThinking ? '32 22' : '54 0',
       advisorContentOpacity: a.advisorThinking ? '0' : '1',
       advisorTextAnim: a.advisorReady ? 'advisorFadeIn 600ms cubic-bezier(.25,.46,.45,.94) both' : 'none',
+      toolBarsOpacity: a.toolBarsHidden ? '0' : '1',
+      toolBarsPointer: a.toolBarsHidden ? 'none' : 'auto',
+      milestoneBarsOpacity: a.milestoneBarsHidden ? '0' : '1',
+      milestoneBarsPointer: a.milestoneBarsHidden ? 'none' : 'auto',
       openHF: () => this.openHF(),
       claimed:a.claimed, planHeading: a.claimed ? 'Your selling plan' : 'How selling works',
       togglePlan: ()=>this.togglePlan(),
