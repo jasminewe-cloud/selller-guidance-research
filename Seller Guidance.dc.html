@@ -479,7 +479,7 @@
               <div style="overflow:hidden;max-height:{{ a.understandSubMaxH }};transition:max-height 220ms cubic-bezier(.4,0,.2,1);pointer-events:auto;">
                 <div class="noscroll" style="display:flex;align-items:center;gap:6px;padding-bottom:10px;border-top:1px solid rgba(0,0,0,.08);padding-top:8px;padding-left:12px;overflow-x:auto;">
                   <button onClick="{{ a.subGoto0 }}" style="flex:none;padding:5px 12px;border-radius:999px;font-family:var(--font-ui);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.subTab0Active }};color:{{ a.subTab0Color }};">Home value</button>
-                  <button onClick="{{ a.subGoto1 }}" style="flex:none;padding:5px 12px;border-radius:999px;font-family:var(--font-ui);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.subTab1Active }};color:{{ a.subTab1Color }};">Track market</button>
+                  <button onClick="{{ a.subGoto1 }}" style="flex:none;padding:5px 12px;border-radius:999px;font-family:var(--font-ui);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.subTab1Active }};color:{{ a.subTab1Color }};">Review market</button>
                   <button onClick="{{ a.subGoto2 }}" style="flex:none;padding:5px 12px;border-radius:999px;font-family:var(--font-ui);font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.subTab2Active }};color:{{ a.subTab2Color }};">Listing price</button>
                   <button style="flex:none;padding:5px 12px;border-radius:999px;font-family:var(--font-ui);font-size:12px;font-weight:600;white-space:nowrap;border:none;background:rgba(0,0,0,.05);color:var(--gray-400);cursor:default;">Explore</button>
                 </div>
@@ -490,15 +490,15 @@
               <!-- LAYER 2 (z:10): Home photo — on top of teal bg, behind pills -->
               <div style="position:relative;z-index:10;height:380px;">
                 <img src="assets/Photo.png" alt="Your home" style="display:block;width:100%;height:380px;object-fit:cover;object-position:top center;border-radius:0;" />
-                <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.52) 0%,rgba(0,0,0,0.22) 45%,rgba(0,0,0,0) 80%);pointer-events:none;"></div>
-                <div style="position:absolute;left:0;right:0;bottom:35%;padding:0 16px;">
-                  <h3 style="font-family:var(--font-brand);font-weight:900;font-size:28px;color:#fff;line-height:1.15;margin:0;max-width:55%;text-shadow:0 1px 6px rgba(0,0,0,.35);">{{ a.toolTitle }}</h3>
+                <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.58) 0%,rgba(0,0,0,0.18) 50%,rgba(0,0,0,0) 100%);pointer-events:none;"></div>
+                <div style="position:absolute;left:0;right:0;bottom:29%;padding:0 16px;">
+                  <h3 style="font-family:var(--font-brand);font-weight:900;font-size:28px;color:#fff;line-height:1.15;margin:0;max-width:75%;text-shadow:0 1px 6px rgba(0,0,0,.35);">{{ a.toolTitle }}</h3>
                 </div>
               </div>
-              <div id="tool-content-area" onClick="{{ a.tapOutsideComps }}" style="margin-top:-90px;padding:0 14px 96px;display:flex;flex-direction:column;gap:14px;background:var(--gray-50);position:relative;z-index:11;">
+              <div id="tool-content-area" onClick="{{ a.tapOutsideComps }}" style="margin-top:-90px;padding:14px 14px 96px;display:flex;flex-direction:column;gap:14px;background:var(--gray-50);position:relative;z-index:11;">
                 <!-- header removed — title now lives over hero image -->
 
-              <!-- TOOL 0: Understand home value -->
+              <!-- TOOL 0: Understand your home value -->
               <sc-if value="{{ a.t0 }}" hint-placeholder-val="{{ true }}">
                 <!-- Orientation card — only before facts updated and not yet dismissed -->
                 <div class="{{ hf.flashZcard ? 'zcard-glow' : '' }}" style="background:#136F65;border-radius:18px;padding:20px 20px 18px;">
@@ -604,7 +604,7 @@
                 </sc-if>
               </sc-if>
 
-              <!-- TOOL 1: Track the market -->
+              <!-- TOOL 1: Review the market -->
               <sc-if value="{{ a.t1 }}">
                 <div style="background:#fff;border-radius:16px;box-shadow:var(--shadow-sm);padding:16px;">
                   <div style="display:flex;align-items:center;gap:6px;"><span style="font-family:var(--font-brand);font-weight:900;font-size:18px;">Seller's market</span><span style="width:16px;height:16px;background:var(--blue-600);-webkit-mask:var(--ic-IconInfoOutline) center/contain no-repeat;mask:var(--ic-IconInfoOutline) center/contain no-repeat;"></span></div>
@@ -1383,14 +1383,14 @@ class Component extends DCLogic {
     ];
     this.A_DEFAULT_ADDR = { line1:'4812 Menchaca Rd #A, Austin, TX 78745', line2:'Off Market' };
     this.A_EXPLORE = [
-      { title:'Understand home value', desc:'See your Zestimate, recent sales & price range.', bg:'#E7F0E2', accent:'#196100', icon:'var(--ic-IconDollarSignCircleFilled)' },
-      { title:'Track the market', desc:'Watch prices, demand & timing in your area.', bg:'#E4EEEC', accent:'#1e7a52', icon:'var(--ic-IconTrendingOutline)' },
+      { title:'Understand your home value', desc:'See your Zestimate, recent sales & price range.', bg:'#E7F0E2', accent:'#196100', icon:'var(--ic-IconDollarSignCircleFilled)' },
+      { title:'Review the market', desc:'Watch prices, demand & timing in your area.', bg:'#E4EEEC', accent:'#1e7a52', icon:'var(--ic-IconTrendingOutline)' },
       { title:'Determine your listing price', desc:'See what you could walk away with.', bg:'#FBF0D6', accent:'#9a7b00', icon:'var(--ic-IconCalculatorOutline)' },
       { title:'Explore your options', desc:'Compare the ways you could sell.', bg:'#E4ECFB', accent:'var(--blue-600)', icon:'var(--ic-IconCompassOutline)' }
     ];
     this.A_TOOLS = [
-      { title:'Understand home value', desc:"Getting a sense of your home's value helps you get oriented. Review estimates and recent sales to understand your price range." },
-      { title:'Track the market', desc:"See where prices and demand are heading in your area so you can time your sale with confidence." },
+      { title:'Understand your home value', desc:"Getting a sense of your home's value helps you get oriented. Review estimates and recent sales to understand your price range." },
+      { title:'Review the market', desc:"See where prices and demand are heading in your area so you can time your sale with confidence." },
       { title:'Determine your listing price', desc:"See what you could walk away with after your mortgage payoff and the costs of selling." },
       { title:'Prepare to list', desc:"Line up your agent, handle the prep, and make sure nothing surprises you at the closing table." }
     ];
@@ -1401,7 +1401,7 @@ class Component extends DCLogic {
     ];
     // AI summary + tappable prompt trees per Explore tool
     this.A_PROMPTS = [
-      { // 0 — Understand home value
+      { // 0 — Understand your home value
         summary:"Your Zestimate is $465,000, up $27k over the past month. Comparable homes in 78745 are selling close to ask and your price per sq ft is competitive. Your value position is solid if you're thinking about selling in the next few months.",
         root:['v_acc','v_improve','v_value'],
         nodes:{
@@ -1415,7 +1415,7 @@ class Component extends DCLogic {
           c_standout:{ q:"What makes my home stand out?", a:"Your lot, updated finishes, and square footage put you above the midpoint of recent sales. Lead with kitchen and bath condition in your listing to move buyers from interested to making an offer.", follow:[] }
         }
       },
-      { // 1 — Track the market
+      { // 1 — Review the market
         summary:"Your market is favoring sellers right now. Homes are going pending in about 13 days and prices are projected to grow 8.5% over the next year. Demand is outpacing supply, which means you have real pricing power if you move soon.",
         root:['m_now','m_long','m_neutral'],
         nodes:{
@@ -1447,7 +1447,7 @@ class Component extends DCLogic {
       }
     ];
     // Recommended-next metadata for the 4 Explore tools + Prepare to list
-    this.REC_LABEL = ['Understand home value','Track the market','Determine your listing price','Prepare to list'];
+    this.REC_LABEL = ['Understand your home value','Review the market','Determine your listing price','Prepare to list'];
     this.REC_WHY = [
       "Start with what your home's worth — it anchors every other number.",
       "See where your market's heading so you can time the sale right.",
@@ -1457,7 +1457,7 @@ class Component extends DCLogic {
     this.REC_PREP_WHY = "You've sized up your position — you're ready to start getting list-ready.";
     this.MS = [
       { name:'Understand your situation', sub:'Understand your value, timing & options', bg:'#E7F0E2', accent:'#196100', icon:'var(--ic-IconDollarSignCircleFilled)', pill:'4 actions · Start here',
-        actions:[{label:'Understand home value',tool:0},{label:'Track the market',tool:1},{label:'Determine your listing price',tool:2},{label:'Explore your options',tool:3}] },
+        actions:[{label:'Understand your home value',tool:0},{label:'Review the market',tool:1},{label:'Determine your listing price',tool:2},{label:'Explore your options',tool:3}] },
       { name:'Prepare to list', sub:'Set your strategy and prep the home', bg:'#E4ECFB', accent:'var(--blue-600)', icon:'var(--ic-IconHouseHeartFilled)', pill:'4 actions',
         actions:[{label:'Set your price strategy',tool:null},{label:'Prep & make repairs',tool:null},{label:'Photos & staging',tool:null},{label:'Choose how to sell',tool:null}] },
       { name:'List your home', sub:'Go live to buyers and manage showings', bg:'#FBF0D6', accent:'#9a7b00', icon:'var(--ic-IconMegaphoneFilled)', pill:'3 actions',
@@ -1494,7 +1494,7 @@ class Component extends DCLogic {
     this.DMILES = [
       { name:'Understand your situation', intro:"First we get clear on your position — your home's value, your local market, your net proceeds, and whether selling is even right for you.", acts:[
         { label:'Understand your value', ctx:"See your Zestimate and what buyers are paying for homes like yours nearby." },
-        { label:'Track your market', ctx:"Watch how fast homes sell and where prices are heading in your area." },
+        { label:'Review the market', ctx:"Watch how fast homes sell and where prices are heading in your area." },
         { label:'Determine your listing price', ctx:"Find out what you'd actually walk away with after costs and mortgage payoff." },
         { label:'Explore your options', ctx:"Compare selling with an agent, selling to Zillow, or listing on your own." }
       ]},
@@ -1535,7 +1535,7 @@ class Component extends DCLogic {
       ob: { beat: -1, selectedAddr: null, timeline: null, step: 0, uncertainty: null, introExiting: false },
       hf: { open: false, section: 'Key facts', fields: { sqft:'1,680', beds:'3', fullBaths:'2', baths:'2', kitchenReno:false, bathReno:false }, savedFields: { sqft:'1,680', beds:'3', fullBaths:'2', baths:'2', kitchenReno:false, bathReno:false }, msgs:[], chatValue:'', summary:{ show:false, text:'' }, zestimate:465000, savedZest:465000, flashSqft:false, flashZest:false, flashZcard:false, vchat:{ open:false, closing:false, msgs:[], chatValue:'', pendingField:null, pendingCurrent:null, pendingValue:'', awaitingRenovQ:false, awaitingBedSqftQ:false, pendingUpdate:null, renoSteppers:null, awaitingAnythingElse:false, lowered:false } }
     };
-    this.ACTIONS = ["What's your home worth?","Track your market","Determine your listing price","Explore your options"];
+    this.ACTIONS = ["What's your home worth?","Review the market","Determine your listing price","Explore your options"];
     this.PLAN = [
       { n:'1', label:'Explore', desc:'Know your value, market & options', bg:'#196100' },
       { n:'2', label:'Prepare to list', desc:'Price strategy & prep the home', bg:'var(--blue-600)' },
@@ -1545,7 +1545,7 @@ class Component extends DCLogic {
     this.PILLS = ['All','Explore','Prepare to list','List your home','Close your sale'];
     this.ACTION_META = [
       { title:'Understand your value', icon:'var(--ic-IconDollarSignCircleOutline)', badge:'#196100' },
-      { title:'Track your market', icon:'var(--ic-IconTrendingOutline)', badge:'#196100' },
+      { title:'Review the market', icon:'var(--ic-IconTrendingOutline)', badge:'#196100' },
       { title:'Determine your listing price', icon:'var(--ic-IconCalculatorOutline)', badge:'#196100' },
       { title:'Explore your options', icon:'var(--ic-IconCompassOutline)', badge:'#196100' }
     ];
@@ -2746,7 +2746,7 @@ class Component extends DCLogic {
       const sawComps = a.lastPromptKey==='c_price' || a.lastPromptKey==='c_standout';
       recNext = a.readyForNext
         ? (sawComps
-            ? { prep:false, idx:1, name:'Track the market', btn:'View market conditions', why:"You've covered your value and how nearby homes are selling. Next, see where prices and demand are heading in 78745.", go:()=>this.gotoTool(1) }
+            ? { prep:false, idx:1, name:'Review the market', btn:'Review the market', why:"You've covered your value and how nearby homes are selling. Next, see where prices and demand are heading in 78745.", go:()=>this.gotoTool(1) }
             : { prep:false, idx:-1, name:'Comparable homes', btn:'View comparable homes', why:"See how homes like yours are selling nearby.", go:()=>this.closeChatToComps() })
         : { prep:false, idx:2, name:'Determine your listing price', btn:'Determine your listing price', why:"See what you'd actually walk away with after payoff and selling costs.", go:()=>this.gotoTool(2) };
     }
@@ -2758,7 +2758,7 @@ class Component extends DCLogic {
     // bottomRecNext: drives the canvas bottom card — always the next tool after this screen
     let bottomRecNext = recNext;
     if(a.view==='tool' && a.actionIdx===0){
-      bottomRecNext = { prep:false, idx:1, name:'Track the market', btn:'View market conditions', why:"You've reviewed your value and comps. See where prices and demand are heading in 78745.", go:()=>this.gotoTool(1) };
+      bottomRecNext = { prep:false, idx:1, name:'Review the market', btn:'Review the market', why:"You've reviewed your value and comps. See where prices and demand are heading in 78745.", go:()=>this.gotoTool(1) };
     }
     if(a.view==='tool' && a.actionIdx===1){
       bottomRecNext = { prep:false, idx:2, name:'Determine your listing price', btn:'Determine your listing price', why:"You've got a read on the market. See what you'd actually walk away with after payoff and costs.", go:()=>this.gotoTool(2) };
@@ -2816,7 +2816,7 @@ class Component extends DCLogic {
       scrollRef:this.aScrollRef, onScroll:()=>this.onScrollA(), toolScrollOnScroll:()=>this.onScrollTool(), moreBelow:a.moreBelow, scrollDown:()=>this.scrollDownA(), spacerHpx:(a.spacerH||0)+'px', compsRef:this.compsRef, homeFRef:this.homeFRef, toolScrollRef:this.aToolScrollRef, toolChatBarRef:this.toolChatBarRef, advisorCardRef:this.advisorCardRef, milestoneChatBarRef:this.milestoneChatBarRef, milestoneScrollRef:this.aMilestoneScrollRef, onScrollMilestone:()=>this.onScrollMilestone(),
       advisorStep: a.actionIdx===0
         ? (hf.factsUpdated ? 'Step 1 of 3 — Review your estimate' : 'Step 1 of 3 — Update your home facts')
-        : ['','Step 2 of 3 — Track the market','Step 3 of 3 — Determine your listing price',''][a.actionIdx]||'',
+        : ['','Step 2 of 3 — Review the market','Step 3 of 3 — Determine your listing price',''][a.actionIdx]||'',
       advisorMsg: a.actionIdx===0
         ? (hf.factsUpdated
             ? 'Your Zestimate is now $'+(Math.round((hf.zestimate||465000)/1000))+'K based on your updated home facts. If everything looks good on screen, let\'s head to the next step.'
@@ -3149,7 +3149,7 @@ class Component extends DCLogic {
     const wIdx = wFocusIdx[w.focus] != null ? wFocusIdx[w.focus] : 0;
     const wActionMeta = [
       { icon:'var(--ic-IconDollarSignCircleOutline)', title:"What's your home worth?", why:'See your Zestimate and what buyers are paying nearby.' },
-      { icon:'var(--ic-IconTrendingOutline)', title:'Track your market', why:'See how fast homes sell and where prices are heading.' },
+      { icon:'var(--ic-IconTrendingOutline)', title:'Review the market', why:'See how fast homes sell and where prices are heading.' },
       { icon:'var(--ic-IconCalculatorOutline)', title:'Determine your listing price', why:'Find out what you’d actually walk away with after costs.' },
       { icon:'var(--ic-IconCompassOutline)', title:'Explore your options', why:'Compare selling with an agent, to Zillow, or on your own.' }
     ];
@@ -3217,8 +3217,8 @@ class Component extends DCLogic {
     const onToolScreen = a.view==='tool' && a.screen!=='chat';
     const heroVisible = (a.claimed && a.view==='home');
     const OB = {
-      statusBg: (heroVisible || (onToolScreen && !a.tabBarPinned)) ? 'transparent' : '#fff',
-      statusColor: (heroVisible || (onToolScreen && !a.tabBarPinned)) ? '#fff' : 'var(--gray-950)',
+      statusBg: heroVisible ? 'transparent' : '#fff',
+      statusColor: heroVisible ? '#fff' : 'var(--gray-950)',
       showIntro: ob.beat === -1 || ob.introExiting,
       introContentAnim: ob.introExiting ? 'introSlideOut 320ms cubic-bezier(.25,.46,.45,.94) both' : 'introSlideIn 360ms cubic-bezier(.25,.46,.45,.94) both',
       dismissIntro: ()=>this.dismissIntro(),
