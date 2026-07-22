@@ -360,7 +360,7 @@
                     <sc-if value="{{ m.isNextStep }}">
                       <div style="background:#fff;border:1px solid var(--gray-200);border-radius:16px;padding:14px;animation:vfade .3s ease both;">
                         <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-                          <span style="width:14px;height:14px;flex:none;background:#3B0470;-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;display:block;"></span>
+                          <svg width="16" height="16" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" style="flex:none;display:block;"><defs><linearGradient id="ringGradNext" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#3B82F6"/><stop offset="33%" stop-color="#8B5CF6"/><stop offset="66%" stop-color="#EC4899"/><stop offset="100%" stop-color="#F97316"/></linearGradient></defs><circle cx="11" cy="11" r="8.5" fill="none" stroke="url(#ringGradNext)" stroke-width="4" stroke-linecap="round"/></svg>
                           <span style="font-size:10px;font-weight:800;color:#3B0470;text-transform:uppercase;letter-spacing:.05em;">Suggested next step</span>
                         </div>
                         <div style="font-family:var(--font-brand);font-weight:900;font-size:17px;color:var(--gray-950);margin-bottom:6px;">{{ m.nextName }}</div>
