@@ -463,17 +463,17 @@
             <!-- LAYER 3 (z:30): Pill buttons only — always on top of image when scrolling -->
             <div style="position:absolute;top:0;left:0;right:0;z-index:30;padding:{{ a.pillBarPaddingTop }} 0 0;pointer-events:none;background:{{ a.pillBarBg }};box-shadow:{{ a.pillBarShadow }};transition:background 200ms ease,box-shadow 200ms ease;">
               <div style="display:flex;align-items:center;gap:6px;overflow-x:auto;padding:0 0 10px 12px;pointer-events:auto;" class="noscroll">
-                <button onClick="{{ a.tabGoHome }}" style="flex:none;display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.tabHomeActive }};color:{{ a.tabHomeColor }};backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
+                <button onClick="{{ a.tabGoHome }}" style="flex:none;display:flex;align-items:center;justify-content:center;gap:5px;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.tabHomeActive }};color:{{ a.tabHomeColor }};">
                   <span style="width:14px;height:14px;flex:none;display:inline-block;background:{{ a.tabHomeColor }};-webkit-mask:var(--ic-IconSparkleOutline) center/contain no-repeat;mask:var(--ic-IconSparkleOutline) center/contain no-repeat;"></span>
                   Your plan
                 </button>
-                <button onClick="{{ a.tabToggleUnderstand }}" style="flex:none;display:flex;align-items:center;justify-content:center;gap:4px;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.tabUnderstandActive }};color:{{ a.tabUnderstandColor }};backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
+                <button onClick="{{ a.tabToggleUnderstand }}" style="flex:none;display:flex;align-items:center;justify-content:center;gap:4px;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.tabUnderstandActive }};color:{{ a.tabUnderstandColor }};">
                   Understand
                   <span style="width:14px;height:14px;flex:none;display:inline-block;background:{{ a.tabUnderstandColor }};-webkit-mask:var(--ic-IconChevronDownOutline) center/contain no-repeat;mask:var(--ic-IconChevronDownOutline) center/contain no-repeat;transform:{{ a.understandChevronRotate }};transition:transform 200ms;"></span>
                 </button>
-                <button onClick="{{ a.tabGoto3 }}" style="flex:none;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.tabPrepareActive }};color:{{ a.tabPrepareColor }};backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">Prepare</button>
-                <button style="flex:none;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;white-space:nowrap;border:none;background:{{ a.tabDisabledActive }};color:{{ a.tabDisabledColor }};cursor:default;min-width:78px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">List</button>
-                <button style="flex:none;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;white-space:nowrap;border:none;background:{{ a.tabDisabledActive }};color:{{ a.tabDisabledColor }};cursor:default;min-width:78px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">Close</button>
+                <button onClick="{{ a.tabGoto3 }}" style="flex:none;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;border:none;background:{{ a.tabPrepareActive }};color:{{ a.tabPrepareColor }};">Prepare</button>
+                <button style="flex:none;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;white-space:nowrap;border:none;background:{{ a.tabDisabledActive }};color:{{ a.tabDisabledColor }};cursor:default;min-width:78px;text-align:center;">List</button>
+                <button style="flex:none;padding:6px 12px;border-radius:999px;font-family:var(--font-ui);font-size:13px;font-weight:600;white-space:nowrap;border:none;background:{{ a.tabDisabledActive }};color:{{ a.tabDisabledColor }};cursor:default;min-width:78px;text-align:center;">Close</button>
               </div>
               <!-- Understand sub-tab row -->
               <div style="overflow:hidden;max-height:{{ a.understandSubMaxH }};transition:max-height 220ms cubic-bezier(.4,0,.2,1);pointer-events:auto;">
@@ -488,16 +488,15 @@
             <!-- Scroll container — starts at top:0, content offset by spacer -->
             <div ref="{{ a.toolScrollRef }}" data-tool-scroll onScroll="{{ a.toolScrollOnScroll }}" class="noscroll" style="position:absolute;top:0;left:0;right:0;bottom:0;overflow-y:auto;">
               <!-- LAYER 2 (z:10): Home photo — on top of teal bg, behind pills -->
-              <div style="position:relative;z-index:10;">
+              <div style="position:relative;z-index:10;height:200px;">
                 <img src="assets/Photo.png" alt="Your home" style="display:block;width:100%;height:200px;object-fit:cover;border-radius:0;" />
-                <div style="position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,rgba(245,245,245,0) 0%,#f5f5f5 100%);pointer-events:none;"></div>
+                <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.58) 0%,rgba(0,0,0,0.18) 50%,rgba(0,0,0,0) 100%);pointer-events:none;"></div>
+                <div style="position:absolute;bottom:0;left:0;right:0;padding:14px 16px 16px;">
+                  <h3 style="font-family:var(--font-brand);font-weight:900;font-size:26px;color:#fff;line-height:1.05;margin:0;text-shadow:0 1px 4px rgba(0,0,0,.3);">{{ a.toolTitle }}</h3>
+                </div>
               </div>
               <div id="tool-content-area" onClick="{{ a.tapOutsideComps }}" style="padding:12px 14px 96px;display:flex;flex-direction:column;gap:14px;background:var(--gray-50);">
-                <!-- header -->
-                <div>
-                  <h3 style="font-family:var(--font-brand);font-weight:900;font-size:26px;color:var(--gray-950);line-height:1.05;margin:0;">{{ a.toolTitle }}</h3>
-                  <p style="font-size:13.5px;color:var(--gray-700);line-height:1.45;margin:8px 0 0;">{{ a.toolDesc }}</p>
-                </div>
+                <!-- header removed — title now lives over hero image -->
 
               <!-- TOOL 0: Understand home value -->
               <sc-if value="{{ a.t0 }}" hint-placeholder-val="{{ true }}">
@@ -2871,29 +2870,29 @@ class Component extends DCLogic {
       tabGoHome: ()=>this.backHome(), tabGoto0: ()=>this.gotoTool(0), tabGoto3: ()=>this.gotoTool(3),
       tabToggleUnderstand: ()=>this.toggleUnderstandSub(),
       subGoto0: ()=>this.gotoSubTool(0), subGoto1: ()=>this.gotoSubTool(1), subGoto2: ()=>this.gotoSubTool(2), subGoto3: ()=>this.gotoSubTool(3),
-      pillBarBg: a.tabBarPinned ? '#fff' : 'transparent',
-      pillBarShadow: a.tabBarPinned ? '0 1px 0 rgba(0,0,0,.08)' : 'none',
-      pillBarPaddingTop: a.tabBarPinned ? '50px' : '50px',
-      tabDisabledActive: a.tabBarPinned ? 'rgba(0,0,0,.08)' : 'rgba(0,0,0,.45)',
-      tabDisabledColor: a.tabBarPinned ? 'var(--gray-400)' : 'rgba(255,255,255,.5)',
-      tabHomeActive: a.tabBarPinned ? 'rgba(0,0,0,.08)' : 'rgba(0,0,0,.45)',
-      tabHomeColor: a.tabBarPinned ? 'var(--gray-950)' : '#fff',
-      tabUnderstandActive: (a.actionIdx===0||a.actionIdx===1||a.actionIdx===2) ? (a.tabBarPinned ? '#0041D9' : 'rgba(255,255,255,0.85)') : (a.tabBarPinned ? 'rgba(0,0,0,.08)' : 'rgba(0,0,0,.45)'),
-      tabUnderstandColor:  (a.actionIdx===0||a.actionIdx===1||a.actionIdx===2) ? (a.tabBarPinned ? '#fff' : 'var(--gray-950)') : (a.tabBarPinned ? 'var(--gray-950)' : '#fff'),
-      tabPrepareActive: a.actionIdx===3 ? '#fff' : (a.tabBarPinned ? 'rgba(0,0,0,.08)' : 'rgba(0,0,0,.45)'),
-      tabPrepareColor:  a.actionIdx===3 ? 'var(--gray-950)' : (a.tabBarPinned ? 'var(--gray-950)' : '#fff'),
-      tabBarBg: a.tabBarPinned ? '#fff' : 'transparent',
-      tabBarBorder: a.tabBarPinned ? '1px solid var(--gray-100)' : 'none',
+      pillBarBg: '#fff',
+      pillBarShadow: '0 1px 0 rgba(0,0,0,.08)',
+      pillBarPaddingTop: '50px',
+      tabDisabledActive: 'rgba(0,0,0,.08)',
+      tabDisabledColor: 'var(--gray-400)',
+      tabHomeActive: 'rgba(0,0,0,.08)',
+      tabHomeColor: 'var(--gray-950)',
+      tabUnderstandActive: (a.actionIdx===0||a.actionIdx===1||a.actionIdx===2) ? '#0041D9' : 'rgba(0,0,0,.08)',
+      tabUnderstandColor:  (a.actionIdx===0||a.actionIdx===1||a.actionIdx===2) ? '#fff' : 'var(--gray-950)',
+      tabPrepareActive: a.actionIdx===3 ? '#0041D9' : 'rgba(0,0,0,.08)',
+      tabPrepareColor:  a.actionIdx===3 ? '#fff' : 'var(--gray-950)',
+      tabBarBg: '#fff',
+      tabBarBorder: '1px solid var(--gray-100)',
       understandSubMaxH: (a.understandSubOpen || a.subPillsRevealed) ? '60px' : '0px',
-      toolNavHeight: a.tabBarPinned ? ((a.understandSubOpen || a.subPillsRevealed) ? '90px' : '56px') : '0px',
-      toolTealHeight: a.tabBarPinned ? ((a.understandSubOpen || a.subPillsRevealed) ? '90px' : '56px') : (a.understandSubOpen ? '140px' : '100px'),
+      toolNavHeight: (a.understandSubOpen || a.subPillsRevealed) ? '90px' : '56px',
+      toolTealHeight: (a.understandSubOpen || a.subPillsRevealed) ? '90px' : '56px',
       understandChevronRotate: a.understandSubOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-      subTab0Active: a.actionIdx===0 ? (a.tabBarPinned ? '#fff' : 'rgba(255,255,255,0.85)') : (a.tabBarPinned ? 'rgba(0,0,0,.06)' : 'rgba(0,0,0,.45)'),
-      subTab0Color:  a.actionIdx===0 ? '#0041D9' : (a.tabBarPinned ? 'var(--gray-950)' : '#fff'),
-      subTab1Active: a.actionIdx===1 ? (a.tabBarPinned ? '#fff' : 'rgba(255,255,255,0.85)') : (a.tabBarPinned ? 'rgba(0,0,0,.06)' : 'rgba(0,0,0,.45)'),
-      subTab1Color:  a.actionIdx===1 ? '#0041D9' : (a.tabBarPinned ? 'var(--gray-950)' : '#fff'),
-      subTab2Active: a.actionIdx===2 ? (a.tabBarPinned ? '#fff' : 'rgba(255,255,255,0.85)') : (a.tabBarPinned ? 'rgba(0,0,0,.06)' : 'rgba(0,0,0,.45)'),
-      subTab2Color:  a.actionIdx===2 ? '#0041D9' : (a.tabBarPinned ? 'var(--gray-950)' : '#fff'),
+      subTab0Active: a.actionIdx===0 ? '#fff' : 'rgba(0,0,0,.06)',
+      subTab0Color:  a.actionIdx===0 ? '#0041D9' : 'var(--gray-950)',
+      subTab1Active: a.actionIdx===1 ? '#fff' : 'rgba(0,0,0,.06)',
+      subTab1Color:  a.actionIdx===1 ? '#0041D9' : 'var(--gray-950)',
+      subTab2Active: a.actionIdx===2 ? '#fff' : 'rgba(0,0,0,.06)',
+      subTab2Color:  a.actionIdx===2 ? '#0041D9' : 'var(--gray-950)',
       subTab3Active: a.actionIdx===3 ? 'rgba(255,255,255,.9)' : 'rgba(255,255,255,.18)',
       subTab3Color:  a.actionIdx===3 ? '#136F65' : '#fff',
       exploreActions: this.A_EXPLORE.map((x,i)=>({ ...x, mt:(i===0?'0':'-20px'), z:String(i+1), onTap:()=>this.openTool(i) })),
