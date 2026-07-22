@@ -2075,6 +2075,7 @@ class Component extends DCLogic {
     if(scrollingUp && !this.state.a.subPillsRevealed){ this.setState(s=>({a:{...s.a, subPillsRevealed:true}})); }
     if(scrollingDown && this.state.a.subPillsRevealed){ this.setState(s=>({a:{...s.a, subPillsRevealed:false}})); }
     if(scrollingUp){ clearTimeout(this._subPillsTimer); this._subPillsTimer = setTimeout(()=>{ this.setState(s=>({a:{...s.a, subPillsRevealed:false}})); }, 3000); }
+    if(this.state.a.actionIdx===1 && this.state.a.selectedComp!==null){ this.setState(s=>({a:{...s.a, selectedComp:null}})); }
     this._lastToolScrollTop = top;
     const compsEl = comps || document.getElementById('comps-section-anchor');
     if(!compsEl) return;
