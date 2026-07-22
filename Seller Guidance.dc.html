@@ -42,8 +42,8 @@
   @keyframes ringSpinAdvisor{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
   .ring-spin{animation:ringSpinAdvisor 600ms linear infinite;transform-origin:center center;}
   @keyframes advisorFadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
-  @keyframes fadeInContent{from{opacity:0;}to{opacity:1;}}
-  .fade-in-content{animation:fadeInContent 250ms ease both;}
+  @keyframes fadeInContent{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+  .fade-in-content{animation:fadeInContent 350ms cubic-bezier(.25,.46,.45,.94) both;}
   .c11n a{color:var(--text-action);}
   .c11n-slider{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:999px;background:var(--gray-200);outline:none;cursor:pointer;margin:10px 0 18px;}
   .c11n-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:999px;background:#fff;border:2px solid var(--blue-600);box-shadow:0 1px 4px rgba(17,17,22,.15);cursor:pointer;transition:box-shadow 120ms;}
@@ -2286,7 +2286,7 @@ class Component extends DCLogic {
   msOfTool(t){ for(let i=0;i<this.MS.length;i++){ if(this.MS[i].actions.some(a=>a.tool===t)) return i; } return -1; }
   backHome(){ this.setState(s=>({a:{...s.a, view:'home', expanded: this.msOfTool(s.a.actionIdx)}})); }
   toggleUnderstandSub(){ this.setState(s=>({a:{...s.a, understandSubOpen:!s.a.understandSubOpen}})); }
-  gotoSubTool(i){ this._lastToolScrollTop=0; this.setState(s=>({a:{...s.a, view:'tool', actionIdx:i, screen:'action', askedKeys:[], understandSubOpen:false, selectedComp: i===2 ? null : s.a.selectedComp, toolBarsHidden:false, tabBarPinned:false}}), ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; const c=document.getElementById('tool-content-area'); if(c){ c.classList.remove('fade-in-content'); void c.offsetWidth; c.classList.add('fade-in-content'); } setTimeout(()=>this.startAdvisorCard(), 250); }); }
+  gotoSubTool(i){ this._lastToolScrollTop=0; this.setState(s=>({a:{...s.a, view:'tool', actionIdx:i, screen:'action', askedKeys:[], understandSubOpen:false, selectedComp: i===2 ? null : s.a.selectedComp, toolBarsHidden:false, tabBarPinned:false}}), ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; const c=document.getElementById('tool-content-area'); if(c){ c.classList.remove('fade-in-content'); void c.offsetWidth; c.classList.add('fade-in-content'); } setTimeout(()=>this.startAdvisorCard(), 350); }); }
   hfCommitPending(){
     const hf = this.state.hf;
     if(hf.pendingZest || hf.pendingFields){
@@ -2651,7 +2651,7 @@ class Component extends DCLogic {
     }, 500);
   }
   // Navigate to a tool and open its card (from "Let's go", a pill, or the bottom nudge)
-  gotoTool(i){ this._lastToolScrollTop=0; this.setState(s=>({a:{...s.a, view:'tool', actionIdx:i, screen:'action', askedKeys:[], understandSubOpen:false, toolBarsHidden:false, tabBarPinned:false}}), ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; const c=document.getElementById('tool-content-area'); if(c){ c.classList.remove('fade-in-content'); void c.offsetWidth; c.classList.add('fade-in-content'); } setTimeout(()=>this.startAdvisorCard(), 250); }); }
+  gotoTool(i){ this._lastToolScrollTop=0; this.setState(s=>({a:{...s.a, view:'tool', actionIdx:i, screen:'action', askedKeys:[], understandSubOpen:false, toolBarsHidden:false, tabBarPinned:false}}), ()=>{ const el=this.aToolScrollRef.current; if(el) el.scrollTop=0; const c=document.getElementById('tool-content-area'); if(c){ c.classList.remove('fade-in-content'); void c.offsetWidth; c.classList.add('fade-in-content'); } setTimeout(()=>this.startAdvisorCard(), 350); }); }
   gotoPrep(){ this.setState(s=>({a:{...s.a, view:'home', screen:'action', expanded:1}})); }
   onSale(e){ const v=parseInt(e.target.value,10)||0; this.setState(s=>({a:{...s.a, salePrice:v, fromInsightNudge:false, engaged:{...s.a.engaged,2:true}, engCount:(s.a.engCount||0)+1}})); }
   onSaleCommit(e){ const v=parseInt(e.target.value,10)||0; this.setState(s=>({a:{...s.a, insightPrice:v, fromInsightNudge:false}})); }
